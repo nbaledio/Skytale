@@ -115,7 +115,7 @@ test_environment.prototype = {
 			p1.sprite.frame = 4;
 		}
 		//  Enable player to jump if they are standing on the ground/platform
-		if (cursors.up.isDown && ( onGround || onPlatform))
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && ( onGround || onPlatform))
 		{
 			p1.sprite.body.velocity.y = -350;
 		}
