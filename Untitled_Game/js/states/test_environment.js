@@ -15,7 +15,7 @@ test_environment.prototype = {
 		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
 		
 
-		//game.load.image('villager', 'assets/img/villager.png');
+		game.load.image('villager', 'assets/img/villager.png');
 
 	},
 	create: function(){
@@ -86,10 +86,10 @@ test_environment.prototype = {
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
 		
-		/*
+		///*
 		v1 = new villager(1, 'Smith');
 		v1.spawn(game, 800, 500, 'villager');
-		*/
+		//*/
 		
 	},
 	update: function(){
