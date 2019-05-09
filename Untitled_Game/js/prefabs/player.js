@@ -11,7 +11,7 @@ player.prototype = {
 	spawn: function(game,x,y,spritesheet){
 		this.sprite = game.add.sprite(x,y,spritesheet);
 		game.physics.arcade.enable(this.sprite);
-		this.sprite.body.gravity.y = 300;
+		this.sprite.body.gravity.y = 900;
 		this.sprite.body.collideWorldBounds = true;
 	},
 	//Arguments: x scaling factor, y scaling factor
