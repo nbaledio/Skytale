@@ -7,7 +7,8 @@ var test_environment = function(game){};
 test_environment.prototype = {
 	preload: function(){
 		//Preload Game assets
-		game.load.image('background', 'assets/img/city.png');
+		game.load.image('background', 'assets/img/sky.png');
+		game.load.image('grass', 'assets/img/grass.png');
 		game.load.image('platform', 'assets/img/platform.png');
 		game.load.image('PhantomThievesLogo', 'assets/img/PhantomThievesLogo.png');
 		game.load.spritesheet('flame', 'assets/img/flame.png',94, 96);
@@ -31,10 +32,10 @@ test_environment.prototype = {
 		background = game.add.sprite(0,0,'background');
 		
 		//Add some decorations
-		game.add.sprite(1450,20,'PhantomThievesLogo');
+		/*game.add.sprite(1450,20,'PhantomThievesLogo');
 		flame = game.add.sprite(1515,50,'flame');
 		flame.animations.add('flames',[0,1,2,3,4,5,6,7,8,9],10,true)
-		flame.animations.play('flames');
+		flame.animations.play('flames');*/
 		
 		
 		//Platforms group
@@ -44,7 +45,7 @@ test_environment.prototype = {
 		platformgroup.enableBody = true;
 		
 		//Add some platforms and enable physics
-		platform1 = game.add.sprite(540,300,'platform');
+		/*platform1 = game.add.sprite(540,300,'platform');
 		platform1.scale.setTo(.5,.5);
 		platformgroup.add(platform1);
 		platform1.body.immovable = true;
@@ -68,7 +69,17 @@ test_environment.prototype = {
 		platform5 = game.add.sprite(1300,270,'platform');
 		platform5.scale.setTo(.5,.5);
 		platformgroup.add(platform5);
-		platform5.body.immovable = true;
+		platform5.body.immovable = true;*/
+		
+		grass1 = game.add.sprite(0,0,'grass');
+		platformgroup.add(grass1);
+		grass1.body.immovable = true;
+		grass1.body.setSize(1,1,1,300);
+		//game.debug.body(grass1);
+		grass2 = game.add.sprite(800,0,'grass');
+		
+		//platformgroup.add(grass1);
+		//grass1.body.immovable = true;
 		
 		//Add player
 		p1 = new player();
@@ -91,11 +102,11 @@ test_environment.prototype = {
 		var onGround = p1.sprite.body.blocked.down;
 		
 		//Bounce top platform left and right
-		if(platform3.x <= 0){
+		/*if(platform3.x <= 0){
 			platform3.body.velocity.x = 100;
 		}else if(platform3.x >= 565){
 			platform3.body.velocity.x = -100;
-		}
+		}*/
 		
 		
 		

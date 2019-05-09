@@ -1,5 +1,5 @@
-
 var level_1 = function(game){};
+var theta = 1;
 
 level_1.prototype = {
 	preload: function(){
@@ -33,12 +33,12 @@ level_1.prototype = {
 		//Enable physics for every object in platforms group
 		platformgroup.enableBody = true;
 		
-		//Add platforms (Left to Right)
+		//Add platforms (To do list: make a prefab)
 		platform0 = game.add.sprite(230,250,'platform');
 		platform0.scale.setTo(.15,.3);
 		platformgroup.add(platform0);
 		platform0.body.immovable = true;
-		platform0.body.velocity.y = -100;
+		platform0.body.velocity.y = -65;
 		
 		platform1 = game.add.sprite(350,300,'platform');
 		platform1.scale.setTo(.15,.3);
@@ -70,6 +70,11 @@ level_1.prototype = {
 		platformgroup.add(platform6);
 		platform6.body.immovable = true;
 		
+		platform7 = game.add.sprite(1175,180,'platform');
+		platform7.scale.setTo(.4,.3);
+		platformgroup.add(platform7);
+		platform7.body.immovable = true;
+		
 		//Add grass to the bottom,enable their physics, and resize their hitboxes
 		grass1 = game.add.sprite(0,0,'grass');
 		platformgroup.add(grass1);
@@ -81,7 +86,7 @@ level_1.prototype = {
 		grass2.body.immovable = true;
 		grass2.body.setSize(800,50,0,400);
 		
-		//Add houses
+		//Add houses (Prefab?)
 		house1 = game.add.sprite(40,270,'house');
 		house1.scale.setTo(.8,.8);
 		house2 = game.add.sprite(530,270,'house');
@@ -92,8 +97,10 @@ level_1.prototype = {
 		house4.scale.setTo(.8,.8);
 		house5 = game.add.sprite(1400,270,'house');
 		house5.scale.setTo(.8,.8);
-		house5 = game.add.sprite(1450,40,'house');
-		house5.scale.setTo(.8,.8);
+		house6 = game.add.sprite(1450,40,'house');
+		house6.scale.setTo(.8,.8);
+		house7 = game.add.sprite(875,270,'house');
+		house7.scale.setTo(.8,.8);
 		
 		//Add player
 		p1 = new player();
@@ -114,7 +121,6 @@ level_1.prototype = {
 		//Variables to check if player is on platform or ground
 		var onPlatform = game.physics.arcade.collide(p1.sprite, platformgroup);
 		var onGround = p1.sprite.body.blocked.down;
-		
 		
 		//  Reset the players velocity (movement)
 		p1.sprite.body.velocity.x = 0;
@@ -151,10 +157,15 @@ level_1.prototype = {
 		
 		//Bounce platform0 up and down
 		if(platform0.y > 250){
-			platform0.body.velocity.y = -100;
+			platform0.body.velocity.y = -65;
 		}
 		if(platform0.y < 100){
-			platform0.body.velocity.y = 100;
+			platform0.body.velocity.y = 65;
 		}
+		
+		//Move platform7 in a circle
+		theta += .01;
+		platform7.body.velocity.x =  Math.cos(theta)*50;
+		platform7.body.velocity.y =  Math.sin(theta)*50;
 	}
 }

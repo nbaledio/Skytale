@@ -7,7 +7,7 @@ function villager(nice, family) {
 	var text;
 }
 
-player.prototype = {
+villager.prototype = {
 	//Arguments: x position, y postion, and spritesheet
 	//Spawns player in game at given position and adds physics, gravity, and collision with world bounds
 	spawn: function(game,x,y,spritesheet){
