@@ -5,6 +5,7 @@ function villager(nice, family) {
 	var nice = nice;
 	var family = family;
 	var text;
+	var x;
 }
 
 villager.prototype = {
@@ -15,9 +16,21 @@ villager.prototype = {
 		game.physics.arcade.enable(this.sprite);
 		this.sprite.body.gravity.y = 300;
 		this.sprite.body.collideWorldBounds = true;
+		this.x = x;
 	},
 	//Arguments: text the villager will say
-	setDialogue: function(text){
+	setText: function(text){
 		this.text = text;
+	},
+	// Arguments: sprite for textbubble, style of text
+	displayText: function(textBubble, style) {
+		game.add.sprite(this.x, 75, textBubble);
+		display = game.add.text(this.x + 25, 100, this.text, style);
+	},
+	// Arguments: sprite for task
+	spawnTask: function(key) {
+		// randomly spawn a task
+		game.add.sprite(((Math.random() * 900) + 800), ((Math.random() * game.world.height) - 20), key);
+		// depending on morality, change difficulty of task
 	}
 }
