@@ -15,7 +15,9 @@ test_environment.prototype = {
 		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
 		
 
-		//game.load.image('villager', 'assets/img/villager.png');
+		game.load.image('villager', 'assets/img/villager.png');
+		game.load.image('textBubble', 'assets/img/textbubble.png');
+		game.load.image('chat', 'assets/img/chat.png');
 
 	},
 	create: function(){
@@ -86,10 +88,14 @@ test_environment.prototype = {
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
 		
-		/*
+		// villager constructor argumanets: nice (0 or 1) and family
 		v1 = new villager(1, 'Smith');
 		v1.spawn(game, 800, 500, 'villager');
-		*/
+		v1.setText("hewwo");
+		//var style = { font: '24px Comic Sans MS', fill: '#FFF', align: "center" };
+		v1.displayText('textBubble', style);
+		v1.spawnTask('chat');
+
 		
 	},
 	update: function(){
