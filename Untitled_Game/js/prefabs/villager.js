@@ -6,6 +6,7 @@ function villager(nice, family) {
 	var family = family;
 	var text;
 	var x;
+	var display;
 }
 
 villager.prototype = {
@@ -25,7 +26,7 @@ villager.prototype = {
 	// Arguments: sprite for textbubble, style of text
 	displayText: function(textBubble, style) {
 		game.add.sprite(this.x, 75, textBubble);
-		display = game.add.text(this.x + 25, 100, this.text, style);
+		this.display = game.add.text(this.x + 25, 100, this.text, style);
 	},
 	// Arguments: sprite for task
 	spawnTask: function(key) {

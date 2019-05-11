@@ -1,3 +1,6 @@
+//level_1.js
+//First level of the game.
+
 var level_1 = function(game){};
 var theta = 1;
 
@@ -5,9 +8,11 @@ level_1.prototype = {
 	preload: function(){
 		//Preload Game assets
 		game.load.image('background', 'assets/img/sky.png');
-		game.load.image('grass', 'assets/img/grass.png');
+		game.load.image('ground', 'assets/img/ground.png');
 		game.load.image('house', 'assets/img/house.png');
-		game.load.image('platform', 'assets/img/platform.png');
+		game.load.image('villager', 'assets/img/villager.png');
+		game.load.image('chat', 'assets/img/chat.png');
+		game.load.image('platform', 'assets/img/rockplatform.png');
 		game.load.spritesheet('dude', 'assets/img/dude.png',32, 48);
 		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
 		
@@ -33,58 +38,36 @@ level_1.prototype = {
 		//Enable physics for every object in platforms group
 		platformgroup.enableBody = true;
 		
-		//Add platforms (To do list: make a prefab)
-		platform0 = game.add.sprite(230,250,'platform');
-		platform0.scale.setTo(.15,.3);
-		platformgroup.add(platform0);
-		platform0.body.immovable = true;
-		platform0.body.velocity.y = -65;
+		//Add platforms (Left to right) (second/third/etc. just means multiple
+		//platforms next to each other to make one big platform since scaling 
+		//makes it look weird.)
+		platform5 = new platform(game,5,107,'platform',platformgroup);
+		platform5_second = new platform(game,69,107,'platform',platformgroup);
+		platform0 = new platform(game,230,250,'platform',platformgroup);
+		platform0.sprite.body.velocity.y = -65;
+		platform1 = new platform(game,350,265,'platform',platformgroup);
+		platform2 = new platform(game,440,230,'platform',platformgroup);
+		platform3 = new platform(game,570,180,'platform',platformgroup);
+		platform4 = new platform(game,715,148,'platform',platformgroup);
+		platform4_second = new platform(game,779,148,'platform',platformgroup);
+		platform4_third = new platform(game,843,148,'platform',platformgroup);
+		platform4_fourth = new platform(game,907,148,'platform',platformgroup);
+		platform7 = new platform(game,1175,150,'platform',platformgroup);
+		platform7_second = new platform(game,1239,150,'platform',platformgroup);
+		platform6 = new platform(game,1435,136,'platform',platformgroup);
+		platform6_second = new platform(game,1499,136,'platform',platformgroup);
+
 		
-		platform1 = game.add.sprite(350,300,'platform');
-		platform1.scale.setTo(.15,.3);
-		platformgroup.add(platform1);
-		platform1.body.immovable = true;
+		//Add ground to the bottom,enable their physics, and resize their hitboxes
+		ground1 = game.add.sprite(0,0,'ground');
+		platformgroup.add(ground1);
+		ground1.body.immovable = true;
+		ground1.body.setSize(800,50,0,400);
 		
-		platform2 = game.add.sprite(440,270,'platform');
-		platform2.scale.setTo(.15,.3);
-		platformgroup.add(platform2);
-		platform2.body.immovable = true;
-		
-		platform3 = game.add.sprite(540,220,'platform');
-		platform3.scale.setTo(.27,.3);
-		platformgroup.add(platform3);
-		platform3.body.immovable = true;
-		
-		platform4 = game.add.sprite(690,180,'platform');
-		platform4.scale.setTo(.6,.3);
-		platformgroup.add(platform4);
-		platform4.body.immovable = true;
-		
-		platform5 = game.add.sprite(5,138,'platform');
-		platform5.scale.setTo(.35,.3);
-		platformgroup.add(platform5);
-		platform5.body.immovable = true;
-		
-		platform6 = game.add.sprite(1400,168,'platform');
-		platform6.scale.setTo(.4,.3);
-		platformgroup.add(platform6);
-		platform6.body.immovable = true;
-		
-		platform7 = game.add.sprite(1175,180,'platform');
-		platform7.scale.setTo(.4,.3);
-		platformgroup.add(platform7);
-		platform7.body.immovable = true;
-		
-		//Add grass to the bottom,enable their physics, and resize their hitboxes
-		grass1 = game.add.sprite(0,0,'grass');
-		platformgroup.add(grass1);
-		grass1.body.immovable = true;
-		grass1.body.setSize(800,50,0,400);
-		
-		grass2 = game.add.sprite(800,0,'grass');
-		platformgroup.add(grass2);
-		grass2.body.immovable = true;
-		grass2.body.setSize(800,50,0,400);
+		ground2 = game.add.sprite(800,0,'ground');
+		platformgroup.add(ground2);
+		ground2.body.immovable = true;
+		ground2.body.setSize(800,50,0,400);
 		
 		//Add houses (Prefab?)
 		house1 = game.add.sprite(40,270,'house');
@@ -102,6 +85,20 @@ level_1.prototype = {
 		house7 = game.add.sprite(875,270,'house');
 		house7.scale.setTo(.8,.8);
 		
+		//Add villager group
+		villagergroup = game.add.group();
+		villagergroup.enableBody = true;
+		
+		//Add villagers
+		villager1 = new villager('Good','Family1');
+		villager1.spawn(game,30,75,'villager');
+		villagergroup.add(villager1.sprite);
+		
+		villager2 = new villager('Bad','Family2');
+		villager2.spawn(game,550,337,'villager');
+		villagergroup.add(villager2.sprite);
+		//villager2.setText('Hi.');
+				
 		//Add player
 		p1 = new player();
 		p1.spawn(game,110,325,'dude');
@@ -124,6 +121,7 @@ level_1.prototype = {
 		
 		//  Reset the players velocity (movement)
 		p1.sprite.body.velocity.x = 0;
+		
 		//Check if left is input
 		if (cursors.left.isDown)
 		{
@@ -146,6 +144,7 @@ level_1.prototype = {
 			p1.sprite.animations.stop();
 			p1.sprite.frame = 4;
 		}
+		
 		//  Enable player to jump if they are standing on the ground/platform
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && ( onGround || onPlatform))
 		{
@@ -155,17 +154,35 @@ level_1.prototype = {
 		//  Enables player to fall on platforms
 		game.physics.arcade.collide(p1.sprite, platformgroup);
 		
+		//Enables villagers to fall on platforms
+		game.physics.arcade.collide(villagergroup, platformgroup);
+		
 		//Bounce platform0 up and down
-		if(platform0.y > 250){
-			platform0.body.velocity.y = -65;
+		if(platform0.sprite.y > 250){
+			platform0.sprite.body.velocity.y = -65;
 		}
-		if(platform0.y < 100){
-			platform0.body.velocity.y = 65;
+		if(platform0.sprite.y < 100){
+			platform0.sprite.body.velocity.y = 65;
 		}
 		
-		//Move platform7 in a circle
+		//Move platform7/second in a circle
 		theta += .01;
-		platform7.body.velocity.x =  Math.cos(theta)*50;
-		platform7.body.velocity.y =  Math.sin(theta)*50;
+		platform7.sprite.body.velocity.x =  Math.cos(theta)*50;
+		platform7_second.sprite.body.velocity.x =  Math.cos(theta)*50;
+		platform7.sprite.body.velocity.y =  Math.sin(theta)*50;
+		platform7_second.sprite.body.velocity.y =  Math.sin(theta)*50;
+		
+		//Check if player if overlapping villager and display text bubble if true
+		/*if(Phaser.Rectangle.intersects(p1.sprite.getBounds(), villager2.sprite.getBounds())){
+			villager2.displayText('chat','arial');
+		}*/
+		//game.physics.arcade.overlap(p1.sprite, villagergroup, showText, null, this);
+		
 	}
 }
+
+/*function showText(p1, villager){
+	console.log('Show_Bubble');
+	villager.displayText('chat','arial');
+
+}*/

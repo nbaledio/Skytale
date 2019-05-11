@@ -14,8 +14,6 @@ var game = new Phaser.Game(width, height, Phaser.AUTO, 'phaser');
 
 // add states to StateManager
 game.state.add('Menu', Menu);
-game.state.add('test_environment', test_environment);
-game.state.add('test_environment2', test_environment2);
 game.state.add('level_1', level_1);
 
-game.state.start('Menu');
+game.state.start('level_1');
