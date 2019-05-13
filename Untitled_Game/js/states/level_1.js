@@ -5,6 +5,10 @@ var level_1 = function(game){};
 var theta = 1;
 
 level_1.prototype = {
+	init: function() {
+		this.peopleHelped = 0;
+		this.state = 'level_1';
+	},
 	preload: function(){
 		//Preload Game assets
 		game.load.image('background', 'assets/img/sky.png');
@@ -12,6 +16,7 @@ level_1.prototype = {
 		game.load.image('house', 'assets/img/house.png');
 		game.load.image('villager', 'assets/img/villager.png');
 		game.load.image('chat', 'assets/img/chat.png');
+		game.load.image('textbubble', 'assets/img/textbubble.png');
 		game.load.image('platform', 'assets/img/rockplatform.png');
 		game.load.spritesheet('dude', 'assets/img/dude.png',32, 48);
 		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
@@ -21,6 +26,8 @@ level_1.prototype = {
 		
 		//Setting the size of the world
 		game.world.setBounds(0, 0, 1600, 450);
+
+		game.physics.startSystem(Phaser.Physics.ARCADE);
 		
 		//Add and play music
 		//NOTE: Chrome will not play music until user
@@ -91,11 +98,11 @@ level_1.prototype = {
 		
 		//Add villagers
 		villager1 = new villager('Good','Family1');
-		villager1.spawn(game,30,75,'villager');
+		villager1.spawn(game,30,75,'villager','chat');
 		villagergroup.add(villager1.sprite);
 		
 		villager2 = new villager('Bad','Family2');
-		villager2.spawn(game,550,337,'villager');
+		villager2.spawn(game,550,337,'villager','chat');
 		villagergroup.add(villager2.sprite);
 		//villager2.setText('Hi.');
 				
@@ -173,16 +180,21 @@ level_1.prototype = {
 		platform7_second.sprite.body.velocity.y =  Math.sin(theta)*50;
 		
 		//Check if player if overlapping villager and display text bubble if true
-		/*if(Phaser.Rectangle.intersects(p1.sprite.getBounds(), villager2.sprite.getBounds())){
-			villager2.displayText('chat','arial');
-		}*/
-		//game.physics.arcade.overlap(p1.sprite, villagergroup, showText, null, this);
+		villager2.update(p1);
+		game.physics.arcade.overlap(p1.sprite, villager2.getTask(), finishTask, null, this);
+		villager1.update(p1);
+		game.physics.arcade.overlap(p1.sprite, villager1.getTask(), finishTask, null, this);
 		
+		console.log(this.peopleHelped);
+		if (this.peopleHelped == 2) {
+			game.state.start('GameOver', true, false, this.peopleHelped);
+		}
 	}
 }
 
-/*function showText(p1, villager){
-	console.log('Show_Bubble');
-	villager.displayText('chat','arial');
-
-}*/
+function finishTask(p1, task){
+	console.log('hewwo');
+	task.kill();
+	villager2.complete();
+	this.peopleHelped++;
+}
