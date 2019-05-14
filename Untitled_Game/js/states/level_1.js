@@ -13,6 +13,9 @@ level_1.prototype = {
 	},
 	create: function(){
 		
+		//Resets theta so circular platform doesn't glitch to random places
+		theta = 1;
+		
 		//Setting the size of the world
 		game.world.setBounds(0, 0, 1600, 450);
 
@@ -40,7 +43,6 @@ level_1.prototype = {
 		platform5 = new platform(game,5,107,'platform',platformgroup);
 		platform5_second = new platform(game,69,107,'platform',platformgroup);
 		platform0 = new platform(game,230,250,'platform',platformgroup);
-		platform0.sprite.body.velocity.y = -65;
 		platform1 = new platform(game,350,265,'platform',platformgroup);
 		platform2 = new platform(game,440,230,'platform',platformgroup);
 		platform3 = new platform(game,570,180,'platform',platformgroup);
@@ -65,7 +67,7 @@ level_1.prototype = {
 		ground2.body.immovable = true;
 		ground2.body.setSize(800,50,0,400);
 		
-		//Add houses (Prefab?)
+		//Add houses
 		house1 = game.add.sprite(40,270,'house');
 		house1.scale.setTo(.8,.8);
 		house2 = game.add.sprite(530,270,'house');
@@ -142,10 +144,15 @@ level_1.prototype = {
 			p1.sprite.frame = 4;
 		}
 		
+		//Push player downwards if on platform for more consistent jumps
+		if(onGround || onPlatform){
+			p1.sprite.y +=1;
+		}
+		
 		//  Enable player to jump if they are standing on the ground/platform
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && ( onGround || onPlatform))
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)  && ( onGround || onPlatform))
 		{
-			p1.sprite.body.velocity.y = -460;
+			p1.sprite.body.velocity.y = -500;
 		}
 		
 		//  Enables player to fall on platforms
@@ -155,11 +162,11 @@ level_1.prototype = {
 		game.physics.arcade.collide(villagergroup, platformgroup);
 		
 		//Bounce platform0 up and down
-		if(platform0.sprite.y > 250){
-			platform0.sprite.body.velocity.y = -65;
+		if(platform0.sprite.y >= 250){
+			platform0.sprite.body.velocity.y = -60;
 		}
-		if(platform0.sprite.y < 100){
-			platform0.sprite.body.velocity.y = 65;
+		if(platform0.sprite.y <= 100){
+			platform0.sprite.body.velocity.y = 60;
 		}
 		
 		//Move platform7/second in a circle
