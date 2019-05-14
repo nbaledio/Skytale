@@ -1,3 +1,4 @@
+//Group 6: Nathan Baledio, Sophia Santos, Kaylin Wang
 var GameOver = function(game){};
 GameOver.prototype = {
 	init: function(peopleHelped, balance) {

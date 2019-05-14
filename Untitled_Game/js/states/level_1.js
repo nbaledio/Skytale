@@ -1,3 +1,4 @@
+//Group 6: Nathan Baledio, Sophia Santos, Kaylin Wang
 //level_1.js
 //First level of the game.
 

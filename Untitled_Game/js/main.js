@@ -1,3 +1,4 @@
+//Group 6: Nathan Baledio, Sophia Santos, Kaylin Wang
 //main.js:
 //Creates game and manages states in the StateManager
 

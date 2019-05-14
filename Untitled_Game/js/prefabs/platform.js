@@ -1,3 +1,4 @@
+//Group 6: Nathan Baledio, Sophia Santos, Kaylin Wang
 //platform.js
 //Spawns a platform (used to save time in writing it in main)
 //Note: If you scale the image, be sure to change the hitbox as well.

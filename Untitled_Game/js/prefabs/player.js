@@ -1,3 +1,4 @@
+//Group 6: Nathan Baledio, Sophia Santos, Kaylin Wang
 //player.js:
 //Player prefab. Has basic functions to is such as spawning, scaling, etc.
 
