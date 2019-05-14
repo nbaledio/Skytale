@@ -7,20 +7,8 @@ var theta = 1;
 level_1.prototype = {
 	init: function() {
 		this.peopleHelped = 0;
+		this.balance = 0;
 		this.state = 'level_1';
-	},
-	preload: function(){
-		//Preload Game assets
-		game.load.image('background', 'assets/img/sky.png');
-		game.load.image('ground', 'assets/img/ground.png');
-		game.load.image('house', 'assets/img/house.png');
-		game.load.image('villager', 'assets/img/villager.png');
-		game.load.image('chat', 'assets/img/chat.png');
-		game.load.image('textbubble', 'assets/img/textbubble.png');
-		game.load.image('platform', 'assets/img/rockplatform.png');
-		game.load.spritesheet('dude', 'assets/img/dude.png',32, 48);
-		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
-		
 	},
 	create: function(){
 		
@@ -97,14 +85,15 @@ level_1.prototype = {
 		villagergroup.enableBody = true;
 		
 		//Add villagers
-		villager1 = new villager('Good','Family1');
-		villager1.spawn(game,30,75,'villager','chat');
+		villager1 = new villager();
+		villager1.spawn(game,30,75,'villager',1,'Family1','chat');
 		villagergroup.add(villager1.sprite);
+		villager1.setText('Find me one of those chat bubbles');
 		
-		villager2 = new villager('Bad','Family2');
-		villager2.spawn(game,550,337,'villager','chat');
+		villager2 = new villager();
+		villager2.spawn(game,550,337,'villager',0,'Family2','chat');
 		villagergroup.add(villager2.sprite);
-		//villager2.setText('Hi.');
+		villager2.setText('Find me one of those chat bubbles');
 				
 		//Add player
 		p1 = new player();
@@ -179,22 +168,40 @@ level_1.prototype = {
 		platform7.sprite.body.velocity.y =  Math.sin(theta)*50;
 		platform7_second.sprite.body.velocity.y =  Math.sin(theta)*50;
 		
-		//Check if player if overlapping villager and display text bubble if true
+		//Check if player if overlapping villager
+		// call update on villager to respond accordingly
 		villager2.update(p1);
-		game.physics.arcade.overlap(p1.sprite, villager2.getTask(), finishTask, null, this);
+		if (game.physics.arcade.overlap(p1.sprite, villager2.getTask(), finishTask, null, this)) {
+			// if task is completed, update the villager instance and overall balance
+			villager2.complete();
+			if (villager2.nice == 1) {
+				this.balance++;
+			} else {
+				this.balance--;
+			}
+		}
 		villager1.update(p1);
-		game.physics.arcade.overlap(p1.sprite, villager1.getTask(), finishTask, null, this);
+		if (game.physics.arcade.overlap(p1.sprite, villager1.getTask(), finishTask, null, this)) {
+			// if task is completed, update the villager instance and overall balance
+			villager1.complete();
+			if (villager1.nice == 1) {
+				this.balance++;
+			} else {
+				this.balance--;
+			}
+		}
 		
-		console.log(this.peopleHelped);
-		if (this.peopleHelped == 2) {
-			game.state.start('GameOver', true, false, this.peopleHelped);
+
+		// the player will either quit or finish the game by helping everyone
+		if (this.peopleHelped == 2 ||
+			game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
+			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
 	}
 }
 
+// helper function for when task is done
 function finishTask(p1, task){
-	console.log('hewwo');
 	task.kill();
-	villager2.complete();
 	this.peopleHelped++;
 }

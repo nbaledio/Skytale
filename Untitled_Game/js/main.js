@@ -7,7 +7,8 @@
 //Variables
 var width = 800;
 var height = 450;
-var style = { font: '24px Comic Sans MS', fill: '#FFF', align: "center" };
+// Have a consistent text style throughout (subject to change 5/13/2019)
+var style = { font: '24px Comic Sans MS', fill: '#FFF', align: "center", stroke: '#000000', strokeThickness: '6'};
 
 //Game
 var game = new Phaser.Game(width, height, Phaser.AUTO, 'phaser');
@@ -17,4 +18,5 @@ game.state.add('Menu', Menu);
 game.state.add('level_1', level_1);
 game.state.add('GameOver', GameOver);
 
+// begin at the menu
 game.state.start('Menu');

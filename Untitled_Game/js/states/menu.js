@@ -1,26 +1,46 @@
-var Menu = function(game) {
-	var message;
-}
+//menu.js
+//menu screen for the game (also temporarily providing instructions)
 
+var Menu = function(game) {};
+var message;
 
 
 Menu.prototype = {
 	preload: function() {
-		console.log('Menu: preload');
-		game.load.image('sky', 'assets/img/sky.png');
+		//Preload Game assets
+		game.load.image('background', 'assets/img/sky.png');
+		game.load.image('ground', 'assets/img/ground.png');
+		game.load.image('house', 'assets/img/house.png');
+		game.load.image('villager', 'assets/img/villager.png');
+		game.load.image('chat', 'assets/img/chat.png');
+		game.load.image('textbubble', 'assets/img/textbubble.png');
+		game.load.image('platform', 'assets/img/rockplatform.png');
+		game.load.spritesheet('dude', 'assets/img/dude.png',32, 48);
+		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
+		//Figure out a better font to use later
 		//game.load.bitmapFont('myfont', 'assets/myfont/font.png', 'assets/myfont/font.fnt');
 	},
 	create: function() {
-		game.add.sprite(0,0, 'sky');
-		//var style = { font: '24px Comic Sans MS', fill: '#FFF', align: "center" };
-		//var style = { font: 'myfont', fill: '#FFF', align: "center" };
-		message = game.add.text(400, game.world.centerY - 120, "Press SPACE to start", style);
+		//add a background for continuity
+		game.add.sprite(0,0, 'background');
+
+		//Font testing to implement later
 		//message = game.add.bitmapText(game.world.centerX, game.world.centerY - 120, "Press SPACE to start", style);
+		
+		//Give the player general instructions
+		message = game.add.text(400, game.world.centerY - 120, "Press SPACE to start\nPress Q to quit", style);
 		message.anchor.set(0.5);
+
+
+		// Control tutorial
+		instruction = game.add.text(400, game.world.centerY - 40, "Use arrow keys to move\nPress SPACEBAR to interact", style);
+		instruction.anchor.set(0.5);
+
 	},
 	update: function() {
+		// when the player hits space, begin the game
 		if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-			message.destroy();
+			//do not clear cache, but clear the stage
 			game.state.start('level_1', true, false);
 		}
 	}
