@@ -13,7 +13,7 @@ player.prototype = {
 		this.sprite = game.add.sprite(x,y,spritesheet);
 		game.physics.arcade.enable(this.sprite);
 		this.sprite.body.gravity.y = 900;
-		this.sprite.body.collideWorldBounds = true;
+		this.sprite.body.collideWorldBounds = false;
 	},
 	//Arguments: x scaling factor, y scaling factor
 	//Scales sprite image

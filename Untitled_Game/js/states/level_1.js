@@ -37,6 +37,13 @@ level_1.prototype = {
 		//Enable physics for every object in platforms group
 		platformgroup.enableBody = true;
 		
+		//Ground group
+		groundgroup = game.add.group();
+		
+		//Enable physics for every object in ground group
+		groundgroup.enableBody = true;
+		
+		
 		//Add platforms (Left to right) (second/third/etc. just means multiple
 		//platforms next to each other to make one big platform since scaling 
 		//makes it look weird.)
@@ -51,6 +58,7 @@ level_1.prototype = {
 		platform4_third = new platform(game,843,148,'platform',platformgroup);
 		platform4_fourth = new platform(game,907,148,'platform',platformgroup);
 		platform7 = new platform(game,1175,150,'platform',platformgroup);
+		platform7.sprite.body.setSize(62,5,0,32);
 		platform7_second = new platform(game,1239,150,'platform',platformgroup);
 		platform6 = new platform(game,1435,136,'platform',platformgroup);
 		platform6_second = new platform(game,1499,136,'platform',platformgroup);
@@ -58,12 +66,12 @@ level_1.prototype = {
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
-		platformgroup.add(ground1);
+		groundgroup.add(ground1);
 		ground1.body.immovable = true;
 		ground1.body.setSize(800,50,0,400);
 		
 		ground2 = game.add.sprite(800,0,'ground');
-		platformgroup.add(ground2);
+		groundgroup.add(ground2);
 		ground2.body.immovable = true;
 		ground2.body.setSize(800,50,0,400);
 		
@@ -116,10 +124,17 @@ level_1.prototype = {
 	update: function(){
 		//Variables to check if player is on platform or ground
 		var onPlatform = game.physics.arcade.collide(p1.sprite, platformgroup);
-		var onGround = p1.sprite.body.blocked.down;
+		var onGround = game.physics.arcade.collide(p1.sprite, groundgroup);
 		
 		//  Reset the players velocity (movement)
 		p1.sprite.body.velocity.x = 0;
+		
+		// Keeps player in horizontal bounds
+		if(p1.sprite.x <= 0){
+			p1.sprite.x += 2.5;
+		}else if(p1.sprite.x > 1570){
+			p1.sprite.x -= 2.5;
+		}
 		
 		//Check if left is input
 		if (cursors.left.isDown)
@@ -153,6 +168,19 @@ level_1.prototype = {
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)  && ( onGround || onPlatform))
 		{
 			p1.sprite.body.velocity.y = -500;
+		}
+		
+		//  Enable player to drop through platforms
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN)  && onPlatform)
+		{
+			p1.sprite.y +=8;
+		}
+		
+		//Allow player to pass through platforms from the bottom
+		if(p1.sprite.body.velocity.y < -50 && !( onGround || onPlatform)){
+			p1.sprite.body.setSize(0,0,0,-1000);
+		}else{
+			p1.sprite.body.setSize(32,48,0,0);
 		}
 		
 		//  Enables player to fall on platforms

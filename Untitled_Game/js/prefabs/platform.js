@@ -12,7 +12,7 @@ function platform(game,x,y,Sprite,group){
 	group.add(this.sprite);
 	this.sprite.enableBody = true;
 	this.sprite.body.immovable = true;
-	this.sprite.body.setSize(88,30,0,30);
+	this.sprite.body.setSize(88,5,0,32);
 }
 
 platform.prototype = {
