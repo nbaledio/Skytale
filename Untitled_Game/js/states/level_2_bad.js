@@ -1,15 +1,15 @@
 //Group 6: Nathan Baledio, Sophia Santos, Kaylin Wang
-//level_1.js
-//First level of the game.
+//level_2_bad.js
+//Second level of game, bad karma variant
 
-var level_1 = function(game){};
+var level_2_bad = function(game){};
 var theta = 1;
 
-level_1.prototype = {
+level_2_bad.prototype = {
 	init: function() {
 		this.peopleHelped = 0;
 		this.balance = 0;
-		this.state = 'level_1';
+		this.state = 'level_2.bad';
 	},
 	create: function(){
 		
@@ -47,21 +47,16 @@ level_1.prototype = {
 		//Add platforms (Left to right) (second/third/etc. just means multiple
 		//platforms next to each other to make one big platform since scaling 
 		//makes it look weird.)
-		platform5 = new platform(game,5,107,'platform',platformgroup);
-		platform5_second = new platform(game,69,107,'platform',platformgroup);
-		platform0 = new platform(game,230,250,'platform',platformgroup);
-		platform1 = new platform(game,350,265,'platform',platformgroup);
-		platform2 = new platform(game,440,230,'platform',platformgroup);
-		platform3 = new platform(game,570,180,'platform',platformgroup);
-		platform4 = new platform(game,715,148,'platform',platformgroup);
-		platform4_second = new platform(game,779,148,'platform',platformgroup);
-		platform4_third = new platform(game,843,148,'platform',platformgroup);
-		platform4_fourth = new platform(game,907,148,'platform',platformgroup);
-		platform7 = new platform(game,1175,150,'platform',platformgroup);
-		platform7.sprite.body.setSize(62,5,0,32);
-		platform7_second = new platform(game,1239,150,'platform',platformgroup);
-		platform6 = new platform(game,1435,136,'platform',platformgroup);
-		platform6_second = new platform(game,1499,136,'platform',platformgroup);
+		platform0 = new platform(game,600,250,'platform',platformgroup);
+		platform1 = new platform(game,930,250,'platform',platformgroup);
+		platform2 = new platform(game,990,109,'platform',platformgroup);
+		platform2_second = new platform(game,1054,109,'platform',platformgroup);
+		platform3 = new platform(game,510,106,'platform',platformgroup);
+		platform3_second = new platform(game,574,106,'platform',platformgroup);
+		platform4 = new platform(game,775,110,'platform',platformgroup);
+		platform4.sprite.body.setSize(62,5,0,32);
+		platform4_second = new platform(game,839,110,'platform',platformgroup);
+
 
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
@@ -78,17 +73,17 @@ level_1.prototype = {
 		//Add houses
 		house1 = game.add.sprite(40,270,'house');
 		house1.scale.setTo(.8,.8);
-		house2 = game.add.sprite(530,270,'house');
+		house2 = game.add.sprite(750,270,'house');
 		house2.scale.setTo(.8,.8);
-		house3 = game.add.sprite(760,52,'house');
+		house3 = game.add.sprite(520,10,'house');
 		house3.scale.setTo(.8,.8);
-		house4 = game.add.sprite(10,10,'house');
+		house4 = game.add.sprite(380,270,'house');
 		house4.scale.setTo(.8,.8);
 		house5 = game.add.sprite(1400,270,'house');
 		house5.scale.setTo(.8,.8);
-		house6 = game.add.sprite(1450,40,'house');
+		house6 = game.add.sprite(1000,13,'house');
 		house6.scale.setTo(.8,.8);
-		house7 = game.add.sprite(875,270,'house');
+		house7 = game.add.sprite(1100,270,'house');
 		house7.scale.setTo(.8,.8);
 		
 		//Add villager group
@@ -97,32 +92,32 @@ level_1.prototype = {
 		
 		//Add villagers
 		villager1 = new villager();
-		villager1.spawn(game,30,75,'villager',1,'Family1','chat');
+		villager1.spawn(game,1020,79,'villager',1,'Family1','chat');
 		villagergroup.add(villager1.sprite);
 		villager1.setText('Find me one of those chat bubbles');
 		
 		villager2 = new villager();
-		villager2.spawn(game,550,337,'villager',0,'Family2','chat');
+		villager2.spawn(game,540,75,'villager',0,'Family2','chat');
 		villagergroup.add(villager2.sprite);
 		villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
-		villager3.spawn(game,780,117,'villager',1,'Family2','chat');
+		villager3.spawn(game,400,337,'villager',1,'Family1','chat');
 		villagergroup.add(villager3.sprite);
 		villager3.setText('Find me one of those chat bubbles');
 		
 		villager4 = new villager();
-		villager4.spawn(game,890,337,'villager',0,'Family2','chat');
+		villager4.spawn(game,770,337,'villager',0,'Family2','chat');
 		villagergroup.add(villager4.sprite);
 		villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
-		villager5.spawn(game,1420,337,'villager',1,'Family2','chat');
+		villager5.spawn(game,1120,337,'villager',1,'Family1','chat');
 		villagergroup.add(villager5.sprite);
 		villager5.setText('Find me one of those chat bubbles');
 		
 		villager6 = new villager();
-		villager6.spawn(game,1470,105,'villager',0,'Family2','chat');
+		villager6.spawn(game,1420,337,'villager',0,'Family2','chat');
 		villagergroup.add(villager6.sprite);
 		villager6.setText('Find me one of those chat bubbles');
 				
@@ -209,20 +204,12 @@ level_1.prototype = {
 		//Enables villagers to fall on platforms
 		game.physics.arcade.collide(villagergroup, platformgroup);
 		
-		//Bounce platform0 up and down
-		if(platform0.sprite.y >= 250){
-			platform0.sprite.body.velocity.y = -60;
-		}
-		if(platform0.sprite.y <= 100){
-			platform0.sprite.body.velocity.y = 60;
-		}
-		
 		//Move platform7/second in a circle
-		theta += .01;
-		platform7.sprite.body.velocity.x =  Math.cos(theta)*50;
-		platform7_second.sprite.body.velocity.x =  Math.cos(theta)*50;
-		platform7.sprite.body.velocity.y =  Math.sin(theta)*50;
-		platform7_second.sprite.body.velocity.y =  Math.sin(theta)*50;
+		theta += .03;
+		platform4.sprite.body.velocity.x =  Math.cos(theta)*50;
+		platform4_second.sprite.body.velocity.x =  Math.cos(theta)*50;
+		platform4.sprite.body.velocity.y =  Math.sin(theta)*50;
+		platform4_second.sprite.body.velocity.y =  Math.sin(theta)*50;
 		
 		//Check if player if overlapping villager
 		// call update on villager to respond accordingly
