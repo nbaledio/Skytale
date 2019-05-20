@@ -293,6 +293,13 @@ level_1.prototype = {
 			game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
+			game.state.start('level_1')
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
+			game.state.start('level_2_good')
+		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
+			game.state.start('level_2_bad')
+		}
 	}
 }
 

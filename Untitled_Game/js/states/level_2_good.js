@@ -306,6 +306,14 @@ level_2_good.prototype = {
 			}
 		}
 		
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
+			game.state.start('level_1')
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
+			game.state.start('level_2_good')
+		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
+			game.state.start('level_2_bad')
+		}
+		
 
 		// the player will either quit or finish the game by helping everyone
 		if (this.peopleHelped == 2 ||
