@@ -185,15 +185,9 @@ level_2_bad.prototype = {
 			p1.sprite.body.velocity.y = -500;
 		}
 		
-		//  Enable player to drop through platforms
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN)  && onPlatform)
-		{
-			p1.sprite.y +=8;
-		}
-		
-		//Allow player to pass through platforms from the bottom
-		if(p1.sprite.body.velocity.y < -50 && !( onGround || onPlatform)){
-			p1.sprite.body.setSize(0,0,0,-1000);
+		//Allow player to pass through platforms from the bottom/drop down from platforms
+		if((p1.sprite.body.velocity.y < -50 && !( onGround || onPlatform)) || (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && p1.sprite.y < 320)){
+			p1.sprite.body.setSize(0,0,0,1000);
 		}else{
 			p1.sprite.body.setSize(32,48,0,0);
 		}
@@ -276,10 +270,13 @@ level_2_bad.prototype = {
 		
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
 			game.state.start('level_1')
+			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
 			game.state.start('level_2_good')
+			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
 			game.state.start('level_2_bad')
+			bgm.stop();
 		}
 		
 

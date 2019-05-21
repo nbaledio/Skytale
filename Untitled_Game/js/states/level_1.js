@@ -51,8 +51,8 @@ level_1.prototype = {
 		platform5_second = new platform(game,69,107,'platform',platformgroup);
 		platform0 = new platform(game,230,250,'platform',platformgroup);
 		platform1 = new platform(game,350,265,'platform',platformgroup);
-		platform2 = new platform(game,440,230,'platform',platformgroup);
-		platform3 = new platform(game,570,180,'platform',platformgroup);
+		platform2 = new platform(game,460,220,'platform',platformgroup);
+		platform3 = new platform(game,570,170,'platform',platformgroup);
 		platform4 = new platform(game,715,148,'platform',platformgroup);
 		platform4_second = new platform(game,779,148,'platform',platformgroup);
 		platform4_third = new platform(game,843,148,'platform',platformgroup);
@@ -128,7 +128,7 @@ level_1.prototype = {
 				
 		//Add player
 		p1 = new player();
-		p1.spawn(game,110,325,'dude');
+		p1.spawn(game,110,360,'dude');
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2, 3], 10, true);
 		p1.addAnimations('right', [5, 6, 7, 8], 10, true);
@@ -190,15 +190,10 @@ level_1.prototype = {
 			p1.sprite.body.velocity.y = -500;
 		}
 		
-		//  Enable player to drop through platforms
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN)  && onPlatform)
-		{
-			p1.sprite.y +=8;
-		}
 		
-		//Allow player to pass through platforms from the bottom
-		if(p1.sprite.body.velocity.y < -50 && !( onGround || onPlatform)){
-			p1.sprite.body.setSize(0,0,0,-1000);
+		//Allow player to pass through platforms from the bottom/drop down from platforms
+		if((p1.sprite.body.velocity.y < -50 && !( onGround || onPlatform)) || (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && p1.sprite.y < 320)){
+			p1.sprite.body.setSize(0,0,0,1000);
 		}else{
 			p1.sprite.body.setSize(32,48,0,0);
 		}
@@ -295,10 +290,13 @@ level_1.prototype = {
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
 			game.state.start('level_1')
+			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
 			game.state.start('level_2_good')
+			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
 			game.state.start('level_2_bad')
+			bgm.stop();
 		}
 	}
 }
