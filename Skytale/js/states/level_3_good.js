@@ -92,32 +92,32 @@ level_3_good.prototype = {
 		
 		//Add villagers
 		villager1 = new villager();
-		villager1.spawn(game,1020,79,'villager',1,'Family1','chat');
+		villager1.spawn(game,1020,79,'villager',1,'Family1');
 		villagergroup.add(villager1.sprite);
 		villager1.setText('Find me one of those chat bubbles');
 		
 		villager2 = new villager();
-		villager2.spawn(game,540,75,'villager',0,'Family2','chat');
+		villager2.spawn(game,540,75,'villager',0,'Family2');
 		villagergroup.add(villager2.sprite);
 		villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
-		villager3.spawn(game,400,337,'villager',1,'Family1','chat');
+		villager3.spawn(game,400,337,'villager',1,'Family3');
 		villagergroup.add(villager3.sprite);
 		villager3.setText('Find me one of those chat bubbles');
 		
 		villager4 = new villager();
-		villager4.spawn(game,770,337,'villager',0,'Family2','chat');
+		villager4.spawn(game,770,337,'villager',0,'Family4');
 		villagergroup.add(villager4.sprite);
 		villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
-		villager5.spawn(game,1120,337,'villager',1,'Family1','chat');
+		villager5.spawn(game,1120,337,'villager',1,'Family5');
 		villagergroup.add(villager5.sprite);
 		villager5.setText('Find me one of those chat bubbles');
 		
 		villager6 = new villager();
-		villager6.spawn(game,1420,337,'villager',0,'Family2','chat');
+		villager6.spawn(game,1420,337,'villager',0,'Family6');
 		villagergroup.add(villager6.sprite);
 		villager6.setText('Find me one of those chat bubbles');
 				
@@ -160,64 +160,64 @@ level_3_good.prototype = {
 		//Check if player if overlapping villager
 		// call update on villager to respond accordingly
 		villager6.update(p1);
-		if (game.physics.arcade.overlap(p1.sprite, villager6.getTask(), finishTask, null, this)) {
+		if (villager6.interacted == 'yes' && villager6.timer == 59) {
+			task = new task();
+			task.spawn(game, 1560, 148, 'chat', villager6);
+			//console.log('hewwo');
+		}
+		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
 			// if task is completed, update the villager instance and overall balance
-			villager6.complete();
-			if (villager6.nice == 1) {
-				this.balance++;
-			} else {
-				this.balance--;
-			}
+			this.balance = villager6.complete(this.balance, p1);
 		}
 		villager5.update(p1);
-		if (game.physics.arcade.overlap(p1.sprite, villager5.getTask(), finishTask, null, this)) {
+		if (villager5.interacted == 'yes' && villager5.timer == 59) {
+			task = new task();
+			task.spawn(game, 1560, 148, 'chat', villager5);
+			//console.log('hewwo');
+		}
+		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
 			// if task is completed, update the villager instance and overall balance
-			villager5.complete();
-			if (villager5.nice == 1) {
-				this.balance++;
-			} else {
-				this.balance--;
-			}
+			this.balance = villager5.complete(this.balance, p1);
 		}
 		villager4.update(p1);
-		if (game.physics.arcade.overlap(p1.sprite, villager4.getTask(), finishTask, null, this)) {
+		if (villager4.interacted == 'yes' && villager4.timer == 59) {
+			task = new task();
+			task.spawn(game, 1560, 148, 'chat', villager4);
+			//console.log('hewwo');
+		}
+		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
 			// if task is completed, update the villager instance and overall balance
-			villager4.complete();
-			if (villager4.nice == 1) {
-				this.balance++;
-			} else {
-				this.balance--;
-			}
+			this.balance = villager4.complete(this.balance, p1);
 		}
 		villager3.update(p1);
-		if (game.physics.arcade.overlap(p1.sprite, villager3.getTask(), finishTask, null, this)) {
+		if (villager3.interacted == 'yes' && villager3.timer == 59) {
+			task = new task();
+			task.spawn(game, 1560, 148, 'chat', villager3);
+			//console.log('hewwo');
+		}
+		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
 			// if task is completed, update the villager instance and overall balance
-			villager3.complete();
-			if (villager3.nice == 1) {
-				this.balance++;
-			} else {
-				this.balance--;
-			}
+			this.balance = villager3.complete(this.balance, p1);
 		}
 		villager2.update(p1);
-		if (game.physics.arcade.overlap(p1.sprite, villager2.getTask(), finishTask, null, this)) {
+		if (villager2.interacted == 'yes' && villager2.timer == 59) {
+			task = new task();
+			task.spawn(game, 1560, 148, 'chat', villager2);
+			//console.log('hewwo');
+		}
+		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
 			// if task is completed, update the villager instance and overall balance
-			villager2.complete();
-			if (villager2.nice == 1) {
-				this.balance++;
-			} else {
-				this.balance--;
-			}
+			this.balance = villager2.complete(this.balance, p1);
 		}
 		villager1.update(p1);
-		if (game.physics.arcade.overlap(p1.sprite, villager1.getTask(), finishTask, null, this)) {
+		if (villager1.interacted == 'yes' && villager1.timer == 59) {
+			task = new task();
+			task.spawn(game, 1560, 148, 'chat', villager1);
+			//console.log('hewwo');
+		}
+		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
 			// if task is completed, update the villager instance and overall balance
-			villager1.complete();
-			if (villager1.nice == 1) {
-				this.balance++;
-			} else {
-				this.balance--;
-			}
+			this.balance = villager1.complete(this.balance, p1);
 		}
 		
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
