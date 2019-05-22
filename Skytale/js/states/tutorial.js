@@ -70,7 +70,7 @@ tutorial.prototype = {
 		villagergroup.enableBody = true;
 
 		villager3 = new villager();
-		villager3.spawn(game,900,337,'villager',1,'Family2','chat');
+		villager3.spawn(game,900,337,'villager',1,'Family2');
 		villagergroup.add(villager3.sprite);
 		villager3.setText('Find me one of those chat bubbles');
 
@@ -112,7 +112,7 @@ tutorial.prototype = {
 		}
 		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
 			// if task is completed, update the villager instance and overall balance
-			balance = villager3.complete(balance);
+			balance = villager3.complete(balance, p1);
 		}
 
 		//Variables to check if player is on platform or ground

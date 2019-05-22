@@ -4,6 +4,7 @@
 
 function player(){
 	var sprite;
+	var interacting;
 }
 
 player.prototype = {
@@ -14,6 +15,8 @@ player.prototype = {
 		game.physics.arcade.enable(this.sprite);
 		this.sprite.body.gravity.y = 900;
 		this.sprite.body.collideWorldBounds = false;
+
+		this.interacting = 'none';
 	},
 	//Arguments: x scaling factor, y scaling factor
 	//Scales sprite image
