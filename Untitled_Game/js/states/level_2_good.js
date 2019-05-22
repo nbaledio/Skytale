@@ -149,57 +149,7 @@ level_2_good.prototype = {
 		var onPlatform = game.physics.arcade.collide(p1.sprite, platformgroup);
 		var onGround = game.physics.arcade.collide(p1.sprite, groundgroup);
 		
-		//  Reset the players velocity (movement)
-		p1.sprite.body.velocity.x = 0;
-		
-		// Keeps player in horizontal bounds
-		if(p1.sprite.x <= 0){
-			p1.sprite.x += 2.5;
-		}else if(p1.sprite.x > 1570){
-			p1.sprite.x -= 2.5;
-		}
-		
-		//Check if left is input
-		if (cursors.left.isDown)
-		{
-			//  Move to the left
-			p1.sprite.body.velocity.x = -150;
-			//  Play left animation
-			p1.sprite.animations.play('left');
-		}
-		//Check if right is input
-		else if (cursors.right.isDown)
-		{
-			//  Move to the right
-			p1.sprite.body.velocity.x = 150;
-			//  Play right animation
-			p1.sprite.animations.play('right');
-		}
-		else
-		{
-			//  Stand still
-			p1.sprite.animations.stop();
-			p1.sprite.frame = 4;
-		}
-		
-		//Push player downwards if on platform for more consistent jumps
-		if(onGround || onPlatform){
-			p1.sprite.y +=1;
-		}
-		
-		//  Enable player to jump if they are standing on the ground/platform
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)  && ( onGround || onPlatform))
-		{
-			p1.sprite.body.velocity.y = -500;
-		}
-		
-		//Allow player to pass through platforms from the bottom
-		//Allow player to pass through platforms from the bottom/drop down from platforms
-		if((p1.sprite.body.velocity.y < -50 && !( onGround || onPlatform)) || (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && p1.sprite.y < 320)){
-			p1.sprite.body.setSize(0,0,0,1000);
-		}else{
-			p1.sprite.body.setSize(32,48,0,0);
-		}
+		p1.controls(onGround,onPlatform);
 		
 		//  Enables player to fall on platforms
 		game.physics.arcade.collide(p1.sprite, platformgroup);
