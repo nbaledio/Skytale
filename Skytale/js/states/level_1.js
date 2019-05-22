@@ -128,7 +128,7 @@ level_1.prototype = {
 				
 		//Add player
 		p1 = new player();
-		p1.spawn(game,110,360,'dude');
+		p1.spawn(game,110,350,'dude');
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2, 3], 10, true);
 		p1.addAnimations('right', [5, 6, 7, 8], 10, true);

@@ -48,14 +48,14 @@ player.prototype = {
 			//  Move to the left
 			this.sprite.body.velocity.x = -150;
 			//  Play left animation
-			this.sprite.animations.play('left');
+			this.sprite.animations.play('left',50);
 		}
 		//Check if right is input
 		else if (cursors.right.isDown){
 			//  Move to the right
 			this.sprite.body.velocity.x = 150;
 			//  Play right animation
-			this.sprite.animations.play('right');
+			this.sprite.animations.play('right',50);
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
@@ -72,7 +72,7 @@ player.prototype = {
 		if((this.sprite.body.velocity.y < -50 && !( onGround || onPlatform)) || (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && this.sprite.y < 320)){
 			this.sprite.body.setSize(0,0,0,1000);
 		}else{
-			this.sprite.body.setSize(32,48,0,0);
+			this.sprite.body.setSize(128/4, 165/3,0,0);
 		}
 		
 	}
