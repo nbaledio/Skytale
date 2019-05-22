@@ -2,6 +2,8 @@
 // villager.js
 // villager prefab
 
+
+
 function villager() {
 	var sprite;
 	var nice;	// 0 if bad, 1 if nice
@@ -34,7 +36,7 @@ villager.prototype = {
 		this.sprite.body.immovable = true;
 		this.x = x;
 		this.interacted = 0;
-		this.taskSprite = chat;
+		//this.task = null;
 		this.timer = 0;
 	},
 	//Arguments: text the villager will say
@@ -46,59 +48,79 @@ villager.prototype = {
 
 		// 0 indicates that this is the first interaction
 		if (this.interacted == 0) {
+			// creates the first message
 			this.bubble = game.add.sprite(this.x, 75, textBubble);
-			this.display2 = game.add.text(this.x + 25, 100, "Hey kid ...", style);
+			// display2 is the text held inside the bubble
+			// this.display2 = game.add.text(this.x + 25, 100, "Hey kid ...", style);
+			this.display2 = game.add.bitmapText(this.x+24, 100, 'myfont', "Hey kid...", 48);
+			// removes the original signal for interaction
 			this.display.visible = false;
-			this.interacted = 1; 
+			// move on to the next text bubble when the player hits space again
+			this.interacted = 1;
+			// reset the timer for the text
 			this.timer = 0;
 		}
 		// 1 indicates that this is in the middle of the interaction
+		// the timer must be at least 60 so the player can not skip over the previous portion too fast
 		else if (this.interacted == 1 && this.timer > 60) {
+			// remove the old text
 			this.display2.kill();
-			this.display2 = game.add.text(this.x + 25, 100, this.text, style);
+			// create the new text
+			// this.display2 = game.add.text(this.x + 25, 100, this.text, style);
+			this.display2 = game.add.bitmapText(this.x+24, 100, 'myfont', this.text, 48);
+			// reset the timer and move on to the next interaction when the player presses space again
 			this.timer = 0;
 			this.interacted = 2;
 		}
 		// 2 inidcates the middle of the interaction
+		// the timer must be at least 60 so the player can not skip over the previous portion too fast
 		else if (this.interacted == 2 && this.timer > 60) {
 			this.display2.kill();
-			this.display2 = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
+			// this.display2 = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
+			this.display2 = game.add.bitmapText(this.x+24, 100, 'myfont', 'So...Will you do it? y/n', 48);
 			this.interacted = 3;
 			this.timer = 0;
 		}
 		// 3 indicates a decision to be made, and will respond with 'yes' or 'no'
 		else if (this.interacted == 'yes') {
 			this.display2.kill();
-			this.display2 = game.add.text(this.x + 25, 100, 'Great, thanks!', style);
+			// this.display2 = game.add.text(this.x + 25, 100, 'Great, thanks!', style);
+			this.display2 = game.add.bitmapText(this.x+24, 100, 'myfont', 'Great, thanks!', 48);
+
 			this.timer = 0;
 		} else if (this.interacted == 'no') {
 			this.display2.kill();
-			this.display2 = game.add.text(this.x + 25, 100, 'Alright then...', style);
+			// this.display2 = game.add.text(this.x + 25, 100, 'Alright then...', style);
+
+			this.display2 = game.add.bitmapText(this.x+24, 100, 'myfont', 'Alright then...', 48);
 			this.timer = 0;
 		}
 	},
-	// Arguments: sprite for task
-	spawnTask: function(key) {
-		// spawn a task sprite in a random position
-		this.task = game.add.sprite(((Math.random() * game.world.width)), ((Math.random() * game.world.height) - 50), key);
-		game.physics.arcade.enable(this.task);
-		// indicate the status of this task
-		this.interacted = 'unfinished';
-		// stop talking with the player
-		this.display2.destroy();
-		this.bubble.kill();
-	},
-	getTask: function() {
-		// I didn't know whether this was necessary I just did it :/
-		return this.task;
-	},
-	getStatus: function() {
-		return this.interacted;
-	},
-	complete: function() {
+	// // Arguments: sprite for task
+	// spawnTask: function(key) {
+	// 	// spawn a task sprite in a random position
+	// 	this.task = game.add.sprite(((Math.random() * game.world.width)), ((Math.random() * game.world.height) - 50), key);
+	// 	//this.task = game.add.sprite(600, 300, key);
+	// 	game.physics.arcade.enable(this.task);
+
+	// },
+	// getTask: function() {
+	// 	// I didn't know whether this was necessary I just did it :/
+	// 	return this.task;
+	// },
+	// getStatus: function() {
+	// 	return this.interacted;
+	// },
+	complete: function(balance) {
 		// indicate that the task is complete
 		this.interacted = 'done';
 		this.timer = 0;
+		if (this.nice == 1) {
+			balance++;
+		} else {
+			balance--;
+		}
+		return balance;
 	},
 	update: function(player) {
 		// set up a timer
@@ -126,6 +148,7 @@ villager.prototype = {
 					this.displayText('textbubble', style);
 				}
 				// if the player responds yes
+				// interacted must equal 3 so that the spacebar isn't an option for this section
 				else if (this.interacted == 3 &&
 					game.input.keyboard.isDown(Phaser.Keyboard.Y)) {
 					this.interacted = 'yes';
@@ -148,11 +171,13 @@ villager.prototype = {
 			}
 			// destroy response after time has passed
 			if (this.interacted == 'yes' && this.timer == 60) {
-				this.spawnTask(this.taskSprite);
+				// indicate the status of this task
+				this.interacted = 'unfinished';
+				// stop talking with the player
+				this.display2.destroy();
+				this.bubble.kill();
 			}
-		} // else {
-			//put thank you message somewhere
-		//}
+		}
 
 	}
 }
