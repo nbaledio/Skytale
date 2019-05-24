@@ -5,14 +5,19 @@
 
 
 function villager() {
+	var game;
 	var sprite;
 	var nice;	// 0 if bad, 1 if nice
 	var family;	// the ancestry of the family
 	var text;	// the villager's request
 	var x;	// save the x position of th eplayer
 	var signal;	// signal for the player to interact
+	
 	var textDisplay;	// text display
 	var bubble;		// bubble that encompasses text
+	var bubblex;
+	var bubbley;
+
 	var interacted;	// variable to keep track of interaction
 	var timer;	// times the bubble's appearance
 	var task;
@@ -24,6 +29,7 @@ villager.prototype = {
 	// (soon) task
 	//Spawns player in game at given position and adds physics, gravity, and collision with world bounds
 	spawn: function(game,x,y,spritesheet,nice,family){
+		this.game = game;
 		// Create sprite & add physics
 		this.sprite = game.add.sprite(x,y,spritesheet);
 		game.physics.arcade.enable(this.sprite);
@@ -34,7 +40,7 @@ villager.prototype = {
 		// initialize other properties
 		this.nice = nice;
 		this.family = family;
-		this.x = x;
+		//this.x = x;
 		this.interacted = 0;
 		this.timer = 0;
 	},
@@ -45,13 +51,30 @@ villager.prototype = {
 	// Arguments: sprite for textbubble, style of text
 	displayText: function(textBubble, style) {
 
+		if (this.sprite.x > (this.game.camera.x + 450)) {
+			this.bubblex = this.game.camera.x + 450;
+		} else if (this.sprite.x < (this.game.camera.x+50)) {
+			this.bubblex = this.game.camera.x+50;
+		} else {
+			this.bubblex = this.sprite.x;
+		}
+
+		if (this.sprite.y < 150) {
+			this.bubbley = 180;
+		} else {
+			this.bubbley = 75;
+		}
+
+		console.log(this.game.camera.x);
+		console.log(this.bubblex);
+
 		// 0 indicates that this is the first interaction
 		if (this.interacted == 0) {
 			// creates the first message
-			this.bubble = game.add.sprite(this.x, 75, textBubble);
+			this.bubble = game.add.sprite(this.bubblex, this.bubbley, textBubble);
 			// textDisplay is the text held inside the bubble
 			// this.textDisplay = game.add.text(this.x + 25, 100, "Hey kid ...", style);
-			this.textDisplay = game.add.bitmapText(this.x+24, 100, 'myfont', "Hey kid...", 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', "Hey kid...", 48);
 			// removes the original signal for interaction
 			this.signal.visible = false;
 			// move on to the next text bubble when the player hits space again
@@ -66,7 +89,7 @@ villager.prototype = {
 			this.textDisplay.kill();
 			// create the new text
 			// this.textDisplay = game.add.text(this.x + 25, 100, this.text, style);
-			this.textDisplay = game.add.bitmapText(this.x+24, 100, 'myfont', this.text, 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.text, 48);
 			// reset the timer and move on to the next interaction when the player presses space again
 			this.timer = 0;
 			this.interacted = 2;
@@ -76,7 +99,7 @@ villager.prototype = {
 		else if (this.interacted == 2 && this.timer > 60) {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
-			this.textDisplay = game.add.bitmapText(this.x+24, 100, 'myfont', 'So...Will you do it? y/n', 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'So...Will you do it? y/n', 48);
 			this.interacted = 3;
 			this.timer = 0;
 		}
@@ -84,14 +107,14 @@ villager.prototype = {
 		else if (this.interacted == 'yes') {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Great, thanks!', style);
-			this.textDisplay = game.add.bitmapText(this.x+24, 100, 'myfont', 'Great, thanks!', 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Great, thanks!', 48);
 
 			this.timer = 0;
 		} else if (this.interacted == 'no') {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Alright then...', style);
 
-			this.textDisplay = game.add.bitmapText(this.x+24, 100, 'myfont', 'Alright then...', 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Alright then...', 48);
 			this.timer = 0;
 		}
 	},
