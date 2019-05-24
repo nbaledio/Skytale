@@ -100,7 +100,7 @@ tutorial.prototype = {
 
 		timer++;
 
-		if (timer%70 == 5) {
+		if (timer > 30 && timer%70 == 5) {
 			instructions.visible = !instructions.visible;
 			instructionsVisual.visible = !instructionsVisual.visible;
 			instructionsVisual2.visible = !instructionsVisual2.visible;
@@ -110,6 +110,7 @@ tutorial.prototype = {
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
 			task = new task();
 			task.spawn(game, 1560, 148, 'chat', villager3);
+			timer = 0;
 			//console.log('hewwo');
 		}
 		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
@@ -122,6 +123,7 @@ tutorial.prototype = {
 			bubble.width = 590;
 			bubble.height = 130;
 			instructions = game.add.bitmapText(1000, 200, 'myfont', 'Thank you!\nReturn to the statue to continue', 48);
+			timer = 0;
 
 		}
 
@@ -151,6 +153,7 @@ tutorial.prototype = {
 			instructionsVisual.anchor.set(0.5);
 			instructionsVisual.angle = 90;
 			learned = 1;
+			timer = 0;
 		}
 		if (cursors.right.isDown && learned == 1)
 		{
@@ -158,6 +161,7 @@ tutorial.prototype = {
 			instructionsVisual.destroy();
 			bubble.destroy();
 			learned = 2;
+			timer = 0;
 		}
 		if (learned == 2 && p1.sprite.x>500) {
 			bubble = game.add.sprite(680,185,'textbubble');
@@ -166,6 +170,7 @@ tutorial.prototype = {
 			instructions = game.add.bitmapText(700, 200, 'myfont', 'Use       to interact', 48);
 			instructionsVisual = game.add.sprite(765,215,'spacebar');
 			learned = 3;
+			timer = 0;
 		}
 
 		if (villager3.interacted > 0 && learned == 3) {
@@ -173,6 +178,7 @@ tutorial.prototype = {
 			instructionsVisual.destroy();
 			bubble.destroy();
 			learned = 4;
+			timer = 0;
 		}
 
 		if (villager3.interacted == 3 && learned == 4) {
@@ -183,6 +189,7 @@ tutorial.prototype = {
 			instructionsVisual = game.add.sprite(690,212,'ykey');
 			instructionsVisual2 = game.add.sprite(690,250,'nkey');
 			learned = 5;
+			timer = 0;
 		}
 
 		if (villager3.interacted == 'no' && learned == 5) {
@@ -195,6 +202,7 @@ tutorial.prototype = {
 			bubble.height = 170;
 			instructions = game.add.bitmapText(620, 150, 'myfont', "Don't you want to\nbe helpful?\nTry again!", 48);
 			learned = 6;
+			timer = 0;
 		} else if (villager3.interacted == 'yes' && learned == 5) {
 			bubble.height = 75;
 			instructions.destroy();
@@ -203,12 +211,14 @@ tutorial.prototype = {
 			instructions = game.add.bitmapText(690, 200, 'myfont', "  Find the", 48);
 			instructionsVisual = instructionsVisual = game.add.sprite(860,208,'chat');
 			learned = 7;
+			timer = 0;
 		}
 
 		if (villager3.interacted == 1 && learned == 6) {
 			bubble.destroy();
 			instructions.destroy();
 			learned = 4;
+			timer = 0;
 		}
 
 

@@ -174,75 +174,80 @@ level_1.prototype = {
 		// call update on villager to respond accordingly
 		villager6.update(p1);
 		if (villager6.interacted == 'yes' && villager6.timer == 59) {
-			task = new task();
-			task.spawn(game, 1560, 148, 'chat', villager6);
-			//console.log('hewwo');
+			villager6.task = new task();
+			villager6.task.spawn(game, 1560, 148, 'chat', villager1);
 		}
-		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
+		if (villager6.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager6.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager6.complete(this.balance, p1);
+			this.peopleHelped++;
+			villager6.task.sprite.kill();
 		}
 
 		villager5.update(p1);
 		if (villager5.interacted == 'yes' && villager5.timer == 59) {
-			task = new task();
-			task.spawn(game, 1560, 148, 'chat', villager5);
-			//console.log('hewwo');
+			villager5.task = new task();
+			villager5.task.spawn(game, 1560, 148, 'chat', villager1);
 		}
-		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
+		if (villager5.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager5.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager5.complete(this.balance, p1);
+			this.peopleHelped++;
+			villager5.task.sprite.kill();
 		}
 
 		villager4.update(p1);
 		if (villager4.interacted == 'yes' && villager4.timer == 59) {
-			task = new task();
-			task.spawn(game, 1560, 148, 'chat', villager4);
-			//console.log('hewwo');
+			villager4.task = new task();
+			villager4.task.spawn(game, 1560, 148, 'chat', villager1);
 		}
-		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
+		if (villager4.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager4.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager4.complete(this.balance, p1);
+			this.peopleHelped++;
+			villager4.task.sprite.kill();
 		}
 
 		villager3.update(p1);
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
-			task = new task();
-			task.spawn(game, 1560, 148, 'chat', villager3);
-			//console.log('hewwo');
+			villager3.task = new task();
+			villager3.task.spawn(game, 1560, 148, 'chat', villager1);
 		}
-		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
+		if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager3.complete(this.balance, p1);
+			this.peopleHelped++;
+			villager3.task.sprite.kill();
 		}
 
 		villager2.update(p1);
 		if (villager2.interacted == 'yes' && villager2.timer == 59) {
-			task = new task();
-			task.spawn(game, 1560, 148, 'chat', villager2);
-			//console.log('hewwo');
+			villager2.task = new task();
+			villager2.task.spawn(game, 1560, 148, 'chat', villager1);
 		}
-		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
+		if (villager2.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager2.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager2.complete(this.balance, p1);
+			this.peopleHelped++;
+			villager2.task.sprite.kill();
 		}
 
 		villager1.update(p1);
 		if (villager1.interacted == 'yes' && villager1.timer == 59) {
-			task = new task();
-			task.spawn(game, 1560, 148, 'chat', villager1);
-			//console.log('hewwo');
+			villager1.task = new task();
+			villager1.task.spawn(game, 1560, 148, 'chat', villager1);
 		}
-		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
+		if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager1.complete(this.balance, p1);
+			this.peopleHelped++;
+			villager1.task.sprite.kill();
 		}
 
-		console.log(p1.interacting);
+		//console.log(this.peopleHelped);
 
 		// the player will either quit or finish the game by helping everyone
-		if (this.peopleHelped == 2 ||
-			game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
+		if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
@@ -256,10 +261,4 @@ level_1.prototype = {
 			bgm.stop();
 		}
 	}
-}
-
-// helper function for when task is done
-function finishTask(p1, task){
-	task.kill();
-	this.peopleHelped++;
 }

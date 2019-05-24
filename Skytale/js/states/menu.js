@@ -17,7 +17,7 @@ Menu.prototype = {
 		game.load.image('chat', 'assets/img/chat.png');
 		game.load.image('textbubble', 'assets/img/textbubble.png');
 		game.load.image('platform', 'assets/img/rockplatform.png');
-		game.load.spritesheet('dude', 'assets/img/playerone.png',128/4, 165/3);
+		game.load.spritesheet('dude', 'assets/img/playerone.png',32, 64);
 		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
 		//Figure out a better font to use later
 		//game.load.bitmapFont('myfont', 'assets/myfont/font.png', 'assets/myfont/font.fnt');

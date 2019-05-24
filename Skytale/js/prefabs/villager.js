@@ -15,6 +15,7 @@ function villager() {
 	var bubble;		// bubble that encompasses text
 	var interacted;	// variable to keep track of interaction
 	var timer;	// times the bubble's appearance
+	var task;
 }
 
 villager.prototype = {
