@@ -43,7 +43,6 @@ level_2_bad.prototype = {
 		//Enable physics for every object in ground group
 		groundgroup.enableBody = true;
 		
-		
 		//Add platforms (Left to right) (second/third/etc. just means multiple
 		//platforms next to each other to make one big platform since scaling 
 		//makes it look weird.)
@@ -56,8 +55,6 @@ level_2_bad.prototype = {
 		platform4 = new platform(game,775,110,'platform',platformgroup);
 		platform4.sprite.body.setSize(62,5,0,32);
 		platform4_second = new platform(game,839,110,'platform',platformgroup);
-
-
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
@@ -127,14 +124,11 @@ level_2_bad.prototype = {
 		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
 		p1.addAnimations('right', [3, 8, 4, 7], 6, true);
 		
-		
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 		
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
-		
-		
 	},
 	update: function(){
 		//Variables to check if player is on platform or ground
@@ -242,6 +236,9 @@ level_2_bad.prototype = {
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
 			game.state.start('level_3_good')
+			bgm.stop();
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FIVE)){
+			game.state.start('level_3_bad')
 			bgm.stop();
 		}
 		

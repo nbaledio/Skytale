@@ -43,7 +43,6 @@ level_2_good.prototype = {
 		//Enable physics for every object in ground group
 		groundgroup.enableBody = true;
 		
-		
 		//Add platforms (Left to right) (second/third/etc. just means multiple
 		//platforms next to each other to make one big platform since scaling 
 		//makes it look weird.)
@@ -108,7 +107,6 @@ level_2_good.prototype = {
 		villagergroup.add(villager2.sprite);
 		villager2.setText('Find me one of those chat bubbles');
 		
-		
 		villager3 = new villager();
 		villager3.spawn(game,410,95,'villager',1,'Family3');
 		villagergroup.add(villager3.sprite);
@@ -141,8 +139,6 @@ level_2_good.prototype = {
 		
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
-		
-		
 	},
 	update: function(){
 		//Variables to check if player is on platform or ground
@@ -273,9 +269,10 @@ level_2_good.prototype = {
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
 			game.state.start('level_3_good')
 			bgm.stop();
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FIVE)){
+			game.state.start('level_3_bad')
+			bgm.stop();
 		}
-		
-
 		// the player will either quit or finish the game by helping everyone
 		if (this.peopleHelped == 2 ||
 			game.input.keyboard.isDown(Phaser.Keyboard.Q)) {

@@ -262,6 +262,9 @@ level_1.prototype = {
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
 			game.state.start('level_3_good')
 			bgm.stop();
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FIVE)){
+			game.state.start('level_3_bad')
+			bgm.stop();
 		}
 	}
 }
