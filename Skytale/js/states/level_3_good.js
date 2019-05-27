@@ -4,6 +4,7 @@
 
 var level_3_good = function(game){};
 var theta = 1;
+var diagonal_velocity = 40;
 
 level_3_good.prototype = {
 	init: function() {
@@ -47,15 +48,27 @@ level_3_good.prototype = {
 		//Add platforms (Left to right) (second/third/etc. just means multiple
 		//platforms next to each other to make one big platform since scaling 
 		//makes it look weird.)
-		platform0 = new platform(game,600,250,'platform',platformgroup);
-		platform1 = new platform(game,930,250,'platform',platformgroup);
-		platform2 = new platform(game,990,109,'platform',platformgroup);
-		platform2_second = new platform(game,1054,109,'platform',platformgroup);
-		platform3 = new platform(game,510,106,'platform',platformgroup);
-		platform3_second = new platform(game,574,106,'platform',platformgroup);
-		platform4 = new platform(game,775,110,'platform',platformgroup);
-		platform4.sprite.body.setSize(62,5,0,32);
-		platform4_second = new platform(game,839,110,'platform',platformgroup);
+		platform0 = new platform(game,230,155,'platform',platformgroup);
+		platform0_second = new platform(game,294,155,'platform',platformgroup);
+		platform1 = new platform(game,500,215,'platform',platformgroup);
+		platform1_second = new platform(game,564,215,'platform',platformgroup);
+		platform2 = new platform(game,730,105,'platform',platformgroup);
+		platform2_second = new platform(game,794,105,'platform',platformgroup);
+		platform3 = new platform(game,960,215,'platform',platformgroup);
+		platform3_second = new platform(game,1024,215,'platform',platformgroup);
+		platform4 = new platform(game,250,240,'platform',platformgroup);
+		platform5 = new platform(game,1230,155,'platform',platformgroup);
+		platform5_second = new platform(game,1294,155,'platform',platformgroup);
+		platform6 = new platform(game,650,215,'platform',platformgroup);
+		platform7 = new platform(game,870,215,'platform',platformgroup);
+		platform8 = new platform(game,380,300,'platform',platformgroup);
+		platform9 = new platform(game,1140,300,'platform',platformgroup);
+		platform10 = new platform(game,1350,240,'platform',platformgroup);
+		platform11 = new platform(game,50,50,'platform',platformgroup);
+		platform12 = new platform(game,1450,50,'platform',platformgroup);
+		platform13 = new platform(game,630,140,'platform',platformgroup);
+		platform14 = new platform(game,900,140,'platform',platformgroup);
+		
 
 
 		
@@ -73,17 +86,17 @@ level_3_good.prototype = {
 		//Add houses
 		house1 = game.add.sprite(40,270,'house');
 		house1.scale.setTo(.8,.8);
-		house2 = game.add.sprite(750,270,'house');
+		house2 = game.add.sprite(750,10,'house');
 		house2.scale.setTo(.8,.8);
-		house3 = game.add.sprite(520,10,'house');
+		house3 = game.add.sprite(520,120,'house');
 		house3.scale.setTo(.8,.8);
-		house4 = game.add.sprite(380,270,'house');
+		house4 = game.add.sprite(250,60,'house');
 		house4.scale.setTo(.8,.8);
-		house5 = game.add.sprite(1400,270,'house');
+		house5 = game.add.sprite(980,120,'house');
 		house5.scale.setTo(.8,.8);
-		house6 = game.add.sprite(1000,13,'house');
+		house6 = game.add.sprite(1250,60,'house');
 		house6.scale.setTo(.8,.8);
-		house7 = game.add.sprite(1100,270,'house');
+		house7 = game.add.sprite(1460,270,'house');
 		house7.scale.setTo(.8,.8);
 		
 		//Add villager group
@@ -92,41 +105,41 @@ level_3_good.prototype = {
 		
 		//Add villagers
 		villager1 = new villager();
-		villager1.spawn(game,1020,79,'villager',1,'Family1');
+		villager1.spawn(game,770,75,'villager',1,'Family1');
 		villagergroup.add(villager1.sprite);
 		villager1.setText('Find me one of those chat bubbles');
 		
 		villager2 = new villager();
-		villager2.spawn(game,540,75,'villager',0,'Family2');
+		villager2.spawn(game,540,185,'villager',0,'Family2');
 		villagergroup.add(villager2.sprite);
 		villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
-		villager3.spawn(game,400,337,'villager',1,'Family3');
+		villager3.spawn(game,270,125,'villager',1,'Family3');
 		villagergroup.add(villager3.sprite);
 		villager3.setText('Find me one of those chat bubbles');
 		
 		villager4 = new villager();
-		villager4.spawn(game,770,337,'villager',0,'Family4');
+		villager4.spawn(game,1000,185,'villager',0,'Family4');
 		villagergroup.add(villager4.sprite);
 		villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
-		villager5.spawn(game,1120,337,'villager',1,'Family5');
+		villager5.spawn(game,1270,125,'villager',1,'Family5');
 		villagergroup.add(villager5.sprite);
 		villager5.setText('Find me one of those chat bubbles');
 		
 		villager6 = new villager();
-		villager6.spawn(game,1420,337,'villager',0,'Family6');
+		villager6.spawn(game,1480,335,'villager',0,'Family6');
 		villagergroup.add(villager6.sprite);
 		villager6.setText('Find me one of those chat bubbles');
 				
 		//Add player
 		p1 = new player();
-		p1.spawn(game,110,350,'dude');
+		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
-		p1.addAnimations('left', [0, 1, 2, 3], 10, true);
-		p1.addAnimations('right', [5, 6, 7, 8], 10, true);
+		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
+		p1.addAnimations('right', [3, 8, 4, 7], 6, true);
 		
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -153,10 +166,40 @@ level_3_good.prototype = {
 		//Move platform7/second in a circle
 		theta += .03;
 		platform4.sprite.body.velocity.x =  Math.cos(theta)*50;
-		platform4_second.sprite.body.velocity.x =  Math.cos(theta)*50;
-		platform4.sprite.body.velocity.y =  Math.sin(theta)*50;
-		platform4_second.sprite.body.velocity.y =  Math.sin(theta)*50;
+		platform4.sprite.body.velocity.y =  Math.sin(theta)*50;	
+		platform10.sprite.body.velocity.x =  Math.cos(theta)*50;
+		platform10.sprite.body.velocity.y =  Math.sin(theta)*50;
+
+		//Bounce Platform6/7 diagonally
+		if(platform6.spritey <= 215 || platform7.sprite.y <= 215){
+			platform6.sprite.body.velocity.x = diagonal_velocity;
+			platform6.sprite.body.velocity.y = diagonal_velocity;
+			platform7.sprite.body.velocity.x = -diagonal_velocity;
+			platform7.sprite.body.velocity.y = diagonal_velocity;
+		}else if(platform6.spritey >= 280 || platform7.sprite.y >= 280){
+			platform6.sprite.body.velocity.x = -diagonal_velocity;
+			platform6.sprite.body.velocity.y = -diagonal_velocity;
+			platform7.sprite.body.velocity.x = diagonal_velocity;
+			platform7.sprite.body.velocity.y = -diagonal_velocity;
+		}
 		
+		//Bounce Platform8/9 vertically
+		if(platform8.sprite.y >= 300 || platform9.sprite.y >= 300){
+			platform8.sprite.body.velocity.y = -diagonal_velocity -20;
+			platform9.sprite.body.velocity.y = -diagonal_velocity -20;
+		}else if(platform8.sprite.y <= 200 || platform9.sprite.y <= 200){
+			platform8.sprite.body.velocity.y = diagonal_velocity + 20;
+			platform9.sprite.body.velocity.y = diagonal_velocity + 20;
+		}
+		
+		//Bounce Platform 11/12 vertically
+		if(platform11.sprite.y >= 150 || platform12.sprite.y >= 150){
+			platform11.sprite.body.velocity.y = -diagonal_velocity -20;
+			platform12.sprite.body.velocity.y = -diagonal_velocity -20;
+		}else if(platform11.sprite.y <= 50 || platform12.sprite.y <= 50){
+			platform11.sprite.body.velocity.y = diagonal_velocity + 20;
+			platform12.sprite.body.velocity.y = diagonal_velocity + 20;
+		}
 		//Check if player if overlapping villager
 		// call update on villager to respond accordingly
 		villager6.update(p1);
@@ -239,6 +282,9 @@ level_3_good.prototype = {
 			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
 			game.state.start('level_2_bad')
+			bgm.stop();
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
+			game.state.start('level_3_good')
 			bgm.stop();
 		}
 		

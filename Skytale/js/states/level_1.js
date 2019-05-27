@@ -128,10 +128,10 @@ level_1.prototype = {
 				
 		//Add player
 		p1 = new player();
-		p1.spawn(game,110,350,'dude');
+		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
-		p1.addAnimations('left', [0, 1, 2, 3], 10, true);
-		p1.addAnimations('right', [5, 6, 7, 8], 10, true);
+		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
+		p1.addAnimations('right', [3, 8, 4, 7], 6, true);
 		
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -258,6 +258,9 @@ level_1.prototype = {
 			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
 			game.state.start('level_2_bad')
+			bgm.stop();
+		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
+			game.state.start('level_3_good')
 			bgm.stop();
 		}
 	}

@@ -51,7 +51,7 @@ player.prototype = {
 			//  Move to the left
 			this.sprite.body.velocity.x = -150;
 			//  Play left animation
-			this.sprite.animations.play('left',50);
+			this.sprite.animations.play('left',10);
 
 		}
 		//Check if right is input
@@ -59,11 +59,11 @@ player.prototype = {
 			//  Move to the right
 			this.sprite.body.velocity.x = 150;
 			//  Play right animation
-			this.sprite.animations.play('right',50);
+			this.sprite.animations.play('right',10);
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 4;
+			this.sprite.frame = 6;
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -77,7 +77,7 @@ player.prototype = {
 			this.sprite.body.setSize(0,0,0,1000);
 		}else{
 
-			this.sprite.body.setSize(128/4, 165/3,0,0);
+			this.sprite.body.setSize(164/5, 129/2,0,0);
 		}
 		
 	}
