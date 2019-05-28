@@ -28,10 +28,15 @@ villager.prototype = {
 	// morality, family, and chat bubble
 	// (soon) task
 	//Spawns player in game at given position and adds physics, gravity, and collision with world bounds
-	spawn: function(game,x,y,spritesheet,nice,family){
+	spawn: function(game,x,y,nice,family){
 		this.game = game;
 		// Create sprite & add physics
-		this.sprite = game.add.sprite(x,y,spritesheet);
+		if(nice==1) {
+			this.sprite = game.add.sprite(x,y,'villager');
+		} else {
+			this.sprite = game.add.sprite(x,y,'villager2');
+		}
+		
 		game.physics.arcade.enable(this.sprite);
 		this.sprite.body.collideWorldBounds = true;
 		this.sprite.body.immovable = true;
@@ -64,9 +69,6 @@ villager.prototype = {
 		} else {
 			this.bubbley = 75;
 		}
-
-		console.log(this.game.camera.x);
-		console.log(this.bubblex);
 
 		// 0 indicates that this is the first interaction
 		if (this.interacted == 0) {

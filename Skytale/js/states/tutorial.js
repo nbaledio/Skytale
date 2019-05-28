@@ -6,7 +6,6 @@ var tutorial = function(game) {};
 
 var timer = 0;
 var learned = 0;
-//var balance = 0;
 var task;
 
 tutorial.prototype = {
@@ -82,12 +81,11 @@ tutorial.prototype = {
 		instructionsVisual = game.add.sprite(160,212,'arrow');
 		instructionsVisual2 = game.add.sprite(160,212,'arrow');
 
-
 		p1 = new player();
-		p1.spawn(game,110,325,'dude');
+		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
-		p1.addAnimations('left', [0, 1, 2, 3], 10, true);
-		p1.addAnimations('right', [5, 6, 7, 8], 10, true);
+		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
+		p1.addAnimations('right', [3, 8, 4, 7], 6, true);
 
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -124,7 +122,6 @@ tutorial.prototype = {
 			bubble.height = 130;
 			instructions = game.add.bitmapText(1000, 200, 'myfont', 'Thank you!\nReturn to the statue to continue', 48);
 			timer = 0;
-
 		}
 
 		//Variables to check if player is on platform or ground
@@ -143,7 +140,6 @@ tutorial.prototype = {
 
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)  && ( onGround) && learned == 0)
 		{
-			//p1.sprite.body.velocity.y = -500;
 			instructions.destroy();
 			instructionsVisual.destroy();
 			instructionsVisual2.destroy();

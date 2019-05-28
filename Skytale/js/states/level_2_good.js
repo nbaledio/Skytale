@@ -98,32 +98,32 @@ level_2_good.prototype = {
 		
 		//Add villagers
 		villager1 = new villager();
-		villager1.spawn(game,30,75,'villager',1,'Family1');
+		villager1.spawn(game,30,75,1,'Family1');
 		villagergroup.add(villager1.sprite);
 		villager1.setText('Find me one of those chat bubbles');
 		
 		villager2 = new villager();
-		villager2.spawn(game,720,337,'villager',0,'Family2');
+		villager2.spawn(game,720,337,0,'Family2');
 		villagergroup.add(villager2.sprite);
 		villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
-		villager3.spawn(game,410,95,'villager',1,'Family3');
+		villager3.spawn(game,410,95,1,'Family3');
 		villagergroup.add(villager3.sprite);
 		villager3.setText('Find me one of those chat bubbles');
 		
 		villager4 = new villager();
-		villager4.spawn(game,1120,96,'villager',0,'Family4');
+		villager4.spawn(game,1120,96,0,'Family4');
 		villagergroup.add(villager4.sprite);
 		villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
-		villager5.spawn(game,1450,337,'villager',1,'Family5');
+		villager5.spawn(game,1450,337,1,'Family5');
 		villagergroup.add(villager5.sprite);
 		villager5.setText('Find me one of those chat bubbles');
 		
 		villager6 = new villager();
-		villager6.spawn(game,1470,125,'villager',0,'Family6');
+		villager6.spawn(game,1470,125,0,'Family6');
 		villagergroup.add(villager6.sprite);
 		villager6.setText('Find me one of those chat bubbles');
 				
@@ -195,6 +195,7 @@ level_2_good.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager6.complete(this.balance, p1);
 			this.peopleHelped++;
+			karma.update(this.balance);
 			villager6.task.sprite.kill();
 		}
 
@@ -207,6 +208,7 @@ level_2_good.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager5.complete(this.balance, p1);
 			this.peopleHelped++;
+			karma.update(this.balance);
 			villager5.task.sprite.kill();
 		}
 
@@ -219,6 +221,7 @@ level_2_good.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager4.complete(this.balance, p1);
 			this.peopleHelped++;
+			karma.update(this.balance);
 			villager4.task.sprite.kill();
 		}
 
@@ -231,6 +234,7 @@ level_2_good.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager3.complete(this.balance, p1);
 			this.peopleHelped++;
+			karma.update(this.balance);
 			villager3.task.sprite.kill();
 		}
 
@@ -243,6 +247,7 @@ level_2_good.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager2.complete(this.balance, p1);
 			this.peopleHelped++;
+			karma.update(this.balance);
 			villager2.task.sprite.kill();
 		}
 
@@ -255,6 +260,7 @@ level_2_good.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager1.complete(this.balance, p1);
 			this.peopleHelped++;
+			karma.update(this.balance);
 			villager1.task.sprite.kill();
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){

@@ -14,6 +14,7 @@ Menu.prototype = {
 		game.load.image('ground', 'assets/img/ground.png');
 		game.load.image('house', 'assets/img/house.png');
 		game.load.image('villager', 'assets/img/villager.png');
+		game.load.image('villager2', 'assets/img/villager2.png');
 		game.load.image('chat', 'assets/img/chat.png');
 		game.load.image('textbubble', 'assets/img/textbubble.png');
 		game.load.image('platform', 'assets/img/rockplatform.png');
@@ -30,6 +31,10 @@ Menu.prototype = {
 		game.load.image('spacebar', 'assets/img/spacebar.png');
 		game.load.image('ykey', 'assets/img/ykey.png');
 		game.load.image('nkey', 'assets/img/nkey.png');
+
+		// karma assets
+		game.load.image('container', 'assets/img/meterbg.png');
+		game.load.image('karma', 'assets/img/karmabox.png');
 	},
 	create: function() {
 		//add a background for continuity
