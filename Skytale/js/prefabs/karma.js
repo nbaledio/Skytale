@@ -30,7 +30,7 @@ karma.prototype = {
 		if (balance != 0) { this.numKarma--; }
 		else if (this.numKarma < 5) { this.numKarma++; }
 
-		console.log(this.numKarma);
+		//console.log(this.numKarma);
 
 		karmaLevel.removeAll(true);
 		for(i = 0; i < this.numKarma; i++) {

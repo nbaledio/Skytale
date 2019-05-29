@@ -127,8 +127,8 @@ level_1.prototype = {
 		villager6.setText('Find me one of those chat bubbles');
 				
 		
-		karma = new karma();
-		karma.spawn(game, 'container', 'karma');
+		karmaBar = new karma();
+		karmaBar.spawn(game);
 
 
 		//Add player
@@ -186,7 +186,7 @@ level_1.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager6.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager6.task.sprite.kill();
 		}
 
@@ -199,7 +199,7 @@ level_1.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager5.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager5.task.sprite.kill();
 		}
 
@@ -212,7 +212,7 @@ level_1.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager4.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager4.task.sprite.kill();
 		}
 
@@ -225,7 +225,7 @@ level_1.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager3.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager3.task.sprite.kill();
 		}
 
@@ -238,7 +238,7 @@ level_1.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager2.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager2.task.sprite.kill();
 		}
 
@@ -251,7 +251,7 @@ level_1.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager1.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager1.task.sprite.kill();
 		}
 
@@ -265,7 +265,7 @@ level_1.prototype = {
 			game.state.start('level_1')
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
-			game.state.start('level_2_good')
+			game.state.start('level_2_good');
 			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
 			game.state.start('level_2_bad')

@@ -117,7 +117,10 @@ level_2_bad.prototype = {
 		villager6.spawn(game,1420,337,0,'Family6');
 		villagergroup.add(villager6.sprite);
 		villager6.setText('Find me one of those chat bubbles');
-				
+		
+		karmaBar = new karma();
+		karmaBar.spawn(game);
+		
 		p1 = new player();
 		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
@@ -162,7 +165,7 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager6.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager6.task.sprite.kill();
 		}
 
@@ -175,7 +178,7 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager5.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager5.task.sprite.kill();
 		}
 
@@ -188,7 +191,7 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager4.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager4.task.sprite.kill();
 		}
 
@@ -201,7 +204,7 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager3.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager3.task.sprite.kill();
 		}
 
@@ -214,7 +217,7 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager2.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager2.task.sprite.kill();
 		}
 
@@ -227,7 +230,7 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager1.complete(this.balance, p1);
 			this.peopleHelped++;
-			karma.update(this.balance);
+			karmaBar.update(this.balance);
 			villager1.task.sprite.kill();
 		}
 		
