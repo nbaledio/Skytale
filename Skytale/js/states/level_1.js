@@ -17,7 +17,7 @@ level_1.prototype = {
 		theta = 1;
 		
 		//Setting the size of the world
-		game.world.setBounds(0, 0, 1600, 450);
+		game.world.setBounds(0,0, 1600, 900);
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		
@@ -42,7 +42,6 @@ level_1.prototype = {
 		
 		//Enable physics for every object in ground group
 		groundgroup.enableBody = true;
-		
 		
 		//Add platforms (Left to right) (second/third/etc. just means multiple
 		//platforms next to each other to make one big platform since scaling 
@@ -74,6 +73,17 @@ level_1.prototype = {
 		groundgroup.add(ground2);
 		ground2.body.immovable = true;
 		ground2.body.setSize(800,50,0,400);
+		
+		//Add ground to house task area
+	    ground3 = game.add.sprite(0,450,'ground');
+		groundgroup.add(ground3);
+		ground3.body.immovable = true;
+		ground3.body.setSize(800,0,0,400);
+		
+		ground4 = game.add.sprite(800,450,'ground');
+		groundgroup.add(ground4);
+		ground4.body.immovable = true;
+		ground4.body.setSize(800,0,0,400);
 		
 		//Add houses
 		house1 = game.add.sprite(40,270,'house');
@@ -126,27 +136,25 @@ level_1.prototype = {
 		villagergroup.add(villager6.sprite);
 		villager6.setText('Find me one of those chat bubbles');
 				
-		
 		karmaBar = new karma();
 		karmaBar.spawn(game);
 
 		//villager3.testText();
 
-
 		//Add player
 		p1 = new player();
+		//330
 		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
 		p1.addAnimations('right', [3, 8, 4, 7], 6, true);
 		
-		//Focus camera on player
-		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
+		//Focus camera on player/top half
+		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0.1, 0.1);
+		//game.camera.y = 450;
 		
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
-		
-		
 	},
 	update: function(){
 		//Variables to check if player is on platform or ground
@@ -260,6 +268,7 @@ level_1.prototype = {
 		//console.log(this.peopleHelped);
 
 		// the player will either quit or finish the game by helping everyone
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.P)) {p1.sprite.y+=200}
 		if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
