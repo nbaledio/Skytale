@@ -4,6 +4,7 @@
 
 var level_1 = function(game){};
 var theta = 1;
+var gamplay_state = 'OVERWORLD';
 
 level_1.prototype = {
 	init: function() {
@@ -61,7 +62,14 @@ level_1.prototype = {
 		platform7_second = new platform(game,1239,150,'platform',platformgroup);
 		platform6 = new platform(game,1435,136,'platform',platformgroup);
 		platform6_second = new platform(game,1499,136,'platform',platformgroup);
-
+		
+		//Platforms for the doctor's house task
+		platform8 = new platform(game,600,700,'platform',platformgroup);
+		platform9 = new platform(game,400,670,'platform',platformgroup);
+		platform10 = new platform(game,300,670,'platform',platformgroup);
+		platform11 = new platform(game,50,600,'platform',platformgroup);
+		platform12 = new platform(game,150,530,'platform',platformgroup);
+		platform13 = new platform(game,450,530,'platform',platformgroup);
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
@@ -106,6 +114,7 @@ level_1.prototype = {
 		villagergroup.enableBody = true;
 		
 		//Add villagers
+		game.add.sprite(150,785,'villager')
 		villager1 = new villager();
 		villager1.spawn(game,30,75,1,'Family1');
 		villagergroup.add(villager1.sprite);
@@ -143,15 +152,13 @@ level_1.prototype = {
 
 		//Add player
 		p1 = new player();
-		//330
 		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
 		p1.addAnimations('right', [3, 8, 4, 7], 6, true);
 		
 		//Focus camera on player/top half
-		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0.1, 0.1);
-		//game.camera.y = 450;
+		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0.1, 0);
 		
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
@@ -161,8 +168,28 @@ level_1.prototype = {
 		var onPlatform = game.physics.arcade.collide(p1.sprite, platformgroup);
 		var onGround = game.physics.arcade.collide(p1.sprite, groundgroup);
 		
-		//Enable player controls
-		p1.controls(onGround,onPlatform);
+		//Change controls/fix camera depending on if in overworld or house task
+		if(p1.sprite.y >= 370){
+			if(p1.sprite.x < 901){
+				gameplay_state = 'HOUSE';
+			}else{
+				gameplay_state = 'HOUSE2';
+			}
+		}else{
+			gameplay_state = 'OVERWORLD'
+		}
+		if(gameplay_state == 'OVERWORLD'){
+			p1.controls(onGround,onPlatform);
+			game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0.1, 0);
+			game.camera.y = 0;
+		}else{
+			if(gameplay_state == 'HOUSE'){
+				p1.house1_controls(onGround,onPlatform);
+				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
+				game.camera.x = 0;
+				game.camera.y = 450;
+			}
+		}
 		
 		//  Enables player to fall on platforms
 		game.physics.arcade.collide(p1.sprite, platformgroup);
@@ -184,6 +211,20 @@ level_1.prototype = {
 		platform7_second.sprite.body.velocity.x =  Math.cos(theta)*50;
 		platform7.sprite.body.velocity.y =  Math.sin(theta)*50;
 		platform7_second.sprite.body.velocity.y =  Math.sin(theta)*50;
+		
+		//Bounce platform10 left/right
+		if(platform10.sprite.x >= 300){
+			platform10.sprite.body.velocity.x = -80;
+		}else if(platform10.sprite.x <= 180){
+			platform10.sprite.body.velocity.x = 80;
+		}
+		
+		//Bounce platform12 left/right
+		if(platform12.sprite.x <= 150){
+			platform12.sprite.body.velocity.x = 80;
+		}else if(platform12.sprite.x >=320){
+			platform12.sprite.body.velocity.x = -80;
+		}
 		
 		//Check if player if overlapping villager
 		// call update on villager to respond accordingly
@@ -269,6 +310,7 @@ level_1.prototype = {
 
 		// the player will either quit or finish the game by helping everyone
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.P)) {p1.sprite.y+=200}
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.O)) {p1.sprite.y-=200}
 		if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
