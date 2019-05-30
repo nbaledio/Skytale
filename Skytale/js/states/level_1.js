@@ -130,6 +130,8 @@ level_1.prototype = {
 		karmaBar = new karma();
 		karmaBar.spawn(game);
 
+		//villager3.testText();
+
 
 		//Add player
 		p1 = new player();

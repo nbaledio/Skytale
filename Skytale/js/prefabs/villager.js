@@ -73,8 +73,8 @@ villager.prototype = {
 		// 0 indicates that this is the first interaction
 		if (this.interacted == 0) {
 			// creates the first message
-			this.bubble = game.add.sprite(this.bubblex, this.bubbley, textBubble);
 			// textDisplay is the text held inside the bubble
+			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			// this.textDisplay = game.add.text(this.x + 25, 100, "Hey kid ...", style);
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', "Hey kid...", 48);
 			// removes the original signal for interaction
@@ -91,6 +91,7 @@ villager.prototype = {
 			this.textDisplay.kill();
 			// create the new text
 			// this.textDisplay = game.add.text(this.x + 25, 100, this.text, style);
+			this.text = textWrap(this.text);
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.text, 48);
 			// reset the timer and move on to the next interaction when the player presses space again
 			this.timer = 0;
@@ -101,7 +102,8 @@ villager.prototype = {
 		else if (this.interacted == 2 && this.timer > 60) {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'So...Will you do it? y/n', 48);
+			dialogue = textWrap('So...Will you do it? y/n')
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', dialogue, 48);
 			this.interacted = 3;
 			this.timer = 0;
 		}
@@ -194,5 +196,29 @@ villager.prototype = {
 			this.signal.visible = false;
 		}
 
+	},
+	testText: function() {
+		game.add.sprite(100, 100, 'textbubble');
+		testString = "hi my name is I am struggling."
+		testString = textWrap(testString);
+		game.add.bitmapText(120, 120, 'myfont', testString, 48);
 	}
+}
+
+function textWrap(text) {
+	var wordCount = 0;
+	var result = '';
+	var prevI = 0;
+
+	for (i=0; i<text.length; i++) {
+		if(text.charAt(i) == ' ') {
+			wordCount++;
+			if (wordCount % 3 == 0) {
+				result += text.substring(prevI, i+1) + "\n";
+				prevI = i+1;
+			}
+		}
+	}
+	result += text.substring(prevI)
+	return result;
 }
