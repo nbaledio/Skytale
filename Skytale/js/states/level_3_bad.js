@@ -90,32 +90,32 @@ level_3_bad.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,570,335,1,'Family1');
 		villagergroup.add(villager1.sprite);
-		villager1.setText('Find me one of those chat bubbles');
+		villager1.setText("Hi, I am Dr. Lische.","Good, Red Fever hasn't got you. I fear my vaccine is weak.","Can you help me improve it?","On behalf of the village, I must say I'm forever grateful.","Please, I can't do this without you...");
 		
 		villager2 = new villager();
 		villager2.spawn(game,1220,335,0,'Family2');
 		villagergroup.add(villager2.sprite);
-		villager2.setText('Find me one of those chat bubbles');
+		//villager2.setText("","Find me one of those chat bubbles","","","");
 		
 		villager3 = new villager();
 		villager3.spawn(game,320,335,1,'Family3');
 		villagergroup.add(villager3.sprite);
-		villager3.setText('Find me one of those chat bubbles');
+		villager3.setText("Hello, I am Alfred, 3rd gen scientist.","Our village is powerless... and I can't fix it without a crystal","Please, can you bring a one?","Thank you, I am in your debt.","Please think it over.. I'm begging you.");
 		
 		villager4 = new villager();
 		villager4.spawn(game,1420,335,0,'Family4');
 		villagergroup.add(villager4.sprite);
-		villager4.setText('Find me one of those chat bubbles');
+		//villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
 		villager5.spawn(game,1020,335,1,'Family5');
 		villagergroup.add(villager5.sprite);
-		villager5.setText('Find me one of those chat bubbles');
+		villager5.setText("Hiya partner! I'm Winslow Jr. Jr. and I'm the farmer here!","I'm losing crops, but I won't once I find my lucky hat!","Can ya help me find it?","Thanks buddy!","Aw, shuckeroos.");
 		
 		villager6 = new villager();
 		villager6.spawn(game,790,135,0,'Family6');
 		villagergroup.add(villager6.sprite);
-		villager6.setText('Find me one of those chat bubbles');
+		//villager6.setText('Find me one of those chat bubbles');
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);

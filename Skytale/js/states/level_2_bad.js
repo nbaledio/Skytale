@@ -111,7 +111,7 @@ level_2_bad.prototype = {
 		villager5 = new villager();
 		villager5.spawn(game,1120,337,1,'Family5');
 		villagergroup.add(villager5.sprite);
-		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky BLANK?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.");
+		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky hat?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.");
 		
 		villager6 = new villager();
 		villager6.spawn(game,1420,337,0,'Family6');
