@@ -18,6 +18,7 @@ Menu.prototype = {
 		game.load.image('chat', 'assets/img/chat.png');
 		game.load.image('textbubble', 'assets/img/textbubble.png');
 		game.load.image('platform', 'assets/img/rockplatform.png');
+		game.load.image('statue', 'assets/img/statue.png');
 		game.load.spritesheet('dude', 'assets/img/playerone.png',32, 64);
 		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
 		//Figure out a better font to use later
@@ -25,6 +26,7 @@ Menu.prototype = {
 		game.load.bitmapFont('myfont', 'assets/font/font.png', 'assets/font/font.fnt');
 
 		//menu testing
+		game.load.image('title', 'assets/img/title.png');
 		game.load.spritesheet('playButton', 'assets/img/playButton.png',178, 71);
 		game.load.spritesheet('tutorialButton', 'assets/img/tutorialButton.png',178, 71);
 		game.load.image('arrow', 'assets/img/arrow.png');
@@ -35,12 +37,17 @@ Menu.prototype = {
 		// karma assets
 		game.load.image('container', 'assets/img/meterbg.png');
 		game.load.image('karma', 'assets/img/karmabox.png');
+
 	},
 	create: function() {
 		//add a background for continuity
-		game.add.sprite(0,0, 'background');
+		//game.add.sprite(0,0, 'background');
+		game.add.sprite(0,0, 'title');
 
-		message = game.add.bitmapText(400, 300, 'myfont', "Press SPACE to start\nPress Q to quit", 48);
+		message = game.add.bitmapText(width/2, 230, 'myfont', "Press      to start", 48);
+		message.anchor.set(0.5);
+		bar = game.add.sprite((width/2)-15, 235, 'spacebar');
+		bar.anchor.set(0.5);
 
 		//visual menu
 		playButton = game.add.sprite(width/2, 300, 'playButton');
@@ -71,7 +78,7 @@ Menu.prototype = {
 		if(game.input.keyboard.downDuration(Phaser.Keyboard.DOWN)) {
 			selection = 'tutorial';
 		}
-		if( game.input.keyboard.downDuration(Phaser.Keyboard.UP)) {
+		if(game.input.keyboard.downDuration(Phaser.Keyboard.UP)) {
 			selection = 'play';
 		}
 	}

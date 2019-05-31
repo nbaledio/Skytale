@@ -81,6 +81,10 @@ tutorial.prototype = {
 		instructionsVisual = game.add.sprite(160,212,'arrow');
 		instructionsVisual2 = game.add.sprite(160,212,'arrow');
 
+
+		bigBird = new statue();
+		bigBird.spawn(game);
+
 		p1 = new player();
 		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);

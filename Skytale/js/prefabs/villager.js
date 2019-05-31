@@ -2,7 +2,8 @@
 // villager.js
 // villager prefab
 
-
+var nkey;
+var ykey;
 
 function villager() {
 	var game;
@@ -56,6 +57,7 @@ villager.prototype = {
 	// Arguments: sprite for textbubble, style of text
 	displayText: function(textBubble, style) {
 
+		// determine where the text bubble will spawn
 		if (this.sprite.x > (this.game.camera.x + 450)) {
 			this.bubblex = this.game.camera.x + 450;
 		} else if (this.sprite.x < (this.game.camera.x+50)) {
@@ -76,7 +78,7 @@ villager.prototype = {
 			// textDisplay is the text held inside the bubble
 			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			// this.textDisplay = game.add.text(this.x + 25, 100, "Hey kid ...", style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', "Hey kid...", 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Hey kid...', 48);
 			// removes the original signal for interaction
 			this.signal.visible = false;
 			// move on to the next text bubble when the player hits space again
@@ -93,6 +95,7 @@ villager.prototype = {
 			// this.textDisplay = game.add.text(this.x + 25, 100, this.text, style);
 			this.text = textWrap(this.text);
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.text, 48);
+
 			// reset the timer and move on to the next interaction when the player presses space again
 			this.timer = 0;
 			this.interacted = 2;
@@ -102,20 +105,26 @@ villager.prototype = {
 		else if (this.interacted == 2 && this.timer > 60) {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
-			dialogue = textWrap('So...Will you do it? y/n')
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', dialogue, 48);
+			dialogue = textWrap('So...Will you do it?')
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', dialogue+'\n   yes\n   no', 48);
+			ykey = game.add.sprite(this.bubblex+24, this.bubbley+110, 'ykey');
+			nkey = game.add.sprite(this.bubblex+24, this.bubbley+150, 'nkey');
 			this.interacted = 3;
 			this.timer = 0;
 		}
 		// 3 indicates a decision to be made, and will respond with 'yes' or 'no'
 		else if (this.interacted == 'yes') {
 			this.textDisplay.kill();
+			ykey.destroy();
+			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Great, thanks!', style);
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Great, thanks!', 48);
 
 			this.timer = 0;
 		} else if (this.interacted == 'no') {
 			this.textDisplay.kill();
+			ykey.destroy();
+			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Alright then...', style);
 
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Alright then...', 48);
