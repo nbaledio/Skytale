@@ -91,32 +91,32 @@ level_2_bad.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,1020,79,1,'Family1');
 		villagergroup.add(villager1.sprite);
-		villager1.setText('Find me one of those chat bubbles');
+		villager1.setText("Good evening, I am Dr. Enoch.","Have you taken care to avoid Bolio? I've made a test vaccine.","Can you help me test it?","Thank you so much! Come this way.","But think about how many lives this can save!");
 		
 		villager2 = new villager();
 		villager2.spawn(game,540,75,0,'Family2');
 		villagergroup.add(villager2.sprite);
-		villager2.setText('Find me one of those chat bubbles');
+		//villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
 		villager3.spawn(game,400,337,1,'Family3');
 		villagergroup.add(villager3.sprite);
-		villager3.setText('Find me one of those chat bubbles');
+		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude","But how will we evolve our society?");
 		
 		villager4 = new villager();
 		villager4.spawn(game,770,337,0,'Family4');
 		villagergroup.add(villager4.sprite);
-		villager4.setText('Find me one of those chat bubbles');
+		//villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
 		villager5.spawn(game,1120,337,1,'Family5');
 		villagergroup.add(villager5.sprite);
-		villager5.setText('Find me one of those chat bubbles');
+		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky BLANK?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.");
 		
 		villager6 = new villager();
 		villager6.spawn(game,1420,337,0,'Family6');
 		villagergroup.add(villager6.sprite);
-		villager6.setText('Find me one of those chat bubbles');
+		//villager6.setText('Find me one of those chat bubbles');
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);

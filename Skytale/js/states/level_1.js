@@ -118,32 +118,32 @@ level_1.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,30,75,1,'Family1');
 		villagergroup.add(villager1.sprite);
-		villager1.setText('Find me one of those chat bubbles');
+		villager1.setText("Hey there, I am Dr. Lancit.","I am working on a cure to the recent weasles disease.","Can you help me test it?","Thanks, come on inside.","Well, that is unfortunate...");
 		
 		villager2 = new villager();
 		villager2.spawn(game,550,337,0,'Family2');
 		villagergroup.add(villager2.sprite);
-		villager2.setText('Find me one of those chat bubbles');
+		//villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
 		villager3.spawn(game,780,117,1,'Family3');
 		villagergroup.add(villager3.sprite);
-		villager3.setText('Find me one of those chat bubbles');
+		villager3.setText("Greetings, I am Alvis, a 1st gen. scientist.","I am studying crystals, as a source of new magic energy.","Can you find me a sample?","You have my thanks, friend.","But... think about how this can help the village!");
 		
 		villager4 = new villager();
 		villager4.spawn(game,890,337,0,'Family4');
 		villagergroup.add(villager4.sprite);
-		villager4.setText('Find me one of those chat bubbles');
+		//villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
 		villager5.spawn(game,1420,337,1,'Family5');
 		villagergroup.add(villager5.sprite);
-		villager5.setText('Find me one of those chat bubbles');
+		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a BLANK!","Can ya help me find it?","Thanks buddy!","Aw, shucks.");
 		
 		villager6 = new villager();
 		villager6.spawn(game,1470,105,0,'Family6');
 		villagergroup.add(villager6.sprite);
-		villager6.setText('Find me one of those chat bubbles');
+		//villager6.setText('Find me one of those chat bubbles');
 				
 		karmaBar = new karma();
 		karmaBar.spawn(game);
@@ -244,7 +244,7 @@ level_1.prototype = {
 		villager5.update(p1);
 		if (villager5.interacted == 'yes' && villager5.timer == 59) {
 			villager5.task = new task();
-			villager5.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager5.task.spawn(game, 1530, 340, 'chat', villager5);
 		}
 		if (villager5.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager5.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
