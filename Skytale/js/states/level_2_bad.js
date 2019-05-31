@@ -89,7 +89,7 @@ level_2_bad.prototype = {
 		
 		//Add villagers
 		villager1 = new villager();
-		villager1.spawn(game,1020,79,1,'Family1');
+		villager1.spawn(game,1020,79,1,'Doctors');
 		villagergroup.add(villager1.sprite);
 		villager1.setText("Good evening, I am Dr. Enoch.","Have you taken care to avoid Bolio? I've made a test vaccine.","Can you help me test it?","Thank you so much! Come this way.","But think about how many lives this can save!");
 		
@@ -99,9 +99,9 @@ level_2_bad.prototype = {
 		//villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
-		villager3.spawn(game,400,337,1,'Family3');
+		villager3.spawn(game,400,337,1,'Scientists');
 		villagergroup.add(villager3.sprite);
-		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude","But how will we evolve our society?");
+		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude.","But how will we evolve our society?");
 		
 		villager4 = new villager();
 		villager4.spawn(game,770,337,0,'Family4');
@@ -109,7 +109,7 @@ level_2_bad.prototype = {
 		//villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
-		villager5.spawn(game,1120,337,1,'Family5');
+		villager5.spawn(game,1120,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
 		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky hat?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.");
 		
@@ -172,7 +172,7 @@ level_2_bad.prototype = {
 		villager5.update(p1);
 		if (villager5.interacted == 'yes' && villager5.timer == 59) {
 			villager5.task = new task();
-			villager5.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager5.task.spawn(game, 1230, 340, 'chat', villager5);
 		}
 		if (villager5.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager5.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -198,7 +198,7 @@ level_2_bad.prototype = {
 		villager3.update(p1);
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
 			villager3.task = new task();
-			villager3.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager3.task.spawn(game, 1250, 170, 'chat', villager3);
 		}
 		if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance

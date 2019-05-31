@@ -51,8 +51,8 @@ level_1.prototype = {
 		platform5_second = new platform(game,69,107,'platform',platformgroup);
 		platform0 = new platform(game,230,250,'platform',platformgroup);
 		platform1 = new platform(game,350,265,'platform',platformgroup);
-		platform2 = new platform(game,460,220,'platform',platformgroup);
-		platform3 = new platform(game,570,170,'platform',platformgroup);
+		platform2 = new platform(game,480,220,'platform',platformgroup);
+		platform3 = new platform(game,610,170,'platform',platformgroup);
 		platform4 = new platform(game,715,148,'platform',platformgroup);
 		platform4_second = new platform(game,779,148,'platform',platformgroup);
 		platform4_third = new platform(game,843,148,'platform',platformgroup);
@@ -116,7 +116,7 @@ level_1.prototype = {
 		//Add villagers
 		game.add.sprite(150,785,'villager')
 		villager1 = new villager();
-		villager1.spawn(game,30,75,1,'Family1');
+		villager1.spawn(game,30,75,1,'Doctors');
 		villagergroup.add(villager1.sprite);
 		villager1.setText("Hey there, I am Dr. Lancit.","I am working on a cure to the recent weasles disease.","Can you help me test it?","Thanks, come on inside.","Well, that is unfortunate...");
 		
@@ -126,7 +126,7 @@ level_1.prototype = {
 		//villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
-		villager3.spawn(game,780,117,1,'Family3');
+		villager3.spawn(game,780,117,1,'Scientists');
 		villagergroup.add(villager3.sprite);
 		villager3.setText("Greetings, I am Alvis, a 1st gen. scientist.","I am studying crystals, as a source of new magic energy.","Can you find me a sample?","You have my thanks, friend.","But... think about how this can help the village!");
 		
@@ -136,10 +136,10 @@ level_1.prototype = {
 		//villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
-		villager5.spawn(game,1420,337,1,'Family5');
+		villager5.spawn(game,1420,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
 		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a hat!","Can ya help me find it?","Thanks buddy!","Aw, shucks.");
-		
+		//add 110, 3
 		villager6 = new villager();
 		villager6.spawn(game,1470,105,0,'Family6');
 		villagergroup.add(villager6.sprite);
@@ -270,7 +270,7 @@ level_1.prototype = {
 		villager3.update(p1);
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
 			villager3.task = new task();
-			villager3.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager3.task.spawn(game, 20, 200, 'chat', villager3);
 		}
 		if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
