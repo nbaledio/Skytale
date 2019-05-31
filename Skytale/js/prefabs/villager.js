@@ -52,7 +52,8 @@ villager.prototype = {
 	},
 	//Arguments: text the villager will say
 	setText: function(text){
-		this.text = text;
+		//this.text = text;
+		this.text = textWrap(text);
 	},
 	// Arguments: sprite for textbubble, style of text
 	displayText: function(textBubble, style) {
@@ -93,7 +94,6 @@ villager.prototype = {
 			this.textDisplay.kill();
 			// create the new text
 			// this.textDisplay = game.add.text(this.x + 25, 100, this.text, style);
-			this.text = textWrap(this.text);
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.text, 48);
 
 			// reset the timer and move on to the next interaction when the player presses space again
