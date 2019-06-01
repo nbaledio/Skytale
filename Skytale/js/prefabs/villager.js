@@ -202,7 +202,7 @@ villager.prototype = {
 				player.interacting = 'none';
 			}
 			// destroy response after time has passed
-			if (this.interacted == 'yes' && this.timer == 60) {
+			if (this.interacted == 'yes' && this.timer == 120) {
 				// indicate the status of this task
 				this.interacted = 'unfinished';
 				player.interacting = this.family;
