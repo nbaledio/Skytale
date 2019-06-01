@@ -187,7 +187,7 @@ level_1.prototype = {
 			game.camera.y = 0;
 		}else{
 			if(gameplay_state == 'HOUSE'){
-				p1.house1_controls(onGround,onPlatform);
+				p1.inverted_controls(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 0;
 				game.camera.y = 450;
@@ -349,6 +349,11 @@ level_1.prototype = {
 			bgm.stop();
 		}
 	}
+}
+// helper function for when task is done
+function finishTask(p1, task){
+	task.kill();
+	this.peopleHelped++;
 }
 
 //Fade function. Fades to black to transition to inside house

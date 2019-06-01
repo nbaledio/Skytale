@@ -4,6 +4,8 @@
 
 var level_2_good = function(game){};
 var theta = 1;
+var gamplay_state = 'OVERWORLD';
+var transition = 'OVERWORLD';
 
 level_2_good.prototype = {
 	init: function() {
@@ -17,7 +19,7 @@ level_2_good.prototype = {
 		theta = 1;
 		
 		//Setting the size of the world
-		game.world.setBounds(0, 0, 1600, 450);
+		game.world.setBounds(0, 0, 1600, 900);
 
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		
@@ -65,6 +67,14 @@ level_2_good.prototype = {
 		platform10 = new platform(game,800,160,'platform',platformgroup);
 		platform11 = new platform(game,940,280,'platform',platformgroup);
 		
+		//Add platforms for doctor's house task
+		platform12 = new platform(game,140,750,'platform',platformgroup);
+		platform12.sprite.scale.setTo(.5,.5);
+		platform13 = new platform(game,600,690,'platform',platformgroup);
+		platform13.sprite.scale.setTo(.5,.5);
+		platform14 = new platform(game,160,600,'platform',platformgroup);
+		platform14.sprite.scale.setTo(.5,.5);
+		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
 		groundgroup.add(ground1);
@@ -75,6 +85,17 @@ level_2_good.prototype = {
 		groundgroup.add(ground2);
 		ground2.body.immovable = true;
 		ground2.body.setSize(800,50,0,400);
+		
+		//Add ground to house task area
+	    ground3 = game.add.sprite(0,450,'ground');
+		groundgroup.add(ground3);
+		ground3.body.immovable = true;
+		ground3.body.setSize(800,0,0,400);
+		
+		ground4 = game.add.sprite(800,450,'ground');
+		groundgroup.add(ground4);
+		ground4.body.immovable = true;
+		ground4.body.setSize(800,0,0,400);
 		
 		//Add houses
 		house1 = game.add.sprite(40,270,'house');
@@ -142,13 +163,48 @@ level_2_good.prototype = {
 		
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
+		
+		//Resets black screen once fade is complete 
+		game.camera.onFadeComplete.add(resetFade3, this);
 	},
 	update: function(){
 		//Variables to check if player is on platform or ground
 		var onPlatform = game.physics.arcade.collide(p1.sprite, platformgroup);
 		var onGround = game.physics.arcade.collide(p1.sprite, groundgroup);
 		
-		p1.controls(onGround,onPlatform);
+		//Change controls/fix camera depending on if in overworld or house task
+		if(p1.sprite.y >= 370){
+			if(p1.sprite.x < 801){
+				gameplay_state = 'HOUSE';
+			}else{
+				gameplay_state = 'HOUSE2';
+			}
+		}else{
+			gameplay_state = 'OVERWORLD'
+		}
+		if(gameplay_state == 'OVERWORLD'){
+			p1.controls(onGround,onPlatform);
+			game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0.1, 0);
+			game.camera.y = 0;
+		}else{
+			if(gameplay_state == 'HOUSE'){
+				p1.fast_controls(onGround,onPlatform);
+				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
+				game.camera.x = 0;
+				game.camera.y = 450;
+			}else if(gameplay_state == 'HOUSE2'){
+				p1.controls(onGround,onPlatform);
+				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
+				game.camera.x = 800;
+				game.camera.y = 450;
+				if(p1.sprite.x <= 803){
+					p1.sprite.x += 3;
+				}
+				if(p1.sprite.x >= 1570){
+					p1.sprite.x -= 3;
+				}
+			}
+		}
 		
 		//  Enables player to fall on platforms
 		game.physics.arcade.collide(p1.sprite, platformgroup);
@@ -257,7 +313,9 @@ level_2_good.prototype = {
 		villager1.update(p1);
 		if (villager1.interacted == 'yes' && villager1.timer == 59) {
 			villager1.task = new task();
-			villager1.task.spawn(game, 1560, 148, 'chat', villager1);
+			transition = 'HOUSE';
+			fade();
+			villager1.task.spawn(game, 550, 475, 'chat', villager1);
 		}
 		if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -265,6 +323,8 @@ level_2_good.prototype = {
 			this.peopleHelped++;
 			karmaBar.update(this.balance);
 			villager1.task.sprite.kill();
+			transition = 'OVERWORLD1';
+			fade();
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
 			game.state.start('level_1')
@@ -294,4 +354,30 @@ level_2_good.prototype = {
 function finishTask(p1, task){
 	task.kill();
 	this.peopleHelped++;
+}
+
+//Fade function. Fades to black to transition to inside house
+function fade() {
+    game.camera.fade(0x000000, 1000);
+
+}
+//Function to reset fade to black effect and move player/villager in and out of houses
+function resetFade3() {
+	if(transition == 'HOUSE'){
+		p1.sprite.x = 50;
+		p1.sprite.y = 790;
+		villager1.sprite.x = 150;
+		villager1.sprite.y = 785;
+	}else if(transition == 'HOUSE2'){
+		p1.sprite.x = 850;
+		p1.sprite.y = 790;
+	}else if(transition == 'OVERWORLD1'){
+		p1.sprite.x = 20;
+		p1.sprite.y = 80;
+		villager1.sprite.x = 30;
+		villager1.sprite.y = 75;
+	}else if(transition == 'OVERWORLD2'){
+		
+	}
+    game.camera.resetFX();
 }
