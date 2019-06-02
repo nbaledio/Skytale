@@ -50,12 +50,29 @@ level_3_bad.prototype = {
 		platform0 = new platform(game,750,165,'platform',platformgroup);
 		platform0_second = new platform(game,814,165,'platform',platformgroup);
 		platform1 = new platform(game,650,250,'platform',platformgroup);
-		//platform2 = new platform(game,170,270,'platform',platformgroup);
-		//platform3 = new platform(game,430,270,'platform',platformgroup);
 		platform4 = new platform(game,930,250,'platform',platformgroup);
-		//platform5 = new platform(game,1100,270,'platform',platformgroup);
-		//platform6 = new platform(game,1300,270,'platform',platformgroup);
-		//platform7 = new platform(game,780,280,'platform',platformgroup);
+		
+		//Platforms for doctor's house task
+		platform5 = new platform(game,300,770,'platform',platformgroup);
+		platform5.sprite.scale.setTo(.5,.5);
+		platform6 = new platform(game,380,750,'platform',platformgroup);
+		platform6.sprite.scale.setTo(.5,.5);
+		platform7 = new platform(game,520,750,'platform',platformgroup);
+		platform7.sprite.scale.setTo(.5,.5);
+		platform8 = new platform(game,570,710,'platform',platformgroup);
+		platform8.sprite.scale.setTo(.5,.5);
+		platform9 = new platform(game,600,660,'platform',platformgroup);
+		platform9.sprite.scale.setTo(.5,.5);
+		platform10 = new platform(game,520,630,'platform',platformgroup);
+		platform10.sprite.scale.setTo(.5,.5);
+		platform11 = new platform(game,343,630,'platform',platformgroup);
+		platform11.sprite.scale.setTo(.5,.5);
+		platform12 = new platform(game,200,630,'platform',platformgroup);
+		platform12.sprite.scale.setTo(.5,.5);
+		platform13 = new platform(game,50,630,'platform',platformgroup);
+		platform13.sprite.scale.setTo(.5,.5);
+
+
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
@@ -148,7 +165,7 @@ level_3_bad.prototype = {
 		cursors = game.input.keyboard.createCursorKeys();
 		
 		//Resets black screen once fade is complete 
-		game.camera.onFadeComplete.add(resetFade, this);
+		game.camera.onFadeComplete.add(resetFade4, this);
 	},
 	update: function(){
 		//Variables to check if player is on platform or ground
@@ -171,10 +188,13 @@ level_3_bad.prototype = {
 			game.camera.y = 0;
 		}else{
 			if(gameplay_state == 'HOUSE'){
-				p1.controls(onGround,onPlatform);
+				p1.short_hop_controls(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 0;
 				game.camera.y = 450;
+				if(p1.sprite.x > 770){
+					p1.sprite.x -= 2.5;
+				}
 			}else if(gameplay_state == 'HOUSE2'){
 				p1.controls(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
@@ -265,7 +285,9 @@ level_3_bad.prototype = {
 		villager1.update(p1);
 		if (villager1.interacted == 'yes' && villager1.timer == 59) {
 			villager1.task = new task();
-			villager1.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager1.task.spawn(game, 50, 600, 'chat', villager1);
+			transition = 'HOUSE';
+			fade();
 		}
 		if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -273,6 +295,8 @@ level_3_bad.prototype = {
 			this.peopleHelped++;
 			karmaBar.update(this.balance);
 			villager1.task.sprite.kill();
+			transition = 'OVERWORLD1';
+			fade();
 		}
 		
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
@@ -311,7 +335,7 @@ function fade() {
 
 }
 //Function to reset fade to black effect and move player/villager in and out of houses
-function resetFade() {
+function resetFade4() {
 	if(transition == 'HOUSE'){
 		p1.sprite.x = 50;
 		p1.sprite.y = 790;
@@ -321,10 +345,10 @@ function resetFade() {
 		p1.sprite.x = 850;
 		p1.sprite.y = 790;
 	}else if(transition == 'OVERWORLD1'){
-		p1.sprite.x = 10;
-		p1.sprite.y = 80;
-		villager1.sprite.x = 30;
-		villager1.sprite.y = 75;
+		p1.sprite.x = 550;
+		p1.sprite.y = 340;
+		villager1.sprite.x = 570;
+		villager1.sprite.y = 335;
 	}else if(transition == 'OVERWORLD2'){
 		
 	}

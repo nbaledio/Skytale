@@ -70,6 +70,26 @@ level_3_good.prototype = {
 		platform13 = new platform(game,630,140,'platform',platformgroup);
 		platform14 = new platform(game,900,140,'platform',platformgroup);
 		
+		//Platforms for the doctor's house task
+		platform15 = new platform(game,300,770,'platform',platformgroup);
+		platform15.sprite.scale.setTo(.5,.5);
+		platform16 = new platform(game,380,750,'platform',platformgroup);
+		platform16.sprite.scale.setTo(.5,.5);
+		platform17 = new platform(game,520,750,'platform',platformgroup);
+		platform17.sprite.scale.setTo(.5,.5);
+		platform18 = new platform(game,570,710,'platform',platformgroup);
+		platform18.sprite.scale.setTo(.5,.5);
+		platform19 = new platform(game,600,660,'platform',platformgroup);
+		platform19.sprite.scale.setTo(.5,.5);
+		platform20 = new platform(game,520,630,'platform',platformgroup);
+		platform20.sprite.scale.setTo(.5,.5);
+		platform21 = new platform(game,344,630,'platform',platformgroup);
+		platform21.sprite.scale.setTo(.5,.5);
+		platform22 = new platform(game,200,630,'platform',platformgroup);
+		platform22.sprite.scale.setTo(.5,.5);
+		platform23 = new platform(game,50,630,'platform',platformgroup);
+		platform23.sprite.scale.setTo(.5,.5);
+		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
 		groundgroup.add(ground1);
@@ -160,7 +180,7 @@ level_3_good.prototype = {
 		cursors = game.input.keyboard.createCursorKeys();	
 
 		//Resets black screen once fade is complete 
-		game.camera.onFadeComplete.add(resetFade, this);
+		game.camera.onFadeComplete.add(resetFade5, this);
 	},
 	update: function(){
 		//Variables to check if player is on platform or ground
@@ -183,7 +203,7 @@ level_3_good.prototype = {
 			game.camera.y = 0;
 		}else{
 			if(gameplay_state == 'HOUSE'){
-				p1.controls(onGround,onPlatform);
+				p1.short_hop_controls(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 0;
 				game.camera.y = 450;
@@ -314,7 +334,9 @@ level_3_good.prototype = {
 		villager1.update(p1);
 		if (villager1.interacted == 'yes' && villager1.timer == 59) {
 			villager1.task = new task();
-			villager1.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager1.task.spawn(game, 50, 600, 'chat', villager1);
+			transition = 'HOUSE';
+			fade();
 		}
 		if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -322,6 +344,8 @@ level_3_good.prototype = {
 			this.peopleHelped++;
 			karmaBar.update(this.balance);
 			villager1.task.sprite.kill();
+			transition = 'OVERWORLD1';
+			fade();
 		}
 		
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
@@ -362,7 +386,7 @@ function fade() {
 
 }
 //Function to reset fade to black effect and move player/villager in and out of houses
-function resetFade() {
+function resetFade5() {
 	if(transition == 'HOUSE'){
 		p1.sprite.x = 50;
 		p1.sprite.y = 790;
@@ -372,9 +396,9 @@ function resetFade() {
 		p1.sprite.x = 850;
 		p1.sprite.y = 790;
 	}else if(transition == 'OVERWORLD1'){
-		p1.sprite.x = 10;
+		p1.sprite.x = 760;
 		p1.sprite.y = 80;
-		villager1.sprite.x = 30;
+		villager1.sprite.x = 770;
 		villager1.sprite.y = 75;
 	}else if(transition == 'OVERWORLD2'){
 		

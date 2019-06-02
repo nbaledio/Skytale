@@ -183,6 +183,57 @@ player.prototype = {
 			this.sprite.body.setSize(164/5, 129/2,0,0);
 		}
 		
+	},
+	short_hop_controls: function(onGround,onPlatform){
+		//  Reset the players velocity (movement)
+		this.sprite.body.velocity.x = 0;
+		
+		//Push player downwards if on platform for more consistent jumps
+		if(onGround || onPlatform){
+			this.sprite.y +=1.5;
+		}
+		
+		// Keeps player in horizontal bounds
+		if(p1.sprite.x <= 0){
+			this.sprite.x += 2.5;
+		}else if(p1.sprite.x > 770){
+			this.sprite.x -= 2.5;
+		}
+		
+		//Check if left is input
+		if (cursors.left.isDown){
+			//  Move to the left
+			this.sprite.body.velocity.x = -150;
+			//  Play left animation
+			this.sprite.animations.play('left',20);
+
+		}
+		//Check if right is input
+		else if (cursors.right.isDown){
+			//  Move to the right
+			this.sprite.body.velocity.x = 150;
+			//  Play right animation
+			this.sprite.animations.play('right',20);
+		}else{
+			//  Stand still
+			this.sprite.animations.stop();
+			this.sprite.frame = 6;
+		}
+		
+		//  Enable player to jump if they are standing on the ground/platform
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)  && ( onGround || onPlatform))
+		{
+			this.sprite.body.velocity.y = -350;
+		}
+		
+		//Allow player to pass through platforms from the bottom/drop down from platforms
+		if((this.sprite.body.velocity.y < -50 && !( onGround || onPlatform)) || (game.input.keyboard.isDown(Phaser.Keyboard.DOWN) && this.sprite.y < 740)){
+			this.sprite.body.setSize(0,0,0,1000);
+		}else{
+
+			this.sprite.body.setSize(164/5, 129/2,0,0);
+		}
+		
 	}
 }
 
