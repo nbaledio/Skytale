@@ -153,6 +153,10 @@ level_2_good.prototype = {
 
 		bigBird = new statue();
 		bigBird.spawn(game);
+		
+		//Spawn totem and goat
+		totem = game.add.sprite(150,370,'totem');
+		goat = game.add.sprite(1500,355,'goat');
 			
 		//Add player
 		p1 = new player();
@@ -251,7 +255,7 @@ level_2_good.prototype = {
 		villager6.update(p1,karmaBar,this.balance);
 		if (villager6.interacted == 'yes' && villager6.timer == 59) {
 			villager6.task = new task();
-			villager6.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager6.task.spawn(game, 1560, 148, 'chat', villager6);
 		}
 		if (villager6.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager6.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -264,7 +268,7 @@ level_2_good.prototype = {
 		villager5.update(p1,karmaBar,this.balance);
 		if (villager5.interacted == 'yes' && villager5.timer == 59) {
 			villager5.task = new task();
-			villager5.task.spawn(game, 1560, 340, 'chat', villager5);
+			villager5.task.spawn(game, 1560, 340, 'hat', villager5);
 		}
 		if (villager5.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager5.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -277,13 +281,14 @@ level_2_good.prototype = {
 		villager4.update(p1,karmaBar,this.balance);
 		if (villager4.interacted == 'yes' && villager4.timer == 59) {
 			villager4.task = new task();
-			villager4.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager4.task.spawn(game, 1500,355,'goat', villager4);
 		}
 		if (villager4.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager4.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager4.complete(this.balance, p1);
 			this.peopleHelped++;
 			//karmaBar.update(this.balance);
+			goat.kill();
 			villager4.task.sprite.kill();
 		}
 
@@ -303,13 +308,14 @@ level_2_good.prototype = {
 		villager2.update(p1,karmaBar,this.balance);
 		if (villager2.interacted == 'yes' && villager2.timer == 59) {
 			villager2.task = new task();
-			villager2.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager2.task.spawn(game, 150,370,'totem', villager2);
 		}
 		if (villager2.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager2.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager2.complete(this.balance, p1);
 			this.peopleHelped++;
 			//karmaBar.update(this.balance);
+			totem.kill();
 			villager2.task.sprite.kill();
 		}
 
@@ -318,7 +324,7 @@ level_2_good.prototype = {
 			villager1.task = new task();
 			transition = 'HOUSE';
 			fade();
-			villager1.task.spawn(game, 550, 475, 'chat', villager1);
+			villager1.task.spawn(game, 550, 475, 'flag', villager1);
 		}
 		if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
