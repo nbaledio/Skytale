@@ -237,13 +237,13 @@ villager.prototype = {
 			if (this.interacted == 'returned' && this.timer == 120) {
 				this.textDisplay.destroy();
 				this.bubble.kill();
-				karmaBar.update(balance);
+				if(karmaBar!= null) karmaBar.update(balance);
 				this.timer = 0;
 				this.interacted = 'done';
 				player.interacting = 'none';
 				this.signal.visible = false;
 			}
-			console.log(this.interacted);
+			//console.log(this.interacted);
 		} else {
 			// indicate that there will be no further interaction
 			this.signal.visible = false;

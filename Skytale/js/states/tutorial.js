@@ -72,7 +72,7 @@ tutorial.prototype = {
 		villager3.spawn(game,900,337,'villager',1,'Family2');
 		villagergroup.add(villager3.sprite);
 
-		villager3.setText("Welcome to the tutorial, I've got a task for you.","Find me one of the chat bubbles.","Can you do it?","Thanks.","Alright then...");
+		villager3.setText("Welcome to the tutorial, I've got a task for you.","Find me one of the chat bubbles.","Can you do it?","Wonderful!\nGood luck!","Alright then...", "Wow, thank you!");
 
 		bubble = game.add.sprite(65,185,'textbubble');
 		bubble.width = 280;
@@ -109,14 +109,14 @@ tutorial.prototype = {
 			instructionsVisual2.visible = !instructionsVisual2.visible;
 		}
 
-		villager3.update(p1);
+		villager3.update(p1,null,null);
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
-			task = new task();
-			task.spawn(game, 1560, 148, 'chat', villager3);
+			villager3.task = new task();
+			villager3.task.spawn(game, 1560, 148, 'chat', villager3);
 			timer = 0;
 			//console.log('hewwo');
 		}
-		if (game.physics.arcade.overlap(p1.sprite, task.sprite, finishTask, null, this)) {
+		if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
 			//balance = villager3.complete(balance, p1);
 			bubble.destroy();
@@ -125,8 +125,19 @@ tutorial.prototype = {
 			bubble = game.add.sprite(970,180,'textbubble');
 			bubble.width = 590;
 			bubble.height = 130;
-			instructions = game.add.bitmapText(1000, 200, 'myfont', 'Thank you!\nReturn to the statue to continue', 48);
+			instructions = game.add.bitmapText(1000, 200, 'myfont', "Don't forget to return this item to\nthe villager", 48);
 			timer = 0;
+			villager3.complete(null, p1);
+			villager3.task.sprite.kill();
+		}
+
+		if (villager3.interacted == 'done') {
+			bubble.destroy();
+			instructions.destroy();
+			bubble = game.add.sprite(600,180,'textbubble');
+			bubble.width = 590;
+			bubble.height = 130;
+			instructions = game.add.bitmapText(630, 200, 'myfont', "Nice job! Return to the statue to\ncontinue", 48);
 		}
 
 		//Variables to check if player is on platform or ground
@@ -194,6 +205,7 @@ tutorial.prototype = {
 			instructions.destroy();
 			instructionsVisual.destroy();
 			instructionsVisual2.destroy();
+			bubble = game.add.sprite(680,185,'textbubble');
 			bubble.x = 590;
 			bubble.y = 130;
 			bubble.width = 320;
@@ -227,8 +239,4 @@ tutorial.prototype = {
 		//  Enables player to fall on platforms
 		game.physics.arcade.collide(p1.sprite, platformgroup);
 	}
-}
-// helper function for when task is done
-function finishTask(p1, task){
-	task.kill();
 }
