@@ -141,7 +141,7 @@ level_3_good.prototype = {
 		villager2 = new villager();
 		villager2.spawn(game,540,185,0,'Crystal_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("You know what's great about a rich village? I get more loot.","Alfred has a lot of crystals, stealing one is just fine.","Wanna join me in a break-in?","Let's go, I'll lead the way.","Fine then, go away nerd.");
+		villager2.setText("You know what's great about a rich village? I get more loot.","Alfred has a lot of crystals, stealing one is just fine.","Wanna join me in a break-in?","Let's go, I'll lead the way.","Fine then, go away nerd.","");
 		
 		villager3 = new villager();
 		villager3.spawn(game,270,125,1,'Scientists');
@@ -151,7 +151,7 @@ level_3_good.prototype = {
 		villager4 = new villager();
 		villager4.spawn(game,1000,185,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("Hey you. I've got a job. See that bird statue totem?","I dare you to steal it and bring it here.","Well, are you gonna do it?","Ok, then, get going! Time is money!","Hah, I knew you were too chicken to do it.");
+		villager4.setText("Hey you. I've got a job. See that bird statue totem?","I dare you to steal it and bring it here.","Well, are you gonna do it?","Ok, then, get going! Time is money!","Hah, I knew you were too chicken to do it.","");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1270,125,1,'Farmers');
@@ -161,7 +161,7 @@ level_3_good.prototype = {
 		villager6 = new villager();
 		villager6.spawn(game,1480,335,0,'Goat_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("I always wanted a pet. Winslow Jr. Jr. has too many goats.","I want one. I'll pay you well if you steal it.","Do you wanna take my offer?","Alright, I'll be waiting here.","Fine, guess I'll just have to steal it myself.");
+		villager6.setText("I always wanted a pet. Winslow Jr. Jr. has too many goats.","I want one. I'll pay you well if you steal it.","Do you wanna take my offer?","Alright, I'll be waiting here.","Fine, guess I'll just have to steal it myself.","");
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);

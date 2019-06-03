@@ -117,7 +117,7 @@ level_2_bad.prototype = {
 		villager2 = new villager();
 		villager2.spawn(game,540,75,0,'Goat_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("I'm freezing out here. If only I had that goat's fur...","That farmer is useless. I bet he won't know if it's missing.","Can you steal it from him?","Good, now get to it.","You want me to freeze to death?!");
+		villager2.setText("I'm freezing out here. If only I had that goat's fur...","That farmer is useless. I bet he won't know if it's missing.","Can you steal it from him?","Good, now get to it.","You want me to freeze to death?!","");
 		
 		villager3 = new villager();
 		villager3.spawn(game,400,337,1,'Scientists');
@@ -127,7 +127,7 @@ level_2_bad.prototype = {
 		villager4 = new villager();
 		villager4.spawn(game,770,337,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("This place blows. I need to make some hard cold cash NOW.","Hey, steal a bird statue totem for me or else.","So, you gonna do it?","Well, what are you waiting for?","I'm gonna make you regret this.");
+		villager4.setText("This place blows. I need to make some hard cold cash NOW.","Hey, steal a bird statue totem for me or else.","So, you gonna do it?","Well, what are you waiting for?","I'm gonna make you regret this.","");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1120,337,1,'Farmers');
@@ -137,7 +137,7 @@ level_2_bad.prototype = {
 		villager6 = new villager();
 		villager6.spawn(game,1420,337,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("I hate that Mendel... He has all the crystals for his 'science.'","You and I should teach him a lesson and steal one.","Well, what do you say?","Alright, let's go break into his place.","Good to know I can't count on you.");
+		villager6.setText("I hate that Mendel... He has all the crystals for his 'science.'","You and I should teach him a lesson and steal one.","Well, what do you say?","Alright, let's go break into his place.","Good to know I can't count on you.","");
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);

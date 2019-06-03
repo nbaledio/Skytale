@@ -126,7 +126,7 @@ level_2_good.prototype = {
 		villager2 = new villager();
 		villager2.spawn(game,720,337,0,'Totem_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("This town's got gold. Gold they don't need.","They would not mind if you 'took' a bird statue totem.","Wanna steal one for me?","Cool, don't worry. You'll get your share... maybe","Fine, get lost kid.");
+		villager2.setText("This town's got gold. Gold they don't need.","They would not mind if you 'took' a bird statue totem.","Wanna steal one for me?","Cool, don't worry. You'll get your share... maybe","Fine, get lost kid.","");
 		
 		villager3 = new villager();
 		villager3.spawn(game,410,95,1,'Scientists');
@@ -136,7 +136,7 @@ level_2_good.prototype = {
 		villager4 = new villager();
 		villager4.spawn(game,1120,96,0,'Goat_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("Hey, don't you think Wilson Jr. is an idiot?","Maybe if you steal his goat, then he'll grow a brain.","You wanna steal one from him?","You've got a deal. Bring it here.","What, are you his friend or something?");
+		villager4.setText("Hey, don't you think Wilson Jr. is an idiot?","Maybe if you steal his goat, then he'll grow a brain.","You wanna steal one from him?","You've got a deal. Bring it here.","What, are you his friend or something?","");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1450,337,1,'Farmers');
@@ -146,7 +146,7 @@ level_2_good.prototype = {
 		villager6 = new villager();
 		villager6.spawn(game,1470,125,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("I'm bored. You know what we should do? Break into a house.","Mendel's place is perfect. He's got tons of stuff to steal.","Wanna come join me?","Follow me and be quiet. We're going in from the back.","Then beat it pipsqueak.");
+		villager6.setText("I'm bored. You know what we should do? Break into a house.","Mendel's place is perfect. He's got tons of stuff to steal.","Wanna come join me?","Follow me and be quiet. We're going in from the back.","Then beat it pipsqueak.","");
 
 		karmaBar = new karma();
 		karmaBar.spawn(game);

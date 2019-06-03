@@ -123,7 +123,7 @@ level_1.prototype = {
 		villager2 = new villager();
 		villager2.spawn(game,550,337,0,'Goat_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("Hey, can you lift heavy stuff? I've got a job for you.","Wilson keeps on bragging about a goat. It's getting annoying.","Think you can steal it away?","Cool, bring it here when you got it.","Scared of a goat? Come on now!");
+		villager2.setText("Hey, can you lift heavy stuff? I've got a job for you.","Wilson keeps on bragging about a goat. It's getting annoying.","Think you can steal it away?","Cool, bring it here when you got it.","Scared of a goat? Come on now!","");
 		
 		villager3 = new villager();
 		villager3.spawn(game,780,117,1,'Scientists');
@@ -133,17 +133,17 @@ level_1.prototype = {
 		villager4 = new villager();
 		villager4.spawn(game,890,337,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("Have you seen any shiny totems? They're by the bird statue.","If you steal one for me, I can make some BIG cash.","You wanna help me out?","Nice, you'll get a third of my profit.","You better not steal them for yourself.");
+		villager4.setText("Have you seen any shiny totems? They're by the bird statue.","If you steal one for me, I can make some BIG cash.","You wanna help me out?","Nice, you'll get a third of my profit.","You better not steal them for yourself.","");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1420,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
-		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a hat!","Can ya help me find it?","Thanks buddy!","Aw, shucks.");
+		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a hat!","Can ya help me find it?","Thanks buddy!","Aw, shucks.","");
 
 		villager6 = new villager();
 		villager6.spawn(game,1470,105,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("Hey you! I hear Alvis has some crystals in his house.","Word is, they go for a pretty penny on the market.","Wanna help me steal one?","Follow me. We'll break in from the back.","No? Why not yes?!");
+		villager6.setText("Hey you! I hear Alvis has some crystals in his house.","Word is, they go for a pretty penny on the market.","Wanna help me steal one?","Follow me. We'll break in from the back.","No? Why not yes?!","");
 				
 		karmaBar = new karma();
 		karmaBar.spawn(game);
