@@ -16,6 +16,9 @@ function villager() {
 	var ask //  the villager's question
 	var yes // the villager's accepted dialogue
 	var no //the villager's denied dialogue
+	var thanks;
+	
+
 	var x;	// save the x position of th eplayer
 	var signal;	// signal for the player to interact
 	
@@ -58,13 +61,14 @@ villager.prototype = {
 	},
 
 	//Arguments: text the villager will say
-	setText: function(text2,text,text3,text4,text5){
+	setText: function(text2,text,text3,text4,text5,text6){
 		//this.text = text;
 		this.text = textWrap(text);
 		this.greeting = textWrap(text2);
 		this.ask = textWrap(text3);
 		this.yes = textWrap(text4);
 		this.no = textWrap(text5);
+		this.thanks = textWrap(text6);
 	
 	},
 	// Arguments: sprite for textbubble, style of text
@@ -149,13 +153,17 @@ villager.prototype = {
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.no, 48);
 
 			this.timer = 0;
+		} else if (this.interacted == 'returned') {
+			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.thanks, 48);
+			this.timer = 0;
 		}
 	},
 	complete: function(balance, player) {
 		// indicate that the task is complete
-		this.interacted = 'done';
+		this.interacted = 'returning';
 		this.timer = 0;
-		player.interacting = 'none';
+		//player.interacting = 'none';
 		if (this.nice == 1) {
 			balance++;
 		} else {
@@ -163,7 +171,7 @@ villager.prototype = {
 		}
 		return balance;
 	},
-	update: function(player) {
+	update: function(player,karmaBar,balance) {
 		// set up a timer
 		this.timer++;
 		// make sure the player hasn't already helped this person
@@ -201,10 +209,14 @@ villager.prototype = {
 					game.input.keyboard.isDown(Phaser.Keyboard.N)) {
 					this.interacted = 'no';
 					this.displayText('textbubble', style);
+				} else if (this.interacted == 'returning') {
+					this.interacted = 'returned';
+					player.interacting = 'none';
+					this.displayText('textbubble', style);
 				}
 			}
 			// destroy response after time has passed
-			if (this.interacted == 'no' && this.timer > 120) {
+			if (this.interacted == 'no' && this.timer == 120) {
 				this.textDisplay.destroy();
 				this.bubble.kill();
 				this.timer = 0;
@@ -221,11 +233,21 @@ villager.prototype = {
 				this.textDisplay.destroy();
 				this.bubble.kill();
 			}
+			//destroy message after time has passed
+			if (this.interacted == 'returned' && this.timer == 120) {
+				this.textDisplay.destroy();
+				this.bubble.kill();
+				karmaBar.update(balance);
+				this.timer = 0;
+				this.interacted = 'done';
+				player.interacting = 'none';
+				this.signal.visible = false;
+			}
+			console.log(this.interacted);
 		} else {
+			// indicate that there will be no further interaction
 			this.signal.visible = false;
 		}
-		this.interacted != 'done'
-
 	}
 }
 

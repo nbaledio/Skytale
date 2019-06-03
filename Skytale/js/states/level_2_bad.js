@@ -89,8 +89,8 @@ level_2_bad.prototype = {
 		ground4.body.setSize(800,0,0,400);
 		
 		//Add houses
-		house1 = game.add.sprite(40,270,'house');
-		house1.scale.setTo(.8,.8);
+		// house1 = game.add.sprite(40,270,'house');
+		// house1.scale.setTo(.8,.8);
 		house2 = game.add.sprite(750,270,'house');
 		house2.scale.setTo(.8,.8);
 		house3 = game.add.sprite(520,10,'house');
@@ -112,7 +112,7 @@ level_2_bad.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,1020,79,1,'Doctors');
 		villagergroup.add(villager1.sprite);
-		villager1.setText("Good evening, I am Dr. Enoch.","Have you taken care to avoid Bolio? I've made a test vaccine.","Can you help me test it?","Thank you so much! Come this way.","But think about how many lives this can save!");
+		villager1.setText("Good evening, I am Dr. Enoch.","Have you taken care to avoid Bolio? I've made a test vaccine.","Can you help me test it?","Thank you so much! Come this way.","But think about how many lives this can save!","");
 		
 		villager2 = new villager();
 		villager2.spawn(game,540,75,0,'Goat_Stealer');
@@ -122,7 +122,7 @@ level_2_bad.prototype = {
 		villager3 = new villager();
 		villager3.spawn(game,400,337,1,'Scientists');
 		villagergroup.add(villager3.sprite);
-		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude.","But how will we evolve our society?");
+		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude.","But how will we evolve our society?","");
 		
 		villager4 = new villager();
 		villager4.spawn(game,770,337,0,'Totem_Stealer');
@@ -132,7 +132,7 @@ level_2_bad.prototype = {
 		villager5 = new villager();
 		villager5.spawn(game,1120,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
-		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky hat?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.");
+		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky hat?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.","");
 		
 		villager6 = new villager();
 		villager6.spawn(game,1420,337,0,'Crystal_Stealer');
@@ -141,6 +141,9 @@ level_2_bad.prototype = {
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);
+
+		bigBird = new statue();
+		bigBird.spawn(game);
 		
 		p1 = new player();
 		p1.spawn(game,110,330,'dude');
@@ -211,7 +214,7 @@ level_2_bad.prototype = {
 		
 		//Check if player if overlapping villager
 		// call update on villager to respond accordingly
-		villager6.update(p1);
+		villager6.update(p1,karmaBar,this.balance);
 		if (villager6.interacted == 'yes' && villager6.timer == 59) {
 			villager6.task = new task();
 			villager6.task.spawn(game, 1560, 148, 'chat', villager1);
@@ -220,11 +223,11 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager6.complete(this.balance, p1);
 			this.peopleHelped++;
-			karmaBar.update(this.balance);
+			//karmaBar.update(this.balance);
 			villager6.task.sprite.kill();
 		}
 
-		villager5.update(p1);
+		villager5.update(p1,karmaBar,this.balance);
 		if (villager5.interacted == 'yes' && villager5.timer == 59) {
 			villager5.task = new task();
 			villager5.task.spawn(game, 1230, 340, 'chat', villager5);
@@ -233,11 +236,11 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager5.complete(this.balance, p1);
 			this.peopleHelped++;
-			karmaBar.update(this.balance);
+			//karmaBar.update(this.balance);
 			villager5.task.sprite.kill();
 		}
 
-		villager4.update(p1);
+		villager4.update(p1,karmaBar,this.balance);
 		if (villager4.interacted == 'yes' && villager4.timer == 59) {
 			villager4.task = new task();
 			villager4.task.spawn(game, 1560, 148, 'chat', villager1);
@@ -246,11 +249,11 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager4.complete(this.balance, p1);
 			this.peopleHelped++;
-			karmaBar.update(this.balance);
+			//karmaBar.update(this.balance);
 			villager4.task.sprite.kill();
 		}
 
-		villager3.update(p1);
+		villager3.update(p1,karmaBar,this.balance);
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
 			villager3.task = new task();
 			villager3.task.spawn(game, 1250, 170, 'chat', villager3);
@@ -259,11 +262,11 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager3.complete(this.balance, p1);
 			this.peopleHelped++;
-			karmaBar.update(this.balance);
+			// karmaBar.update(this.balance);
 			villager3.task.sprite.kill();
 		}
 
-		villager2.update(p1);
+		villager2.update(p1,karmaBar,this.balance);
 		if (villager2.interacted == 'yes' && villager2.timer == 59) {
 			villager2.task = new task();
 			villager2.task.spawn(game, 1560, 148, 'chat', villager1);
@@ -272,11 +275,11 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager2.complete(this.balance, p1);
 			this.peopleHelped++;
-			karmaBar.update(this.balance);
+			// karmaBar.update(this.balance);
 			villager2.task.sprite.kill();
 		}
 
-		villager1.update(p1);
+		villager1.update(p1,karmaBar,this.balance);
 		if (villager1.interacted == 'yes' && villager1.timer == 59) {
 			villager1.task = new task();
 			transition = 'HOUSE';
@@ -287,7 +290,7 @@ level_2_bad.prototype = {
 			// if task is completed, update the villager instance and overall balance
 			this.balance = villager1.complete(this.balance, p1);
 			this.peopleHelped++;
-			karmaBar.update(this.balance);
+			// karmaBar.update(this.balance);
 			villager1.task.sprite.kill();
 			transition = 'OVERWORLD1';
 			fade();
