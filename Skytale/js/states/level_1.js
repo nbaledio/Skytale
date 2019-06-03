@@ -139,7 +139,7 @@ level_1.prototype = {
 		villager5.spawn(game,1420,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
 		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a hat!","Can ya help me find it?","Thanks buddy!","Aw, shucks.");
-
+		//add 110,3
 		villager6 = new villager();
 		villager6.spawn(game,1470,105,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
