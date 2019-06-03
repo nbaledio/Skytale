@@ -54,7 +54,6 @@ villager.prototype = {
 		//this.x = x;
 		this.interacted = 0;
 		this.timer = 0;
-		this.dialogue = ['greeting', 'request', 'ask', 'yes', 'no'];
 		//console.log(this.game.state.current);
 	},
 
@@ -109,7 +108,7 @@ villager.prototype = {
 			this.textDisplay.kill();
 			// create the new text
 			// this.textDisplay = game.add.text(this.x + 25, 100, this.text, style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[1], 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.text, 48);
 
 			// reset the timer and move on to the next interaction when the player presses space again
 			this.timer = 0;
@@ -205,7 +204,7 @@ villager.prototype = {
 				}
 			}
 			// destroy response after time has passed
-			if (this.interacted == 'no' && this.timer > 60) {
+			if (this.interacted == 'no' && this.timer > 120) {
 				this.textDisplay.destroy();
 				this.bubble.kill();
 				this.timer = 0;
