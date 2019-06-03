@@ -115,9 +115,9 @@ level_2_bad.prototype = {
 		villager1.setText("Good evening, I am Dr. Enoch.","Have you taken care to avoid Bolio? I've made a test vaccine.","Can you help me test it?","Thank you so much! Come this way.","But think about how many lives this can save!","");
 		
 		villager2 = new villager();
-		villager2.spawn(game,540,75,0,'Family2');
+		villager2.spawn(game,540,75,0,'Goat_Stealer');
 		villagergroup.add(villager2.sprite);
-		//villager2.setText('Find me one of those chat bubbles');
+		villager2.setText("I'm freezing out here. If only I had that goat's fur...","That farmer is useless. I bet he won't know if it's missing.","Can you steal it from him?","Good, now get to it.","You want me to freeze to death?!");
 		
 		villager3 = new villager();
 		villager3.spawn(game,400,337,1,'Scientists');
@@ -125,9 +125,9 @@ level_2_bad.prototype = {
 		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude.","But how will we evolve our society?","");
 		
 		villager4 = new villager();
-		villager4.spawn(game,770,337,0,'Family4');
+		villager4.spawn(game,770,337,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		//villager4.setText('Find me one of those chat bubbles');
+		villager4.setText("This place blows. I need to make some hard cold cash NOW.","Hey, steal a bird statue totem for me or else.","So, you gonna do it?","Well, what are you waiting for?","I'm gonna make you regret this.");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1120,337,1,'Farmers');
@@ -135,9 +135,9 @@ level_2_bad.prototype = {
 		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky hat?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.","");
 		
 		villager6 = new villager();
-		villager6.spawn(game,1420,337,0,'Family6');
+		villager6.spawn(game,1420,337,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
-		//villager6.setText('Find me one of those chat bubbles');
+		villager6.setText("I hate that Mendel... He has all the crystals for his 'science.'","You and I should teach him a lesson and steal one.","Well, what do you say?","Alright, let's go break into his place.","Good to know I can't count on you.");
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);

@@ -19,6 +19,10 @@ Menu.prototype = {
 		game.load.image('textbubble', 'assets/img/textbubble.png');
 		game.load.image('platform', 'assets/img/rockplatform.png');
 		game.load.image('statue', 'assets/img/statue.png');
+		game.load.image('goat', 'assets/img/goat.png');
+		game.load.image('totem', 'assets/img/totem.png');
+		game.load.image('flag', 'assets/img/flag.png');
+		game.load.image('hat', 'assets/img/hat.png');
 		game.load.spritesheet('dude', 'assets/img/playerone.png',32, 64);
 
 		//music cred
