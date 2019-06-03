@@ -89,8 +89,8 @@ level_2_bad.prototype = {
 		ground4.body.setSize(800,0,0,400);
 		
 		//Add houses
-		house1 = game.add.sprite(40,270,'house');
-		house1.scale.setTo(.8,.8);
+		// house1 = game.add.sprite(40,270,'house');
+		// house1.scale.setTo(.8,.8);
 		house2 = game.add.sprite(750,270,'house');
 		house2.scale.setTo(.8,.8);
 		house3 = game.add.sprite(520,10,'house');
@@ -141,6 +141,9 @@ level_2_bad.prototype = {
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);
+
+		bigBird = new statue();
+		bigBird.spawn(game);
 		
 		p1 = new player();
 		p1.spawn(game,110,330,'dude');

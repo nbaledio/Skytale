@@ -113,8 +113,8 @@ level_3_good.prototype = {
 		ground4.body.setSize(800,0,0,400);
 		
 		//Add houses
-		house1 = game.add.sprite(40,270,'house');
-		house1.scale.setTo(.8,.8);
+		// house1 = game.add.sprite(40,270,'house');
+		// house1.scale.setTo(.8,.8);
 		house2 = game.add.sprite(750,10,'house');
 		house2.scale.setTo(.8,.8);
 		house3 = game.add.sprite(520,120,'house');
@@ -164,7 +164,10 @@ level_3_good.prototype = {
 		//villager6.setText('Find me one of those chat bubbles');
 		
 		karmaBar = new karma();
-		karmaBar.spawn(game);	
+		karmaBar.spawn(game);
+
+		bigBird = new statue();
+		bigBird.spawn(game);
 
 		//Add player
 		p1 = new player();

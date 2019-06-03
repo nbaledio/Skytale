@@ -95,8 +95,8 @@ level_1.prototype = {
 		ground4.body.setSize(800,0,0,400);
 		
 		//Add houses
-		house1 = game.add.sprite(40,270,'house');
-		house1.scale.setTo(.8,.8);
+		// house1 = game.add.sprite(40,270,'house');
+		// house1.scale.setTo(.8,.8);
 		house2 = game.add.sprite(530,270,'house');
 		house2.scale.setTo(.8,.8);
 		house3 = game.add.sprite(760,52,'house');
@@ -148,7 +148,8 @@ level_1.prototype = {
 		karmaBar = new karma();
 		karmaBar.spawn(game);
 
-		//villager3.testText();
+		bigBird = new statue();
+		bigBird.spawn(game);
 
 		//Add player
 		p1 = new player();
