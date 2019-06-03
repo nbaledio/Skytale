@@ -71,7 +71,8 @@ tutorial.prototype = {
 		villager3 = new villager();
 		villager3.spawn(game,900,337,'villager',1,'Family2');
 		villagergroup.add(villager3.sprite);
-		villager3.setText('hey kid...','Find me one of those chat bubbles', 'will you do it?','','');
+
+		villager3.setText("Welcome to the tutorial, I've got a task for you.","Find me one of the chat bubbles.","Can you do it?","Thanks.","Alright then...");
 
 		bubble = game.add.sprite(65,185,'textbubble');
 		bubble.width = 280;

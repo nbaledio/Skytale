@@ -11,8 +11,11 @@ function villager() {
 	var nice;	// 0 if bad, 1 if nice
 	var family;	// the ancestry of the family
 
-	var dialogue;
-
+	var text;	// the villager's request
+	var greeting; // the villager's greeting
+	var ask //  the villager's question
+	var yes // the villager's accepted dialogue
+	var no //the villager's denied dialogue
 	var x;	// save the x position of th eplayer
 	var signal;	// signal for the player to interact
 	
@@ -54,14 +57,16 @@ villager.prototype = {
 		this.dialogue = ['greeting', 'request', 'ask', 'yes', 'no'];
 		//console.log(this.game.state.current);
 	},
-	//Arguments: dialogue for villager
-	setText: function(greeting, request, ask, yes, no){
-		// this.request = textWrap(text);
-		this.dialogue[0] = textWrap(greeting);
-		this.dialogue[1] = textWrap(request);
-		this.dialogue[2] = textWrap(ask);
-		this.dialogue[3] = textWrap(yes);
-		this.dialogue[4] = textWrap(no);
+
+	//Arguments: text the villager will say
+	setText: function(text2,text,text3,text4,text5){
+		//this.text = text;
+		this.text = textWrap(text);
+		this.greeting = textWrap(text2);
+		this.ask = textWrap(text3);
+		this.yes = textWrap(text4);
+		this.no = textWrap(text5);
+	
 	},
 	// Arguments: sprite for textbubble, style of text
 	displayText: function(textBubble, style) {
@@ -87,7 +92,9 @@ villager.prototype = {
 			// textDisplay is the text held inside the bubble
 			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			// this.textDisplay = game.add.text(this.x + 25, 100, "Hey kid ...", style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[0], 48);
+
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.greeting, 48);
+
 			// removes the original signal for interaction
 			this.signal.visible = false;
 			// move on to the next text bubble when the player hits space again
@@ -114,7 +121,9 @@ villager.prototype = {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
 			//dialogue = textWrap('So...Will you do it?')
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[2]+'\n   yes\n   no', 48);
+
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.ask+'\n   yes\n   no', 48);
+
 			ykey = game.add.sprite(this.bubblex+24, this.bubbley+110, 'ykey');
 			nkey = game.add.sprite(this.bubblex+24, this.bubbley+150, 'nkey');
 			this.interacted = 3;
@@ -126,7 +135,9 @@ villager.prototype = {
 			ykey.destroy();
 			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Great, thanks!', style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[3], 48);
+
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.yes, 48);
+
 
 			this.timer = 0;
 		} else if (this.interacted == 'no') {
@@ -135,7 +146,9 @@ villager.prototype = {
 			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Alright then...', style);
 
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[4], 48);
+
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.no, 48);
+
 			this.timer = 0;
 		}
 	},
@@ -201,7 +214,7 @@ villager.prototype = {
 				player.interacting = 'none';
 			}
 			// destroy response after time has passed
-			if (this.interacted == 'yes' && this.timer == 60) {
+			if (this.interacted == 'yes' && this.timer == 120) {
 				// indicate the status of this task
 				this.interacted = 'unfinished';
 				player.interacting = this.family;

@@ -5,6 +5,7 @@
 var level_1 = function(game){};
 var theta = 1;
 var gamplay_state = 'OVERWORLD';
+var transition = 'OVERWORLD';
 
 level_1.prototype = {
 	init: function() {
@@ -51,8 +52,8 @@ level_1.prototype = {
 		platform5_second = new platform(game,69,107,'platform',platformgroup);
 		platform0 = new platform(game,230,250,'platform',platformgroup);
 		platform1 = new platform(game,350,265,'platform',platformgroup);
-		platform2 = new platform(game,460,220,'platform',platformgroup);
-		platform3 = new platform(game,570,170,'platform',platformgroup);
+		platform2 = new platform(game,480,220,'platform',platformgroup);
+		platform3 = new platform(game,610,170,'platform',platformgroup);
 		platform4 = new platform(game,715,148,'platform',platformgroup);
 		platform4_second = new platform(game,779,148,'platform',platformgroup);
 		platform4_third = new platform(game,843,148,'platform',platformgroup);
@@ -65,8 +66,8 @@ level_1.prototype = {
 		
 		//Platforms for the doctor's house task
 		platform8 = new platform(game,600,700,'platform',platformgroup);
-		platform9 = new platform(game,400,670,'platform',platformgroup);
-		platform10 = new platform(game,300,670,'platform',platformgroup);
+		platform9 = new platform(game,400,680,'platform',platformgroup);
+		platform10 = new platform(game,300,680,'platform',platformgroup);
 		platform11 = new platform(game,50,600,'platform',platformgroup);
 		platform12 = new platform(game,150,530,'platform',platformgroup);
 		platform13 = new platform(game,450,530,'platform',platformgroup);
@@ -114,36 +115,35 @@ level_1.prototype = {
 		villagergroup.enableBody = true;
 		
 		//Add villagers
-		game.add.sprite(150,785,'villager')
 		villager1 = new villager();
-		villager1.spawn(game,30,75,1,'Family1');
+		villager1.spawn(game,30,75,1,'Doctors');
 		villagergroup.add(villager1.sprite);
-		villager1.setText('Find me one of those chat bubbles');
+		villager1.setText("Hey there, I am Dr. Lancit.","I am working on a cure to the recent weasles disease.","Can you help me test it?","Thanks, come on inside!","Well, that is unfortunate...");
 		
 		villager2 = new villager();
 		villager2.spawn(game,550,337,0,'Family2');
 		villagergroup.add(villager2.sprite);
-		villager2.setText('Find me one of those chat bubbles');
+		//villager2.setText('Find me one of those chat bubbles');
 		
 		villager3 = new villager();
-		villager3.spawn(game,780,117,1,'Family3');
+		villager3.spawn(game,780,117,1,'Scientists');
 		villagergroup.add(villager3.sprite);
-		villager3.setText('Find me one of those chat bubbles');
+		villager3.setText("Greetings, I am Alvis, a 1st gen. scientist.","I am studying crystals, as a source of new magic energy.","Can you find me a sample?","You have my thanks, friend.","But... think about how this can help the village!");
 		
 		villager4 = new villager();
 		villager4.spawn(game,890,337,0,'Family4');
 		villagergroup.add(villager4.sprite);
-		villager4.setText('Find me one of those chat bubbles');
+		//villager4.setText('Find me one of those chat bubbles');
 		
 		villager5 = new villager();
-		villager5.spawn(game,1420,337,1,'Family5');
+		villager5.spawn(game,1420,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
-		villager5.setText('Find me one of those chat bubbles');
-		
+		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a hat!","Can ya help me find it?","Thanks buddy!","Aw, shucks.");
+		//add 110, 3
 		villager6 = new villager();
 		villager6.spawn(game,1470,105,0,'Family6');
 		villagergroup.add(villager6.sprite);
-		villager6.setText('Find me one of those chat bubbles');
+		//villager6.setText('Find me one of those chat bubbles');
 				
 		karmaBar = new karma();
 		karmaBar.spawn(game);
@@ -162,6 +162,9 @@ level_1.prototype = {
 		
 		//Enable controls
 		cursors = game.input.keyboard.createCursorKeys();
+		
+		//Resets black screen once fade is complete 
+		game.camera.onFadeComplete.add(resetFade, this);
 	},
 	update: function(){
 		//Variables to check if player is on platform or ground
@@ -170,7 +173,7 @@ level_1.prototype = {
 		
 		//Change controls/fix camera depending on if in overworld or house task
 		if(p1.sprite.y >= 370){
-			if(p1.sprite.x < 901){
+			if(p1.sprite.x < 801){
 				gameplay_state = 'HOUSE';
 			}else{
 				gameplay_state = 'HOUSE2';
@@ -184,10 +187,21 @@ level_1.prototype = {
 			game.camera.y = 0;
 		}else{
 			if(gameplay_state == 'HOUSE'){
-				p1.house1_controls(onGround,onPlatform);
+				p1.inverted_controls(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 0;
 				game.camera.y = 450;
+			}else if(gameplay_state == 'HOUSE2'){
+				p1.controls(onGround,onPlatform);
+				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
+				game.camera.x = 800;
+				game.camera.y = 450;
+				if(p1.sprite.x <= 803){
+					p1.sprite.x += 3;
+				}
+				if(p1.sprite.x >= 1570){
+					p1.sprite.x -= 3;
+				}
 			}
 		}
 		
@@ -244,7 +258,7 @@ level_1.prototype = {
 		villager5.update(p1);
 		if (villager5.interacted == 'yes' && villager5.timer == 59) {
 			villager5.task = new task();
-			villager5.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager5.task.spawn(game, 1530, 340, 'chat', villager5);
 		}
 		if (villager5.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager5.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -270,7 +284,7 @@ level_1.prototype = {
 		villager3.update(p1);
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
 			villager3.task = new task();
-			villager3.task.spawn(game, 1560, 148, 'chat', villager1);
+			villager3.task.spawn(game, 20, 200, 'chat', villager3);
 		}
 		if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -296,7 +310,9 @@ level_1.prototype = {
 		villager1.update(p1);
 		if (villager1.interacted == 'yes' && villager1.timer == 59) {
 			villager1.task = new task();
-			villager1.task.spawn(game, 1560, 148, 'chat', villager1);
+			transition = 'HOUSE';
+			fade();
+			villager1.task.spawn(game, 480, 500, 'chat', villager1);
 		}
 		if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -304,13 +320,15 @@ level_1.prototype = {
 			this.peopleHelped++;
 			karmaBar.update(this.balance);
 			villager1.task.sprite.kill();
+			transition = 'OVERWORLD1';
+			fade();
 		}
 
 		//console.log(this.peopleHelped);
+		
+		//DEV TOOLS//
 
 		// the player will either quit or finish the game by helping everyone
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.P)) {p1.sprite.y+=200}
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.O)) {p1.sprite.y-=200}
 		if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
@@ -331,4 +349,35 @@ level_1.prototype = {
 			bgm.stop();
 		}
 	}
+}
+// helper function for when task is done
+function finishTask(p1, task){
+	task.kill();
+	this.peopleHelped++;
+}
+
+//Fade function. Fades to black to transition to inside house
+function fade() {
+    game.camera.fade(0x000000, 1000);
+
+}
+//Function to reset fade to black effect and move player/villager in and out of houses
+function resetFade() {
+	if(transition == 'HOUSE'){
+		p1.sprite.x = 50;
+		p1.sprite.y = 790;
+		villager1.sprite.x = 150;
+		villager1.sprite.y = 785;
+	}else if(transition == 'HOUSE2'){
+		p1.sprite.x = 850;
+		p1.sprite.y = 790;
+	}else if(transition == 'OVERWORLD1'){
+		p1.sprite.x = 10;
+		p1.sprite.y = 80;
+		villager1.sprite.x = 30;
+		villager1.sprite.y = 75;
+	}else if(transition == 'OVERWORLD2'){
+		
+	}
+    game.camera.resetFX();
 }
