@@ -20,7 +20,15 @@ Menu.prototype = {
 		game.load.image('platform', 'assets/img/rockplatform.png');
 		game.load.image('statue', 'assets/img/statue.png');
 		game.load.spritesheet('dude', 'assets/img/playerone.png',32, 64);
-		game.load.audio('bgm', 'assets/audio/have_a_short_rest.ogg');
+
+		//music cred
+		// "Dreamy Flashback" Kevin MacLeod (incompetech.com)
+		// Licensed under Creative Commons: By Attribution 3.0 License
+		// http://creativecommons.org/licenses/by/3.0/
+		game.load.audio('bgm', 'assets/audio/dreamy_flashback.mp3');
+		// Additional sound effects from https://www.zapsplat.com
+
+
 		//Figure out a better font to use later
 		//game.load.bitmapFont('myfont', 'assets/myfont/font.png', 'assets/myfont/font.fnt');
 		game.load.bitmapFont('myfont', 'assets/font/font.png', 'assets/font/font.fnt');
@@ -44,42 +52,50 @@ Menu.prototype = {
 		//game.add.sprite(0,0, 'background');
 		game.add.sprite(0,0, 'title');
 
-		message = game.add.bitmapText(width/2, 230, 'myfont', "Press      to start", 48);
+		message = game.add.bitmapText(width/2, 300, 'myfont', " Press              to play", 48);
 		message.anchor.set(0.5);
-		bar = game.add.sprite((width/2)-15, 235, 'spacebar');
-		bar.anchor.set(0.5);
+		message = game.add.bitmapText((width/2)+100, 355, 'myfont', "to start tutorial", 48);
+		//message.anchor.set(0.5);
+		// bar = game.add.sprite((width/2)-15, 235, 'spacebar');
+		// bar.anchor.set(0.5);
 
 		//visual menu
 		playButton = game.add.sprite(width/2, 300, 'playButton');
 		playButton.anchor.set(0.5);
-		playButton.animations.add('blink',[0,1],3,true);
+		// playButton.animations.add('blink',[0,1],3,true);
 
 		tutorialButton = game.add.sprite(width/2, 380, 'tutorialButton');
 		tutorialButton.anchor.set(0.5);
-		tutorialButton.animations.add('blink',[0,1],3,true);
+		// tutorialButton.animations.add('blink',[0,1],3,true);
 
 	},
 	update: function() {
-		if(selection == 'play') {
-			playButton.animations.play('blink');
-			tutorialButton.frame = 0;
-			if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-				//do not clear cache, but clear the stage
-				game.state.start('level_1', true, false);
-			}
-		} else if (selection == 'tutorial') {
-			tutorialButton.animations.play('blink');
-			playButton.frame = 0;
-			if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-				//do not clear cache, but clear the stage
-				game.state.start('tutorial', true, false);
-			}
+		// if(selection == 'play') {
+		// 	playButton.animations.play('blink');
+		// 	tutorialButton.frame = 0;
+		// 	if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+		// 		//do not clear cache, but clear the stage
+		// 		game.state.start('level_1', true, false);
+		// 	}
+		// } else if (selection == 'tutorial') {
+		// 	tutorialButton.animations.play('blink');
+		// 	playButton.frame = 0;
+		// 	if (game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+		// 		//do not clear cache, but clear the stage
+		// 		game.state.start('tutorial', true, false);
+		// 	}
+		// }
+		// if(game.input.keyboard.downDuration(Phaser.Keyboard.DOWN)) {
+		// 	selection = 'tutorial';
+		// }
+		// if(game.input.keyboard.downDuration(Phaser.Keyboard.UP)) {
+		// 	selection = 'play';
+		// }
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+			game.state.start('level_1', true, false);
 		}
-		if(game.input.keyboard.downDuration(Phaser.Keyboard.DOWN)) {
-			selection = 'tutorial';
-		}
-		if(game.input.keyboard.downDuration(Phaser.Keyboard.UP)) {
-			selection = 'play';
+		if(game.input.keyboard.justPressed(Phaser.Keyboard.SHIFT)) {
+			game.state.start('tutorial', true, false);
 		}
 	}
 }

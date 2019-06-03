@@ -10,7 +10,9 @@ function villager() {
 	var sprite;
 	var nice;	// 0 if bad, 1 if nice
 	var family;	// the ancestry of the family
-	var text;	// the villager's request
+
+	var dialogue;
+
 	var x;	// save the x position of th eplayer
 	var signal;	// signal for the player to interact
 	
@@ -49,11 +51,17 @@ villager.prototype = {
 		//this.x = x;
 		this.interacted = 0;
 		this.timer = 0;
+		this.dialogue = ['greeting', 'request', 'ask', 'yes', 'no'];
+		//console.log(this.game.state.current);
 	},
-	//Arguments: text the villager will say
-	setText: function(text){
-		//this.text = text;
-		this.text = textWrap(text);
+	//Arguments: dialogue for villager
+	setText: function(greeting, request, ask, yes, no){
+		// this.request = textWrap(text);
+		this.dialogue[0] = textWrap(greeting);
+		this.dialogue[1] = textWrap(request);
+		this.dialogue[2] = textWrap(ask);
+		this.dialogue[3] = textWrap(yes);
+		this.dialogue[4] = textWrap(no);
 	},
 	// Arguments: sprite for textbubble, style of text
 	displayText: function(textBubble, style) {
@@ -79,7 +87,7 @@ villager.prototype = {
 			// textDisplay is the text held inside the bubble
 			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			// this.textDisplay = game.add.text(this.x + 25, 100, "Hey kid ...", style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Hey kid...', 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[0], 48);
 			// removes the original signal for interaction
 			this.signal.visible = false;
 			// move on to the next text bubble when the player hits space again
@@ -94,7 +102,7 @@ villager.prototype = {
 			this.textDisplay.kill();
 			// create the new text
 			// this.textDisplay = game.add.text(this.x + 25, 100, this.text, style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.text, 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[1], 48);
 
 			// reset the timer and move on to the next interaction when the player presses space again
 			this.timer = 0;
@@ -105,8 +113,8 @@ villager.prototype = {
 		else if (this.interacted == 2 && this.timer > 60) {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
-			dialogue = textWrap('So...Will you do it?')
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', dialogue+'\n   yes\n   no', 48);
+			//dialogue = textWrap('So...Will you do it?')
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[2]+'\n   yes\n   no', 48);
 			ykey = game.add.sprite(this.bubblex+24, this.bubbley+110, 'ykey');
 			nkey = game.add.sprite(this.bubblex+24, this.bubbley+150, 'nkey');
 			this.interacted = 3;
@@ -118,7 +126,7 @@ villager.prototype = {
 			ykey.destroy();
 			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Great, thanks!', style);
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Great, thanks!', 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[3], 48);
 
 			this.timer = 0;
 		} else if (this.interacted == 'no') {
@@ -127,7 +135,7 @@ villager.prototype = {
 			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Alright then...', style);
 
-			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', 'Alright then...', 48);
+			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.dialogue[4], 48);
 			this.timer = 0;
 		}
 	},
@@ -204,13 +212,8 @@ villager.prototype = {
 		} else {
 			this.signal.visible = false;
 		}
+		this.interacted != 'done'
 
-	},
-	testText: function() {
-		game.add.sprite(100, 100, 'textbubble');
-		testString = "hi my name is I am struggling."
-		testString = textWrap(testString);
-		game.add.bitmapText(120, 120, 'myfont', testString, 48);
 	}
 }
 

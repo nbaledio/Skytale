@@ -71,7 +71,7 @@ tutorial.prototype = {
 		villager3 = new villager();
 		villager3.spawn(game,900,337,'villager',1,'Family2');
 		villagergroup.add(villager3.sprite);
-		villager3.setText('Find me one of those chat bubbles');
+		villager3.setText('hey kid...','Find me one of those chat bubbles', 'will you do it?','','');
 
 		bubble = game.add.sprite(65,185,'textbubble');
 		bubble.width = 280;
@@ -177,20 +177,17 @@ tutorial.prototype = {
 			instructions.destroy();
 			instructionsVisual.destroy();
 			bubble.destroy();
-			learned = 4;
-			timer = 0;
-		}
-
-		if (villager3.interacted == 3 && learned == 4) {
-			bubble = game.add.sprite(660,185,'textbubble');
-			bubble.width = 280;
-			bubble.height = 120;
-			instructions = game.add.bitmapText(700, 200, 'myfont', '  to agree\n  to decline', 48);
-			instructionsVisual = game.add.sprite(690,212,'ykey');
-			instructionsVisual2 = game.add.sprite(690,250,'nkey');
 			learned = 5;
 			timer = 0;
 		}
+
+		// if (villager3.interacted == 3 && learned == 4) {
+		// 	instructions = game.add.bitmapText(700, 200, 'myfont', '  to agree\n  to decline', 48);
+		// 	instructionsVisual = game.add.sprite(690,212,'ykey');
+		// 	instructionsVisual2 = game.add.sprite(690,250,'nkey');
+		// 	learned = 5;
+		// 	timer = 0;
+		// }
 
 		if (villager3.interacted == 'no' && learned == 5) {
 			instructions.destroy();
@@ -204,6 +201,10 @@ tutorial.prototype = {
 			learned = 6;
 			timer = 0;
 		} else if (villager3.interacted == 'yes' && learned == 5) {
+			bubble = game.add.sprite(660,185,'textbubble');
+			bubble.width = 280;
+			bubble.height = 120;
+
 			bubble.height = 75;
 			instructions.destroy();
 			instructionsVisual.destroy();
