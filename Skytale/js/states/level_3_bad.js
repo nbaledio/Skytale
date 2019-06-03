@@ -123,9 +123,9 @@ level_3_bad.prototype = {
 		villager1.setText("Hi, I am Dr. Lische.","Good, Red Fever hasn't got you. I fear my vaccine is weak.","Can you help me improve it?","On behalf of the village, I must say I'm forever grateful.","Please, I can't do this without you...","");
 		
 		villager2 = new villager();
-		villager2.spawn(game,1220,335,0,'Family2');
+		villager2.spawn(game,1220,335,0,'Goat_Stealer');
 		villagergroup.add(villager2.sprite);
-		//villager2.setText("","Find me one of those chat bubbles","","","");
+		villager2.setText("I'm starving... I need to eat... That goat looks pretty good...","It's right there, who cares if the village needs it.","Hey, wanna steal it for me?","Thanks bud, I'll share the feast with you.","You're just as useless as Wilson Jr. Jr.","");
 		
 		villager3 = new villager();
 		villager3.spawn(game,320,335,1,'Scientists');
@@ -133,9 +133,9 @@ level_3_bad.prototype = {
 		villager3.setText("Hello, I am Alfred, 3rd gen scientist.","Our village is powerless... and I can't fix it without a crystal","Please, can you bring a one?","Thank you, I am in your debt.","Please think it over.. I'm begging you.","");
 		
 		villager4 = new villager();
-		villager4.spawn(game,1420,335,0,'Family4');
+		villager4.spawn(game,1420,335,0,'Crystal_Stealer');
 		villagergroup.add(villager4.sprite);
-		//villager4.setText('Find me one of those chat bubbles');
+		villager4.setText("That dumb Alfred can't save us. You sell crystals not study them.","Come with me kid, we're gonna steal his last one.","Well, you coming or not?","Alright then, let's get to it.","You punk, don't you realize the village is done for.","");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1020,335,1,'Farmers');
@@ -143,9 +143,9 @@ level_3_bad.prototype = {
 		villager5.setText("Hiya partner! I'm Winslow Jr. Jr. and I'm the farmer here!","I'm losing crops, but I won't once I find my lucky hat!","Can ya help me find it?","Thanks buddy!","Aw, shuckeroos.","");
 		
 		villager6 = new villager();
-		villager6.spawn(game,790,135,0,'Family6');
+		villager6.spawn(game,790,135,0,'Totem_Stealer');
 		villagergroup.add(villager6.sprite);
-		//villager6.setText('Find me one of those chat bubbles');
+		villager6.setText("This village is trash. Who cares about the rules? I want money.","I want you to steal a bird statue totem.","So, what do you say?","Well? Don't keep me waiting here.","You think you can still save this place? Get real.","");
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);
