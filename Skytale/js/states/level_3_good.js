@@ -139,9 +139,9 @@ level_3_good.prototype = {
 		villager1.setText("Hi, I am Dr. Lische.","We've come far in the skies! Shouldn't we jump higher too?","Wanna test my new jump serum?","Thanks, I hope you're ready to soar!","Hm, maybe it is safer not make it.");
 		
 		villager2 = new villager();
-		villager2.spawn(game,540,185,0,'Family2');
+		villager2.spawn(game,540,185,0,'Crystal_Stealer');
 		villagergroup.add(villager2.sprite);
-		//villager2.setText('Find me one of those chat bubbles');
+		villager2.setText("You know what's great about a rich village? I get more loot.","Alfred has a lot of crystals, stealing one is just fine.","Wanna join me in a break-in?","Let's go, I'll lead the way.","Fine then, go away nerd.");
 		
 		villager3 = new villager();
 		villager3.spawn(game,270,125,1,'Scientists');
@@ -149,9 +149,9 @@ level_3_good.prototype = {
 		villager3.setText("Hello, I am Alfred, 3rd gen scientist.","I'm making robots! But I need a crystal for my prototype.","Can you find one for me?","Thanks. The future is now!","Hm, Maybe I can power it without a crystal.");
 		
 		villager4 = new villager();
-		villager4.spawn(game,1000,185,0,'Family4');
+		villager4.spawn(game,1000,185,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		//villager4.setText('Find me one of those chat bubbles');
+		villager4.setText("Hey you. I've got a job. See that bird statue totem?","I dare you to steal it and bring it here.","Well, are you gonna do it?","Ok, then, get going! Time is money!","Hah, I knew you were too chicken to do it.");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1270,125,1,'Farmers');
@@ -159,9 +159,9 @@ level_3_good.prototype = {
 		villager5.setText("Hiya partner! I'm Winslow Jr. Jr. and I'm the farmer here!","We got a good harvest! But I lost my lucky hat!","Can ya help me find it?","Thanks buddy!","Aw, shuckeroos.");
 		
 		villager6 = new villager();
-		villager6.spawn(game,1480,335,0,'Family6');
+		villager6.spawn(game,1480,335,0,'Goat_Stealer');
 		villagergroup.add(villager6.sprite);
-		//villager6.setText('Find me one of those chat bubbles');
+		villager6.setText("I always wanted a pet. Winslow Jr. Jr. has too many goats.","I want one. I'll pay you well if you steal it.","Do you wanna take my offer?","Alright, I'll be waiting here.","Fine, guess I'll just have to steal it myself.");
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);	
