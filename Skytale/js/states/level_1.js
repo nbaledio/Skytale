@@ -126,32 +126,32 @@ level_1.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,30,75,1,'Doctors');
 		villagergroup.add(villager1.sprite);
-		villager1.setText("Hey there, I am Dr. Lancit.","I am working on a cure to the recent weasles disease.","Can you help me test it?","Thanks, come on inside!","Well, that is unfortunate...","");
+		villager1.setText("Hey there, I am Dr. Lancit.","I am working on a cure to the recent weasles disease.","Can you help me test it?","Thanks, come on inside!","Well, that is unfortunate...","Ah, I see my error. You helped quite a lot!");
 		
 		villager2 = new villager();
 		villager2.spawn(game,550,337,0,'Goat_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("Hey, can you lift heavy stuff? I've got a job for you.","Wilson keeps on bragging about a goat. It's getting annoying.","Think you can steal it away?","Cool, bring it here when you got it.","Scared of a goat? Come on now!","");
+		villager2.setText("Hey, can you lift heavy stuff? I've got a job for you.","Wilson keeps on bragging about a goat. It's getting annoying.","Think you can steal it away?","Cool, bring it here when you got it.","Scared of a goat? Come on now!","Nice, now I don't have to listen to that dumb farmer.");
 		
 		villager3 = new villager();
 		villager3.spawn(game,780,117,1,'Scientists');
 		villagergroup.add(villager3.sprite);
-		villager3.setText("Greetings, I am Alvis, a 1st gen. scientist.","I am studying crystals, as a source of new magic energy.","Can you find me a sample?","You have my thanks, friend.","But... think about how this can help the village!","");
+		villager3.setText("Greetings, I am Alvis, a 1st gen. scientist.","I am studying crystals, as a source of new magic energy.","Can you find me a sample?","You have my thanks, friend.","But... think about how this can help the village!","Thanks you! Now my research can progress! ");
 		
 		villager4 = new villager();
 		villager4.spawn(game,890,337,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("Have you seen any shiny totems? They're by the bird statue.","If you steal one for me, I can make some BIG cash.","You wanna help me out?","Nice, you'll get a third of my profit.","You better not steal them for yourself.","");
+		villager4.setText("Have you seen any shiny totems? They're by the bird statue.","If you steal one for me, I can make some BIG cash.","You wanna help me out?","Nice, you'll get a third of my profit.","You better not steal them for yourself.","Nice, I'm gonna keep the money by the way.");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1420,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
-		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a hat!","Can ya help me find it?","Thanks buddy!","Aw, shucks.","");
+		villager5.setText("Howdy partner! I am Winslow and I'm the farmer!","But I lost my good luck charm! It's a hat!","Can ya help me find it?","Thanks buddy!","Aw, shucks.","Wow! Where did ya find it?");
 
 		villager6 = new villager();
 		villager6.spawn(game,1470,105,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("Hey you! I hear Alvis has some crystals in his house.","Word is, they go for a pretty penny on the market.","Wanna help me steal one?","Follow me. We'll break in from the back.","No? Why not yes?!","");
+		villager6.setText("Hey you! I hear Alvis has some crystals in his house.","Word is, they go for a pretty penny on the market.","Wanna help me steal one?","Follow me. We'll break in from the back.","No? Why not yes?!","Good stuff kid, now get out of here.");
 				
 		karmaBar = new karma();
 		karmaBar.spawn(game);
@@ -205,7 +205,7 @@ level_1.prototype = {
 				game.camera.x = 0;
 				game.camera.y = 450;
 			}else if(gameplay_state == 'HOUSE2'){
-				p1.controls(onGround,onPlatform);
+				p1.controls2(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 800;
 				game.camera.y = 450;

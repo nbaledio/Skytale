@@ -131,32 +131,32 @@ level_2_good.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,30,75,1,'Doctors');
 		villagergroup.add(villager1.sprite);
-		villager1.setText("Good evening, I am Dr. Enoch.","Our species has adapted well to viruses, but we can be stronger.","Hey, wanna test my speed serum?","Yes! Come on in! I'll set you up!","Hm.. maybe I can test it on a goat instead...","");
+		villager1.setText("Good evening, I am Dr. Enoch.","Our species has adapted well to viruses, but we can be stronger.","Hey, wanna test my speed serum?","Yes! Come on in! I'll set you up!","Hm.. maybe I can test it on a goat instead...","So, did you feel fast?");
 		
 		villager2 = new villager();
 		villager2.spawn(game,720,337,0,'Totem_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("This town's got gold. Gold they don't need.","They would not mind if you 'took' a bird statue totem.","Wanna steal one for me?","Cool, don't worry. You'll get your share... maybe","Fine, get lost kid.","");
+		villager2.setText("This town's got gold. Gold they don't need.","They would not mind if you 'took' a bird statue totem.","Wanna steal one for me?","Cool, don't worry. You'll get your share... maybe","Fine, get lost kid.","You're a good money maker.");
 		
 		villager3 = new villager();
 		villager3.spawn(game,410,95,1,'Scientists');
 		villagergroup.add(villager3.sprite);
-		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","I'm working on an anti matter manipulator but I need a crystal.","Can you bring me one?","Thanks, this is for science!","Oh, that's a shame...","");
+		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","I'm working on an anti matter manipulator but I need a crystal.","Can you bring me one?","Thanks, this is for science!","Oh, that's a shame...","Yes! Now I can make my creation!");
 		
 		villager4 = new villager();
 		villager4.spawn(game,1120,96,0,'Goat_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("Hey, don't you think Wilson Jr. is an idiot?","Maybe if you steal his goat, then he'll grow a brain.","You wanna steal one from him?","You've got a deal. Bring it here.","What, are you his friend or something?","");
+		villager4.setText("Hey, don't you think Wilson Jr. is an idiot?","Maybe if you steal his goat, then he'll grow a brain.","You wanna steal one from him?","You've got a deal. Bring it here.","What, are you his friend or something?","Nice, this will teach that dumb farmer a good lesson.");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1450,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
-		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer around here!",'Them crops are looking good, but I lost my lucky hat!',"Can ya help me find it?","Thanks buddy!","Aw, shuckers.","");
+		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer around here!",'Them crops are looking good, but I lost my lucky hat!',"Can ya help me find it?","Thanks buddy!","Aw, shuckers.","Wow! Where did ya find it?");
 		
 		villager6 = new villager();
 		villager6.spawn(game,1470,125,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("I'm bored. You know what we should do? Break into a house.","Mendel's place is perfect. He's got tons of stuff to steal.","Wanna come join me?","Follow me and be quiet. We're going in from the back.","Then beat it pipsqueak.","");
+		villager6.setText("I'm bored. You know what we should do? Break into a house.","Mendel's place is perfect. He's got tons of stuff to steal.","Wanna come join me?","Follow me and be quiet. We're going in from the back.","Then beat it pipsqueak.","That was a clean job. You better keep quiet about this.");
 
 		karmaBar = new karma();
 		karmaBar.spawn(game);
@@ -210,7 +210,7 @@ level_2_good.prototype = {
 				game.camera.x = 0;
 				game.camera.y = 450;
 			}else if(gameplay_state == 'HOUSE2'){
-				p1.controls(onGround,onPlatform);
+				p1.controls2(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 800;
 				game.camera.y = 450;

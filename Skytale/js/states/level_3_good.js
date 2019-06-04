@@ -91,14 +91,11 @@ level_3_good.prototype = {
 		platform23.sprite.scale.setTo(.5,.5);
 		
 		//Platforms for the crystal thief's task
-		platform24 = new platform(game,1150,750,'platform',platformgroup);
-		platform24.sprite.scale.setTo(.5,.5);
-		platform25 = new platform(game,1250,750,'platform',platformgroup);
-		platform25.sprite.scale.setTo(.5,.5);
-		platform26 = new platform(game,1030,650,'platform',platformgroup);
-		platform27 = new platform(game,1330,650,'platform',platformgroup);
-		platform28 = new platform(game,1150,550,'platform',platformgroup);
-		platform29 = new platform(game,1200,550,'platform',platformgroup);
+		platform24 = new platform(game,1200,730,'platform',platformgroup);
+		platform24.sprite.body.velocity.x = 80;
+		platform25 = new platform(game,1400,655,'platform',platformgroup);
+		platform26 = new platform(game,950,580,'platform',platformgroup);
+		platform26.sprite.body.velocity.x = -80;
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
@@ -146,32 +143,32 @@ level_3_good.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,770,75,1,'Doctors');
 		villagergroup.add(villager1.sprite);
-		villager1.setText("Hi, I am Dr. Lische.","We've come far in the skies! Shouldn't we jump higher too?","Wanna test my new jump serum?","Thanks, I hope you're ready to soar!","Hm, maybe it is safer not make it.","");
+		villager1.setText("Hi, I am Dr. Lische.","We've come far in the skies! Shouldn't we jump higher too?","Wanna test my new jump serum?","Thanks, I hope you're ready to soar!","Hm, maybe it is safer not make it.","Heh. Looks like I screwed up the formula.");
 		
 		villager2 = new villager();
 		villager2.spawn(game,540,185,0,'Crystal_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("You know what's great about a rich village? I get more loot.","Alfred has a lot of crystals, stealing one is just fine.","Wanna join me in a break-in?","Let's go, I'll lead the way.","Fine then, go away nerd.","");
+		villager2.setText("You know what's great about a rich village? I get more loot.","Alfred has a lot of crystals, stealing one is just fine.","Wanna join me in a break-in?","Let's go, I'll lead the way.","Fine then, go away nerd.","Thanks. Think we should make this a regular thing?");
 		
 		villager3 = new villager();
 		villager3.spawn(game,270,125,1,'Scientists');
 		villagergroup.add(villager3.sprite);
-		villager3.setText("Hello, I am Alfred, 3rd gen scientist.","I'm making robots! But I need a crystal for my prototype.","Can you find one for me?","Thanks. The future is now!","Hm, Maybe I can power it without a crystal.","");
+		villager3.setText("Hello, I am Alfred, 3rd gen scientist.","I'm making robots! But I need a crystal for my prototype.","Can you find one for me?","Thanks. The future is now!","Hm, Maybe I can power it without a crystal.","Perfect! My robot children will rise!");
 		
 		villager4 = new villager();
 		villager4.spawn(game,1000,185,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("Hey you. I've got a job. See that bird statue totem?","I dare you to steal it and bring it here.","Well, are you gonna do it?","Ok, then, get going! Time is money!","Hah, I knew you were too chicken to do it.","");
+		villager4.setText("Hey you. I've got a job. See that bird statue totem?","I dare you to steal it and bring it here.","Well, are you gonna do it?","Ok, then, get going! Time is money!","Hah, I knew you were too chicken to do it.","Wow, and here I was thinking you ran away.");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1270,125,1,'Farmers');
 		villagergroup.add(villager5.sprite);
-		villager5.setText("Hiya partner! I'm Winslow Jr. Jr. and I'm the farmer here!","We got a good harvest! But I lost my lucky hat!","Can ya help me find it?","Thanks buddy!","Aw, shuckeroos.","");
+		villager5.setText("Hiya partner! I'm Winslow Jr. Jr. and I'm the farmer here!","We got a good harvest! But I lost my lucky hat!","Can ya help me find it?","Thanks buddy!","Aw, shuckeroos.","Wow! Where did ya find it?");
 		
 		villager6 = new villager();
 		villager6.spawn(game,1480,335,0,'Goat_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("I always wanted a pet. Winslow Jr. Jr. has too many goats.","I want one. I'll pay you well if you steal it.","Do you wanna take my offer?","Alright, I'll be waiting here.","Fine, guess I'll just have to steal it myself.","");
+		villager6.setText("I always wanted a pet. Winslow Jr. Jr. has too many goats.","I want one. I'll pay you well if you steal it.","Do you wanna take my offer?","Alright, I'll be waiting here.","Fine, guess I'll just have to steal it myself.","Cool. Now, what should I name it?");
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);
@@ -225,7 +222,7 @@ level_3_good.prototype = {
 				game.camera.x = 0;
 				game.camera.y = 450;
 			}else if(gameplay_state == 'HOUSE2'){
-				p1.controls(onGround,onPlatform);
+				p1.controls2(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 800;
 				game.camera.y = 450;
@@ -281,6 +278,26 @@ level_3_good.prototype = {
 			platform11.sprite.body.velocity.y = diagonal_velocity + 20;
 			platform12.sprite.body.velocity.y = diagonal_velocity + 20;
 		}
+		
+		//Bounce platform24 left/right
+		if(platform24.sprite.x >= 1400){
+			platform24.sprite.body.velocity.x = -80;
+		}else if(platform24.sprite.x <= 900){
+			platform24.sprite.body.velocity.x = 80;
+			
+		}//Bounce platform25 left/right
+		if(platform25.sprite.x >= 1400){
+			platform25.sprite.body.velocity.x = -80;
+		}else if(platform25.sprite.x <= 900){
+			platform25.sprite.body.velocity.x = 80;
+			
+		}//Bounce platform26 left/right
+		if(platform26.sprite.x >= 1400){
+			platform26.sprite.body.velocity.x = -80;
+		}else if(platform26.sprite.x <= 900){
+			platform26.sprite.body.velocity.x = 80;
+		}
+		
 		//Check if player if overlapping villager
 		// call update on villager to respond accordingly
 		villager6.update(p1,karmaBar,this.balance);
@@ -344,7 +361,7 @@ level_3_good.prototype = {
 			villager2.task = new task();
 			transition = 'HOUSE2';
 			fade();
-			villager2.task.spawn(game, 1200, 530, 'chat', villager2);
+			villager2.task.spawn(game, 1200, 460, 'chat', villager2);
 		}
 		if (villager2.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager2.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance

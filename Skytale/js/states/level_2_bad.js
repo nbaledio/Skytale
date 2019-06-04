@@ -122,32 +122,32 @@ level_2_bad.prototype = {
 		villager1 = new villager();
 		villager1.spawn(game,1020,79,1,'Doctors');
 		villagergroup.add(villager1.sprite);
-		villager1.setText("Good evening, I am Dr. Enoch.","Have you taken care to avoid Bolio? I've made a test vaccine.","Can you help me test it?","Thank you so much! Come this way.","But think about how many lives this can save!","");
+		villager1.setText("Good evening, I am Dr. Enoch.","Have you taken care to avoid Bolio? I've made a test vaccine.","Can you help me test it?","Thank you so much! Come this way.","But think about how many lives this can save!","I now know what to fix. Thanks for your help!");
 		
 		villager2 = new villager();
 		villager2.spawn(game,540,75,0,'Goat_Stealer');
 		villagergroup.add(villager2.sprite);
-		villager2.setText("I'm freezing out here. If only I had that goat's fur...","That farmer is useless. I bet he won't know if it's missing.","Can you steal it from him?","Good, now get to it.","You want me to freeze to death?!","");
+		villager2.setText("I'm freezing out here. If only I had that goat's fur...","That farmer is useless. I bet he won't know if it's missing.","Can you steal it from him?","Good, now get to it.","You want me to freeze to death?!","Thanks. You uh.. might wanna look away.");
 		
 		villager3 = new villager();
 		villager3.spawn(game,400,337,1,'Scientists');
 		villagergroup.add(villager3.sprite);
-		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude.","But how will we evolve our society?","");
+		villager3.setText("Salutations, I am Mendel, 2nd gen. scientist","Our town lacks science! I have a solution, but no power source.","Can you bring me a crystal?","You have my gratitude.","But how will we evolve our society?","Yes! This is exactly what I needed!");
 		
 		villager4 = new villager();
 		villager4.spawn(game,770,337,0,'Totem_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("This place blows. I need to make some hard cold cash NOW.","Hey, steal a bird statue totem for me or else.","So, you gonna do it?","Well, what are you waiting for?","I'm gonna make you regret this.","");
+		villager4.setText("This place blows. I need to make some hard cold cash NOW.","Hey, steal a bird statue totem for me or else.","So, you gonna do it?","Well, what are you waiting for?","I'm gonna make you regret this.","You do good kid. Don't say a word about this.");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1120,337,1,'Farmers');
 		villagergroup.add(villager5.sprite);
-		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky hat?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.","");
+		villager5.setText("Heyo partner! I'm Winslow Jr. and I'm the farmer!","The crops are sad... Maybe it's because I lost my lucky hat?","Can ya help me find it?","Thanks buddy!","Aw, shuckers.","Wow! Where did ya find it?");
 		
 		villager6 = new villager();
 		villager6.spawn(game,1420,337,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
-		villager6.setText("I hate that Mendel... He has all the crystals for his 'science.'","You and I should teach him a lesson and steal one.","Well, what do you say?","Alright, let's go break into his place.","Good to know I can't count on you.","");
+		villager6.setText("I hate that Mendel... He has all the crystals for his 'science.'","You and I should teach him a lesson and steal one.","Well, what do you say?","Alright, let's go break into his place.","Good to know I can't count on you.","Good job kid. You're a natural thief.");
 		
 		karmaBar = new karma();
 		karmaBar.spawn(game);
@@ -200,7 +200,7 @@ level_2_bad.prototype = {
 				game.camera.x = 0;
 				game.camera.y = 450;
 			}else if(gameplay_state == 'HOUSE2'){
-				p1.controls(onGround,onPlatform);
+				p1.controls2(onGround,onPlatform);
 				game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0, 0);
 				game.camera.x = 800;
 				game.camera.y = 450;
@@ -388,6 +388,8 @@ function resetFade2() {
 		p1.sprite.y = 85;
 		villager1.sprite.x = 1020;
 		villager1.sprite.y = 79;
+		game.camera.x = 800;
+		game.camera.y = 0;
 	}else if(transition == 'OVERWORLD2'){
 		p1.sprite.x = 1400;
 		p1.sprite.y = 342;
