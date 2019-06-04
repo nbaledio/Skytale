@@ -366,26 +366,31 @@ level_2_good.prototype = {
 			fade();
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
+			game.camera.onFadeComplete.remove(resetFade3, this);
 			game.state.start('level_1')
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
+			game.camera.onFadeComplete.remove(resetFade3, this);
 			game.state.start('level_2_good')
 			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
+			game.camera.onFadeComplete.remove(resetFade3, this);
 			game.state.start('level_2_bad')
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
+			game.camera.onFadeComplete.remove(resetFade3, this);
 			game.state.start('level_3_good')
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FIVE)){
+			game.camera.onFadeComplete.remove(resetFade3, this);
 			game.state.start('level_3_bad')
 			bgm.stop();
 		}
 		// the player will either quit or finish the game by helping everyone
-		if (this.peopleHelped == 2 ||
+		/*if (this.peopleHelped == 2 ||
 			game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
-		}
+		}*/
 	}
 }
 

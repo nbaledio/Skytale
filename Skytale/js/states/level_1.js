@@ -353,18 +353,23 @@ level_1.prototype = {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
+			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_1')
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
+			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_2_good');
 			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
+			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_2_bad')
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
+			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_3_good')
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FIVE)){
+			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_3_bad')
 			bgm.stop();
 		}
