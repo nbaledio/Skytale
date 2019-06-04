@@ -66,6 +66,16 @@ level_2_bad.prototype = {
 		platform7 = new platform(game,160,600,'platform',platformgroup);
 		platform7.sprite.scale.setTo(.5,.5);
 		
+		//Add platforms for the crystal thief task
+		platform8 = new platform(game,900,750,'platform',platformgroup);
+		platform8.sprite.scale.setTo(.5,.5);
+		platform9 = new platform(game,1050,650,'platform',platformgroup);
+		platform9.sprite.scale.setTo(.5,.5);
+		platform10 = new platform(game,1250,650,'platform',platformgroup);
+		platform10.sprite.scale.setTo(.5,.5);
+		platform11 = new platform(game,1450,570,'platform',platformgroup);
+		platform11.sprite.scale.setTo(.5,.5);
+		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
 		groundgroup.add(ground1);
@@ -216,12 +226,30 @@ level_2_bad.prototype = {
 		platform4.sprite.body.velocity.y =  Math.sin(theta)*50;
 		platform4_second.sprite.body.velocity.y =  Math.sin(theta)*50;
 		
+		//Bounce platform8 up/down
+		if(platform8.sprite.y >= 750){
+			platform8.sprite.body.velocity.y = -60;
+		}
+		if(platform8.sprite.y <= 650){
+			platform8.sprite.body.velocity.y = 60;
+		}
+		
+		//Bounce Platform10 up/down
+		if(platform10.sprite.y >= 650){
+			platform10.sprite.body.velocity.y = -60;
+		}
+		if(platform10.sprite.y <= 570){
+			platform10.sprite.body.velocity.y = 60;
+		}
+		
 		//Check if player if overlapping villager
 		// call update on villager to respond accordingly
 		villager6.update(p1,karmaBar,this.balance);
 		if (villager6.interacted == 'yes' && villager6.timer == 59) {
 			villager6.task = new task();
-			villager6.task.spawn(game, 1560, 148, 'chat', villager6);
+			transition = 'HOUSE2';
+			fade();
+			villager6.task.spawn(game, 1460, 550, 'chat', villager6);
 		}
 		if (villager6.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager6.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -229,6 +257,8 @@ level_2_bad.prototype = {
 			this.peopleHelped++;
 			//karmaBar.update(this.balance);
 			villager6.task.sprite.kill();
+			transition = 'OVERWORLD2';
+			fade();
 		}
 
 		villager5.update(p1,karmaBar,this.balance);
@@ -346,13 +376,18 @@ function resetFade2() {
 	}else if(transition == 'HOUSE2'){
 		p1.sprite.x = 850;
 		p1.sprite.y = 790;
+		villager6.sprite.x = 900;
+		villager6.sprite.y = 785;
 	}else if(transition == 'OVERWORLD1'){
 		p1.sprite.x = 1000;
 		p1.sprite.y = 85;
 		villager1.sprite.x = 1020;
 		villager1.sprite.y = 79;
 	}else if(transition == 'OVERWORLD2'){
-		
+		p1.sprite.x = 1400;
+		p1.sprite.y = 342;
+		villager6.sprite.x = 1420;
+		villager6.sprite.y = 337;
 	}
     game.camera.resetFX();
 }

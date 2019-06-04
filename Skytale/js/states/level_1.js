@@ -72,6 +72,14 @@ level_1.prototype = {
 		platform12 = new platform(game,150,530,'platform',platformgroup);
 		platform13 = new platform(game,450,530,'platform',platformgroup);
 		
+		//Platforms for the crystal thief task
+		platform14 = new platform(game,1000,750,'platform',platformgroup);
+		platform15 = new platform(game,1200,750,'platform',platformgroup);
+		platform16 = new platform(game,1400,650,'platform',platformgroup);
+		platform17 = new platform(game,1300,550,'platform',platformgroup);
+		platform18 = new platform(game,1100,550,'platform',platformgroup);
+		platform19 = new platform(game,900,550,'platform',platformgroup);
+		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');
 		groundgroup.add(ground1);
@@ -250,7 +258,10 @@ level_1.prototype = {
 		villager6.update(p1,karmaBar,this.balance);
 		if (villager6.interacted == 'yes' && villager6.timer == 59) {
 			villager6.task = new task();
-			villager6.task.spawn(game, 1560, 148, 'chat', villager6);
+			transition = 'HOUSE2';
+			fade();
+			villager6.task.spawn(game, 930, 550, 'chat', villager6);
+			
 		}
 		if (villager6.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager6.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -258,6 +269,8 @@ level_1.prototype = {
 			this.peopleHelped++;
 			//karmaBar.update(this.balance);
 			villager6.task.sprite.kill();
+			transition = 'OVERWORLD2';
+			fade();
 		}
 
 		villager5.update(p1,karmaBar,this.balance);
@@ -376,15 +389,20 @@ function resetFade() {
 		villager1.sprite.x = 150;
 		villager1.sprite.y = 785;
 	}else if(transition == 'HOUSE2'){
-		p1.sprite.x = 850;
+		p1.sprite.x = 800;
 		p1.sprite.y = 790;
+		villager6.sprite.x = 900;
+		villager6.sprite.y = 785;
 	}else if(transition == 'OVERWORLD1'){
 		p1.sprite.x = 10;
 		p1.sprite.y = 80;
 		villager1.sprite.x = 30;
 		villager1.sprite.y = 75;
 	}else if(transition == 'OVERWORLD2'){
-		
+		p1.sprite.x = 1450;
+		p1.sprite.y = 110;;
+		villager6.sprite.x = 1470;
+		villager6.sprite.y = 105;
 	}
     game.camera.resetFX();
 }
