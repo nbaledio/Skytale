@@ -389,7 +389,7 @@ function resetFade() {
 		villager1.sprite.x = 150;
 		villager1.sprite.y = 785;
 	}else if(transition == 'HOUSE2'){
-		p1.sprite.x = 800;
+		p1.sprite.x = 850;
 		p1.sprite.y = 790;
 		villager6.sprite.x = 900;
 		villager6.sprite.y = 785;
