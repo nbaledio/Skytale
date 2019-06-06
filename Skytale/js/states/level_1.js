@@ -65,20 +65,20 @@ level_1.prototype = {
 		platform6_second = new platform(game,1499,136,'platform',platformgroup);
 		
 		//Platforms for the doctor's house task
-		platform8 = new platform(game,600,700,'platform',platformgroup);
-		platform9 = new platform(game,400,680,'platform',platformgroup);
-		platform10 = new platform(game,300,680,'platform',platformgroup);
-		platform11 = new platform(game,50,600,'platform',platformgroup);
-		platform12 = new platform(game,150,530,'platform',platformgroup);
-		platform13 = new platform(game,450,530,'platform',platformgroup);
+		platform8 = new platform(game,600,700,'platform2',platformgroup);
+		platform9 = new platform(game,400,680,'platform2',platformgroup);
+		platform10 = new platform(game,300,680,'platform2',platformgroup);
+		platform11 = new platform(game,50,600,'platform2',platformgroup);
+		platform12 = new platform(game,150,530,'platform2',platformgroup);
+		platform13 = new platform(game,450,530,'platform2',platformgroup);
 		
 		//Platforms for the crystal thief task
-		platform14 = new platform(game,1000,750,'platform',platformgroup);
-		platform15 = new platform(game,1200,750,'platform',platformgroup);
-		platform16 = new platform(game,1400,650,'platform',platformgroup);
-		platform17 = new platform(game,1300,550,'platform',platformgroup);
-		platform18 = new platform(game,1100,550,'platform',platformgroup);
-		platform19 = new platform(game,900,550,'platform',platformgroup);
+		platform14 = new platform(game,1000,750,'platform2',platformgroup);
+		platform15 = new platform(game,1200,750,'platform2',platformgroup);
+		platform16 = new platform(game,1400,650,'platform2',platformgroup);
+		platform17 = new platform(game,1300,550,'platform2',platformgroup);
+		platform18 = new platform(game,1100,550,'platform2',platformgroup);
+		platform19 = new platform(game,900,550,'platform2',platformgroup);
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
 		ground1 = game.add.sprite(0,0,'ground');

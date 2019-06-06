@@ -71,30 +71,30 @@ level_3_good.prototype = {
 		platform14 = new platform(game,900,140,'platform',platformgroup);
 		
 		//Platforms for the doctor's house task
-		platform15 = new platform(game,300,770,'platform',platformgroup);
+		platform15 = new platform(game,300,770,'platform2',platformgroup);
 		platform15.sprite.scale.setTo(.5,.5);
-		platform16 = new platform(game,380,750,'platform',platformgroup);
+		platform16 = new platform(game,380,750,'platform2',platformgroup);
 		platform16.sprite.scale.setTo(.5,.5);
-		platform17 = new platform(game,520,750,'platform',platformgroup);
+		platform17 = new platform(game,520,750,'platform2',platformgroup);
 		platform17.sprite.scale.setTo(.5,.5);
-		platform18 = new platform(game,570,710,'platform',platformgroup);
+		platform18 = new platform(game,570,710,'platform2',platformgroup);
 		platform18.sprite.scale.setTo(.5,.5);
-		platform19 = new platform(game,600,660,'platform',platformgroup);
+		platform19 = new platform(game,600,660,'platform2',platformgroup);
 		platform19.sprite.scale.setTo(.5,.5);
-		platform20 = new platform(game,520,630,'platform',platformgroup);
+		platform20 = new platform(game,520,630,'platform2',platformgroup);
 		platform20.sprite.scale.setTo(.5,.5);
-		platform21 = new platform(game,344,630,'platform',platformgroup);
+		platform21 = new platform(game,344,630,'platform2',platformgroup);
 		platform21.sprite.scale.setTo(.5,.5);
-		platform22 = new platform(game,200,630,'platform',platformgroup);
+		platform22 = new platform(game,200,630,'platform2',platformgroup);
 		platform22.sprite.scale.setTo(.5,.5);
-		platform23 = new platform(game,50,630,'platform',platformgroup);
+		platform23 = new platform(game,50,630,'platform2',platformgroup);
 		platform23.sprite.scale.setTo(.5,.5);
 		
 		//Platforms for the crystal thief's task
-		platform24 = new platform(game,1200,730,'platform',platformgroup);
+		platform24 = new platform(game,1200,730,'platform2',platformgroup);
 		platform24.sprite.body.velocity.x = 80;
-		platform25 = new platform(game,1400,655,'platform',platformgroup);
-		platform26 = new platform(game,950,580,'platform',platformgroup);
+		platform25 = new platform(game,1400,655,'platform2',platformgroup);
+		platform26 = new platform(game,950,580,'platform2',platformgroup);
 		platform26.sprite.body.velocity.x = -80;
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes

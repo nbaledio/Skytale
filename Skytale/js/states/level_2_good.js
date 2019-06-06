@@ -68,21 +68,21 @@ level_2_good.prototype = {
 		platform11 = new platform(game,940,280,'platform',platformgroup);
 		
 		//Add platforms for doctor's house task
-		platform12 = new platform(game,140,750,'platform',platformgroup);
+		platform12 = new platform(game,140,750,'platform2',platformgroup);
 		platform12.sprite.scale.setTo(.5,.5);
-		platform13 = new platform(game,600,690,'platform',platformgroup);
+		platform13 = new platform(game,600,690,'platform2',platformgroup);
 		platform13.sprite.scale.setTo(.5,.5);
-		platform14 = new platform(game,160,600,'platform',platformgroup);
+		platform14 = new platform(game,160,600,'platform2',platformgroup);
 		platform14.sprite.scale.setTo(.5,.5);
 		
 		//Add platforms for the crystal thief task
-		platform15 = new platform(game,900,750,'platform',platformgroup);
+		platform15 = new platform(game,900,750,'platform2',platformgroup);
 		platform15.sprite.scale.setTo(.5,.5);
-		platform16 = new platform(game,1050,650,'platform',platformgroup);
+		platform16 = new platform(game,1050,650,'platform2',platformgroup);
 		platform16.sprite.scale.setTo(.5,.5);
-		platform17 = new platform(game,1250,650,'platform',platformgroup);
+		platform17 = new platform(game,1250,650,'platform2',platformgroup);
 		platform17.sprite.scale.setTo(.5,.5);
-		platform18 = new platform(game,1450,570,'platform',platformgroup);
+		platform18 = new platform(game,1450,570,'platform2',platformgroup);
 		platform18.sprite.scale.setTo(.5,.5);
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes

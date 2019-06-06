@@ -59,21 +59,21 @@ level_2_bad.prototype = {
 		platform4_second = new platform(game,839,110,'platform',platformgroup);
 		
 		//Add platforms for doctor's house task
-		platform5 = new platform(game,140,750,'platform',platformgroup);
+		platform5 = new platform(game,140,750,'platform2',platformgroup);
 		platform5.sprite.scale.setTo(.5,.5);
-		platform6 = new platform(game,600,690,'platform',platformgroup);
+		platform6 = new platform(game,600,690,'platform2',platformgroup);
 		platform6.sprite.scale.setTo(.5,.5);
-		platform7 = new platform(game,160,600,'platform',platformgroup);
+		platform7 = new platform(game,160,600,'platform2',platformgroup);
 		platform7.sprite.scale.setTo(.5,.5);
 		
 		//Add platforms for the crystal thief task
-		platform8 = new platform(game,900,750,'platform',platformgroup);
+		platform8 = new platform(game,900,750,'platform2',platformgroup);
 		platform8.sprite.scale.setTo(.5,.5);
-		platform9 = new platform(game,1050,650,'platform',platformgroup);
+		platform9 = new platform(game,1050,650,'platform2',platformgroup);
 		platform9.sprite.scale.setTo(.5,.5);
-		platform10 = new platform(game,1250,650,'platform',platformgroup);
+		platform10 = new platform(game,1250,650,'platform2',platformgroup);
 		platform10.sprite.scale.setTo(.5,.5);
-		platform11 = new platform(game,1450,570,'platform',platformgroup);
+		platform11 = new platform(game,1450,570,'platform2',platformgroup);
 		platform11.sprite.scale.setTo(.5,.5);
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
@@ -101,13 +101,13 @@ level_2_bad.prototype = {
 		//Add houses
 		// house1 = game.add.sprite(40,270,'house');
 		// house1.scale.setTo(.8,.8);
-		house2 = game.add.sprite(750,270,'house');
+		house2 = game.add.sprite(750,236,'house2');
 		house2.scale.setTo(.8,.8);
 		house3 = game.add.sprite(520,10,'house');
 		house3.scale.setTo(.8,.8);
-		house4 = game.add.sprite(380,270,'house');
+		house4 = game.add.sprite(380,236,'house2');
 		house4.scale.setTo(.8,.8);
-		house5 = game.add.sprite(1400,270,'house');
+		house5 = game.add.sprite(1400,236,'house2');
 		house5.scale.setTo(.8,.8);
 		house6 = game.add.sprite(1000,13,'house');
 		house6.scale.setTo(.8,.8);

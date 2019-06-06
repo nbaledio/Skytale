@@ -53,30 +53,30 @@ level_3_bad.prototype = {
 		platform4 = new platform(game,930,250,'platform',platformgroup);
 		
 		//Platforms for doctor's house task
-		platform5 = new platform(game,300,770,'platform',platformgroup);
+		platform5 = new platform(game,300,770,'platform2',platformgroup);
 		platform5.sprite.scale.setTo(.5,.5);
-		platform6 = new platform(game,380,750,'platform',platformgroup);
+		platform6 = new platform(game,380,750,'platform2',platformgroup);
 		platform6.sprite.scale.setTo(.5,.5);
-		platform7 = new platform(game,520,750,'platform',platformgroup);
+		platform7 = new platform(game,520,750,'platform2',platformgroup);
 		platform7.sprite.scale.setTo(.5,.5);
-		platform8 = new platform(game,570,710,'platform',platformgroup);
+		platform8 = new platform(game,570,710,'platform2',platformgroup);
 		platform8.sprite.scale.setTo(.5,.5);
-		platform9 = new platform(game,600,660,'platform',platformgroup);
+		platform9 = new platform(game,600,660,'platform2',platformgroup);
 		platform9.sprite.scale.setTo(.5,.5);
-		platform10 = new platform(game,520,630,'platform',platformgroup);
+		platform10 = new platform(game,520,630,'platform2',platformgroup);
 		platform10.sprite.scale.setTo(.5,.5);
-		platform11 = new platform(game,343,630,'platform',platformgroup);
+		platform11 = new platform(game,343,630,'platform2',platformgroup);
 		platform11.sprite.scale.setTo(.5,.5);
-		platform12 = new platform(game,200,630,'platform',platformgroup);
+		platform12 = new platform(game,200,630,'platform2',platformgroup);
 		platform12.sprite.scale.setTo(.5,.5);
-		platform13 = new platform(game,50,630,'platform',platformgroup);
+		platform13 = new platform(game,50,630,'platform2',platformgroup);
 		platform13.sprite.scale.setTo(.5,.5);
 		
 		//Platforms for the crystal thief's task
-		platform14 = new platform(game,1200,730,'platform',platformgroup);
+		platform14 = new platform(game,1200,730,'platform2',platformgroup);
 		platform14.sprite.body.velocity.x = 80;
-		platform15 = new platform(game,1400,655,'platform',platformgroup);
-		platform16 = new platform(game,950,580,'platform',platformgroup);
+		platform15 = new platform(game,1400,655,'platform2',platformgroup);
+		platform16 = new platform(game,950,580,'platform2',platformgroup);
 		platform16.sprite.body.velocity.x = -80;
 		
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
@@ -104,17 +104,17 @@ level_3_bad.prototype = {
 		//Add houses
 		// house1 = game.add.sprite(40,270,'house');
 		// house1.scale.setTo(.8,.8);
-		house2 = game.add.sprite(550,270,'house');
+		house2 = game.add.sprite(550,236,'house2');
 		house2.scale.setTo(.8,.8);
-		house3 = game.add.sprite(770,70,'house');
+		house3 = game.add.sprite(770,36,'house2');
 		house3.scale.setTo(.8,.8);
-		house4 = game.add.sprite(300,270,'house');
+		house4 = game.add.sprite(300,236,'house2');
 		house4.scale.setTo(.8,.8);
-		house5 = game.add.sprite(1400,270,'house');
+		house5 = game.add.sprite(1400,236,'house2');
 		house5.scale.setTo(.8,.8);
-		house6 = game.add.sprite(1000,270,'house');
+		house6 = game.add.sprite(1000,236,'house2');
 		house6.scale.setTo(.8,.8);
-		house7 = game.add.sprite(1200,270,'house');
+		house7 = game.add.sprite(1200,236,'house2');
 		house7.scale.setTo(.8,.8);
 		
 		//Add villager group
