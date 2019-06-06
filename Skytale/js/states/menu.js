@@ -23,7 +23,8 @@ Menu.prototype = {
 		game.load.image('totem', 'assets/img/totem.png');
 		game.load.image('flag', 'assets/img/flag.png');
 		game.load.image('hat', 'assets/img/hat.png');
-		game.load.spritesheet('dude', 'assets/img/playerone.png',32, 64);
+		game.load.image('gem', 'assets/img/gem.png');
+		game.load.spritesheet('dude', 'assets/img/player2.png',192/3, 192/3);
 
 		//music cred
 		// "Dreamy Flashback" Kevin MacLeod (incompetech.com)

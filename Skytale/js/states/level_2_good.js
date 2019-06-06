@@ -172,8 +172,9 @@ level_2_good.prototype = {
 		p1 = new player();
 		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
-		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
-		p1.addAnimations('right', [3, 8, 4, 7], 6, true);
+		p1.addAnimations('left', [0, 1, 2], 6, true);
+		p1.addAnimations('right', [4, 5, 6], 6, true);
+		
 		
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -283,7 +284,7 @@ level_2_good.prototype = {
 			villager6.task = new task();
 			transition = 'HOUSE2';
 			fade();
-			villager6.task.spawn(game, 1460, 550, 'chat', villager6);
+			villager6.task.spawn(game, 1460, 550, 'gem', villager6);
 		}
 		if (villager6.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager6.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance
@@ -325,7 +326,7 @@ level_2_good.prototype = {
 		villager3.update(p1,karmaBar,this.balance);
 		if (villager3.interacted == 'yes' && villager3.timer == 59) {
 			villager3.task = new task();
-			villager3.task.spawn(game, 1330, 120, 'chat', villager3);
+			villager3.task.spawn(game, 1330, 120, 'gem', villager3);
 		}
 		if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
 			// if task is completed, update the villager instance and overall balance

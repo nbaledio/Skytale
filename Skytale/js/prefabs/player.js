@@ -63,7 +63,7 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 6;
+			this.sprite.frame = 3;
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -77,7 +77,7 @@ player.prototype = {
 			this.sprite.body.setSize(0,0,0,1000);
 		}else{
 
-			this.sprite.body.setSize(164/5, 129/2,0,0);
+			this.sprite.body.setSize(192/3, 192/3,0,0);
 		}
 		
 	},
@@ -114,7 +114,7 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 6;
+			this.sprite.frame = 3;
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -128,7 +128,7 @@ player.prototype = {
 			this.sprite.body.setSize(0,0,0,1000);
 		}else{
 
-			this.sprite.body.setSize(164/5, 129/2,0,0);
+			this.sprite.body.setSize(192/3, 192/3,0,0);
 		}
 		
 	},
@@ -167,7 +167,7 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 6;
+			this.sprite.frame = 3;
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -181,7 +181,7 @@ player.prototype = {
 			this.sprite.body.setSize(0,0,0,1000);
 		}else{
 
-			this.sprite.body.setSize(164/5, 129/2,0,0);
+			this.sprite.body.setSize(192/3, 192/3,0,0);
 		}
 	},
 	fast_controls: function(onGround,onPlatform){
@@ -217,7 +217,7 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 6;
+			this.sprite.frame = 3;
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -231,7 +231,7 @@ player.prototype = {
 			this.sprite.body.setSize(0,0,0,1000);
 		}else{
 
-			this.sprite.body.setSize(164/5, 129/2,0,0);
+			this.sprite.body.setSize(192/3, 192/3,0,0);
 		}
 		
 	},
@@ -268,7 +268,7 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 6;
+			this.sprite.frame = 3;
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -282,7 +282,7 @@ player.prototype = {
 			this.sprite.body.setSize(0,0,0,1000);
 		}else{
 
-			this.sprite.body.setSize(164/5, 129/2,0,0);
+			this.sprite.body.setSize(192/3, 192/3,0,0);
 		}
 		
 	}
