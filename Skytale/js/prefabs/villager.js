@@ -110,8 +110,8 @@ villager.prototype = {
 		else if (this.interacted == 1 && this.timer > 60) {
 			// remove the old text
 			this.textDisplay.kill();
-			// create the new text
-			// this.textDisplay = game.add.text(this.x + 25, 100, this.text, style);
+			this.bubble.kill();
+			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.text, 48);
 
 			// reset the timer and move on to the next interaction when the player presses space again
@@ -124,7 +124,8 @@ villager.prototype = {
 			this.textDisplay.kill();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'So...Will you do it? y/n', style);
 			//dialogue = textWrap('So...Will you do it?')
-
+			this.bubble.kill();
+			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			this.textDisplay = game.add.bitmapText(this.bubblex+24, this.bubbley+24, 'myfont', this.ask+'\n   yes\n   no', 48);
 
 			ykey = game.add.sprite(this.bubblex+24, this.bubbley+110, 'ykey');
@@ -135,6 +136,8 @@ villager.prototype = {
 		// 3 indicates a decision to be made, and will respond with 'yes' or 'no'
 		else if (this.interacted == 'yes') {
 			this.textDisplay.kill();
+			this.bubble.kill();
+			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			ykey.destroy();
 			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Great, thanks!', style);
@@ -145,6 +148,8 @@ villager.prototype = {
 			this.timer = 0;
 		} else if (this.interacted == 'no') {
 			this.textDisplay.kill();
+			this.bubble.kill();
+			this.bubble = game.add.sprite(this.bubblex, this.bubbley, 'textbubble');
 			ykey.destroy();
 			nkey.destroy();
 			// this.textDisplay = game.add.text(this.x + 25, 100, 'Alright then...', style);
