@@ -77,11 +77,17 @@ tutorial.prototype = {
 		bubble = game.add.sprite(65,185,'textbubble');
 		bubble.width = 280;
 		bubble.height = 75;
+		bubble.visible = false;
+
 
 		instructions = game.add.bitmapText(90, 200, 'myfont', 'Use    to jump', 48);
 		instructionsVisual = game.add.sprite(160,212,'arrow');
 		instructionsVisual2 = game.add.sprite(160,212,'arrow');
+		instructions.visible = false;
+		instructionsVisual.visible = false;
+		instructionsVisual2.visible = false;
 
+		timer = -5;
 
 		bigBird = new statue();
 		bigBird.spawn(game);
@@ -100,8 +106,34 @@ tutorial.prototype = {
 		
 	},
 	update: function() {
+		//Variables to check if player is on platform or ground
+		var onPlatform = game.physics.arcade.collide(p1.sprite, platformgroup);
+		var onGround = game.physics.arcade.collide(p1.sprite, groundgroup);
+		
+		//Enable player controls
+		p1.controls(onGround,onPlatform);
+		
+		//  Enables player to fall on platforms
+		game.physics.arcade.collide(p1.sprite, platformgroup);
+		
+		//Enables villagers to fall on platforms
+		game.physics.arcade.collide(villagergroup, platformgroup);
+		
+		//  Enables player to fall on platforms
+		game.physics.arcade.collide(p1.sprite, platformgroup);
+
+		if (learned !=60 && (bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
+			bigBird.startLevel();
+		} else {
 
 		timer++;
+		
+		if (timer <0) {
+			bubble.visible = true;
+			instructions.visible = true;
+			instructionsVisual.visible = true;
+
+		}
 
 		if (timer > 30 && timer%70 == 5) {
 			instructions.visible = !instructions.visible;
@@ -138,21 +170,19 @@ tutorial.prototype = {
 			bubble.width = 590;
 			bubble.height = 130;
 			instructions = game.add.bitmapText(630, 200, 'myfont', "Nice job! Return to the statue to\ncontinue", 48);
+			learned = 'done';
+			//bigBird.interacted = 'doneTutorial';
 		}
+		//if(villager3.interacted == 'done' &&  game.physics.arcade.overlap(p1.sprite, bigBird.sprite, null, null, this)) {
+		
+		//(bigBird.interacted == 'doneTutorial' || bigBird.interacted == 'readyToLeave')
+		if (bigBird.interacted == 'endLevel') {
+			game.state.start('level_1', true, false);
+		} else if(p1.sprite.x < 120 && learned == 'done'){
+			bigBird.endTutorial();
+		}
+		//console.log(bigBird.interacted);
 
-		//Variables to check if player is on platform or ground
-		var onPlatform = game.physics.arcade.collide(p1.sprite, platformgroup);
-		var onGround = game.physics.arcade.collide(p1.sprite, groundgroup);
-		
-		//Enable player controls
-		p1.controls(onGround,onPlatform);
-		
-		//  Enables player to fall on platforms
-		game.physics.arcade.collide(p1.sprite, platformgroup);
-		
-		//Enables villagers to fall on platforms
-		game.physics.arcade.collide(villagergroup, platformgroup);
-		
 
 		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)  && ( onGround) && learned == 0)
 		{
@@ -167,6 +197,7 @@ tutorial.prototype = {
 			learned = 1;
 			timer = 0;
 		}
+	
 		if (cursors.right.isDown && learned == 1)
 		{
 			instructions.destroy();
@@ -236,7 +267,7 @@ tutorial.prototype = {
 		}
 
 
-		//  Enables player to fall on platforms
-		game.physics.arcade.collide(p1.sprite, platformgroup);
+
+		}
 	}
 }

@@ -21,6 +21,7 @@ Menu.prototype = {
 		game.load.image('platform', 'assets/img/rockplatform.png');
 		game.load.image('platform2', 'assets/img/sciplatform.png');
 		game.load.image('statue', 'assets/img/statue.png');
+		game.load.image('statuetextbub', 'assets/img/statuetextbub.png');
 		game.load.image('goat', 'assets/img/goat.png');
 		game.load.image('totem', 'assets/img/totem.png');
 		game.load.image('flag', 'assets/img/flag.png');
