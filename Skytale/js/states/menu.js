@@ -14,8 +14,8 @@ Menu.prototype = {
 		game.load.image('ground', 'assets/img/ground.png');
 		game.load.image('house', 'assets/img/house.png');
 		game.load.image('house2', 'assets/img/brokenhouse.png');
-		game.load.image('villager', 'assets/img/villager.png');
-		game.load.image('villager2', 'assets/img/villager2.png');
+		game.load.image('villager', 'assets/img/owl.png');
+		game.load.image('villager2', 'assets/img/auk.png');
 		game.load.image('chat', 'assets/img/chat.png');
 		game.load.image('textbubble', 'assets/img/textbubble.png');
 		game.load.image('platform', 'assets/img/rockplatform.png');
