@@ -357,7 +357,7 @@ level_3_bad.prototype = {
 			}
 		}
 		
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
+		/*if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
 			game.camera.onFadeComplete.remove(resetFade4, this);
 			game.state.start('level_1')
 			bgm.stop();
@@ -377,7 +377,7 @@ level_3_bad.prototype = {
 			game.camera.onFadeComplete.remove(resetFade4, this);
 			game.state.start('level_3_bad')
 			bgm.stop();
-		}
+		}*/
 		// the player will either quit or finish the game by helping everyone
 		/*if (this.peopleHelped == 2 ||
 			game.input.keyboard.isDown(Phaser.Keyboard.Q)) {

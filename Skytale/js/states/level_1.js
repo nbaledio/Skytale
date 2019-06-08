@@ -6,6 +6,7 @@ var level_1 = function(game){};
 var theta = 1;
 var gamplay_state = 'OVERWORLD';
 var transition = 'OVERWORLD';
+var color = 'BLACK';
 
 level_1.prototype = {
 	init: function() {
@@ -259,9 +260,6 @@ level_1.prototype = {
 		//console.log(p1.sprite.x);
 		//console.log(bigBird.interacted);
 
-		
-
-
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
 			bigBird.startLevel();
 			//bigBird.endLevel(4);
@@ -271,11 +269,9 @@ level_1.prototype = {
 				bigBird.endLevel(karmaBar.numKarma, p1);
 			}
 			if (bigBird.interacted == 'endLevel') {
-				if (karmaBar.numKarma < 5) {
-					game.state.start('level_2_bad');
-				} else {
-					game.state.start('level_2_good');
-				}
+				color = 'WHITE';
+				transition = 'NULL';
+				game.camera.fade('0xFFFFFF', 2000);	
 			}
 
 			//Check if player if overlapping villager
@@ -375,7 +371,7 @@ level_1.prototype = {
 		//DEV TOOLS//
 
 		// the player will either quit or finish the game by helping everyone
-		if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
+		/*if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
@@ -398,7 +394,7 @@ level_1.prototype = {
 			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_3_bad')
 			bgm.stop();
-		}
+		}*/
 	}
 }
 // helper function for when task is done
@@ -408,10 +404,12 @@ function finishTask(p1, task){
 }
 
 //Fade function. Fades to black to transition to inside house
-function fade() {
-    game.camera.fade(0x000000, 1000);
-
+function fade(){
+	if(color == 'BLACK'){
+		game.camera.fade(0x000000, 1000);
+	}
 }
+
 //Function to reset fade to black effect and move player/villager in and out of houses
 function resetFade() {
 	if(transition == 'HOUSE'){
@@ -434,6 +432,16 @@ function resetFade() {
 		p1.sprite.y = 110;;
 		villager6.sprite.x = 1470;
 		villager6.sprite.y = 105;
+	}else if (transition = 'NULL'){
+		if (karmaBar.numKarma < 5) {
+			game.camera.onFadeComplete.remove(resetFade, this);
+			game.state.start('level_2_bad');
+			bgm.stop();
+		} else {
+			game.camera.onFadeComplete.remove(resetFade, this);
+			game.state.start('level_2_good');
+			bgm.stop();
+		}
 	}
     game.camera.resetFX();
 }

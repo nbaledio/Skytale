@@ -6,6 +6,7 @@ var level_2_bad = function(game){};
 var theta = 1;
 var gamplay_state = 'OVERWORLD';
 var transition = 'OVERWORLD';
+var color = 'BLACK';
 
 level_2_bad.prototype = {
 	init: function() {
@@ -244,8 +245,6 @@ level_2_bad.prototype = {
 		if(platform10.sprite.y <= 570){
 			platform10.sprite.body.velocity.y = 60;
 		}
-		
-
 
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
 			bigBird.startLevel();
@@ -256,11 +255,9 @@ level_2_bad.prototype = {
 				bigBird.endLevel(karmaBar.numKarma, p1);
 			}
 			if (bigBird.interacted == 'endLevel') {
-				if (karmaBar.numKarma < 5) {
-					game.state.start('level_3_bad');
-				} else {
-					game.state.start('level_4_good');
-				}
+				color = 'WHITE';
+				transition = 'NULL';
+				game.camera.fade('0xFFFFFF', 2000);	
 			}
 			//Check if player if overlapping villager
 			// call update on villager to respond accordingly
@@ -353,7 +350,7 @@ level_2_bad.prototype = {
 			}
 
 		}
-		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
+		/*if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
 			game.state.start('level_1')
 			game.camera.onFadeComplete.remove(resetFade2, this);
 			bgm.stop();
@@ -373,7 +370,7 @@ level_2_bad.prototype = {
 			game.camera.onFadeComplete.remove(resetFade2, this);
 			game.state.start('level_3_bad')
 			bgm.stop();
-		}
+		}*/
 
 		// the player will either quit or finish the game by helping everyone
 		/*if (this.peopleHelped == 2 ||
@@ -417,6 +414,16 @@ function resetFade2() {
 		p1.sprite.y = 342;
 		villager6.sprite.x = 1420;
 		villager6.sprite.y = 337;
+	}else if(transition == 'NULL'){
+		if (karmaBar.numKarma < 5) {
+			game.camera.onFadeComplete.remove(resetFade2, this);
+			game.state.start('level_3_bad');
+			bgm.stop();
+		} else {
+			game.camera.onFadeComplete.remove(resetFade2, this);
+			game.state.start('level_3_good');
+			bgm.stop();
+		}
 	}
     game.camera.resetFX();
 }
