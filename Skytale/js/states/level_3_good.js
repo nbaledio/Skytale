@@ -33,6 +33,8 @@ level_3_good.prototype = {
 		
 		//Add background
 		background = game.add.sprite(0,0,'background');
+		background2 = game.add.sprite(0,450,'homebackground');
+		background3 = game.add.sprite(800,450,'homebackground');
 		
 		//Platforms group
 		platformgroup = game.add.group();
@@ -109,12 +111,12 @@ level_3_good.prototype = {
 		ground2.body.setSize(800,50,0,400);
 		
 		//Add ground to house task area
-	    ground3 = game.add.sprite(0,450,'ground');
+	    ground3 = game.add.sprite(0,450,'ground2');
 		groundgroup.add(ground3);
 		ground3.body.immovable = true;
 		ground3.body.setSize(800,0,0,400);
 		
-		ground4 = game.add.sprite(800,450,'ground');
+		ground4 = game.add.sprite(800,450,'ground2');
 		groundgroup.add(ground4);
 		ground4.body.immovable = true;
 		ground4.body.setSize(800,0,0,400);
