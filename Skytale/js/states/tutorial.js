@@ -92,6 +92,7 @@ tutorial.prototype = {
 		bigBird = new statue();
 		bigBird.spawn(game);
 
+
 		p1 = new player();
 		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
@@ -122,7 +123,7 @@ tutorial.prototype = {
 		//  Enables player to fall on platforms
 		game.physics.arcade.collide(p1.sprite, platformgroup);
 
-		if (learned !=60 && (bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
+		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
 			bigBird.startLevel();
 		} else {
 

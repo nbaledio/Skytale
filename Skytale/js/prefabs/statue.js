@@ -62,7 +62,7 @@ statue.prototype = {
 				space.destroy();
 				this.textDisplay.destroy();
 				this.timer = 0;
-				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "I wish you luck\nin this lifetime.", 48);
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "I wish you luck\nin this lifetime.\nReturn to me\nonce finished.", 48);
 				this.interacted = 'ready';
 			}
 		}
@@ -111,16 +111,77 @@ statue.prototype = {
 			}
 		}
 	},
-	endLevel: function(numKarma) {
-		dialogue[0] = 'Hero...';
+	endLevel: function(numKarma, player) {
+		this.dialogue[0] = "You have\nreturned...";
+		//this.dialogue[0] = textWrap(this.dialogue[0]);
 		// give the player an overview of how they're doing
 		if (numKarma < 5) {
-			dialogue[1] = "Do you think you\nhave led a\nfulfilling life?";
-			textWrap(dialogue[1]);
+			this.dialogue[1] = "I am worried about the\nprosperity of my town but...";
+			this.dialogue[1] = textWrap(this.dialogue[1]);
 		} else {
-			dialogue[1] = "the town sure is in good hands";
-			textWrap(dialogue[1]);
+			this.dialogue[1] = "You have done well to ensure prosperity in my town...";
+			this.dialogue[1] = textWrap(this.dialogue[1]);
 		}
+		this.dialogue[2] = textWrap("Are you ready to move on?");
+		//this.interacted = 'endLevel';
+
+		this.timer++;
+
+		if (this.interacted == 'continueLevel' || this.interacted == 'readyToLeave') {
+			//this.interacted == 'continueLevel' || 
+			if (this.timer == 60) {
+				this.bubble.destroy();
+				this.textDisplay.destroy();
+				this.timer = 0;
+				//this.interacted = 'endLevel';
+				player.sprite.x = 101;
+				if(this.interacted == 'readyToLeave') {this.interacted = 'endLevel';}
+				if(this.interacted == 'continueLevel') {
+					this.interacted = 'playLevel';
+					player.interacting = 'none';
+				}
+			}
+		} else if (this.interacted != 'endLevel') {
+			player.interacting = 'statue';
+			if (this.timer < 5) {
+				this.bubble = game.add.sprite(100, 350, 'statuetextbub');
+				this.bubble.anchor.set(0,1);
+				this.bubble.width = 0;
+				this.bubble.height = 0;
+				this.timer = 5;
+			} else if (this.timer <= 30) {
+				this.bubble.width+=12;
+				this.bubble.height+=8.2;
+			} else if (this.timer == 31) {
+				//this.textDisplay = game.add.bitmapText(124, 154,'myfont', "Have you learned\neverything you\nneeded?", 48);
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[0], 48);
+				//space = game.add.sprite(220, 280, 'spacebar');
+			} else if (this.timer == 90) {
+				this.textDisplay.destroy();
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[1], 48);
+			} else if (this.timer == 260) {
+				this.textDisplay.destroy();
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[2]+"\n   yes\n   no", 48);
+				yes = game.add.sprite(130, 240, 'ykey');
+				no = game.add.sprite(130, 280, 'nkey');
+			} else if (this.timer > 280 && game.input.keyboard.justPressed(Phaser.Keyboard.Y)) {
+				this.textDisplay.destroy();
+				yes.destroy();
+				no.destroy();
+				this.timer = 0;
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "I will see you\nagain soon...", 48);
+				this.interacted = 'readyToLeave';
+			} else if (this.timer > 50 && game.input.keyboard.justPressed(Phaser.Keyboard.N)) {
+				this.textDisplay.destroy();
+				yes.destroy();
+				no.destroy();
+				this.timer = 0;
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "Then by all\nmeans, continue\nyour work.", 48);
+				this.interacted = "continueLevel";
+			}
+		}
+
+
 	}
 }
 function textWrap(text) {

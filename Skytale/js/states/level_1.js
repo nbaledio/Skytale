@@ -158,6 +158,7 @@ level_1.prototype = {
 
 		bigBird = new statue();
 		bigBird.spawn(game);
+		bigBird.setText("","","");
 		
 		//Spawn totem and goat
 		totem = game.add.sprite(150,370,'totem');
@@ -252,96 +253,119 @@ level_1.prototype = {
 		}else if(platform12.sprite.x >=320){
 			platform12.sprite.body.velocity.x = -80;
 		}
+
+		//console.log(p1.sprite.x);
+		//console.log(bigBird.interacted);
+
 		
-		//Check if player if overlapping villager
-		// call update on villager to respond accordingly
-		villager6.update(p1,karmaBar,this.balance);
-		if (villager6.interacted == 'yes' && villager6.timer == 59) {
-			villager6.task = new task();
-			transition = 'HOUSE2';
-			fade();
-			villager6.task.spawn(game, 930, 550, 'gem', villager6);
-			
-		}
-		if (villager6.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager6.task.sprite, null, null, this)) {
-			// if task is completed, update the villager instance and overall balance
-			this.balance = villager6.complete(this.balance, p1);
-			this.peopleHelped++;
-			//karmaBar.update(this.balance);
-			villager6.task.sprite.kill();
-			transition = 'OVERWORLD2';
-			fade();
-		}
 
-		villager5.update(p1,karmaBar,this.balance);
-		if (villager5.interacted == 'yes' && villager5.timer == 59) {
-			villager5.task = new task();
-			villager5.task.spawn(game, 1530, 340, 'hat', villager5);
-		}
-		if (villager5.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager5.task.sprite, null, null, this)) {
-			// if task is completed, update the villager instance and overall balance
-			this.balance = villager5.complete(this.balance, p1);
-			this.peopleHelped++;
-			//karmaBar.update(this.balance);
-			villager5.task.sprite.kill();
-		}
 
-		villager4.update(p1,karmaBar,this.balance);
-		if (villager4.interacted == 'yes' && villager4.timer == 59) {
-			villager4.task = new task();
-			villager4.task.spawn(game, 150,370,'totem', villager4);
-		}
-		if (villager4.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager4.task.sprite, null, null, this)) {
-			// if task is completed, update the villager instance and overall balance
-			this.balance = villager4.complete(this.balance, p1);
-			this.peopleHelped++;
-			//karmaBar.update(this.balance);
-			totem.kill();
-			villager4.task.sprite.kill();
-		}
+		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
+			bigBird.startLevel();
+			//bigBird.endLevel(4);
+		} else {
+			// check for ending
+			if ((p1.interacting == 'none'|| p1.interacting == 'statue') && p1.sprite.x<100 && p1.sprite.y==345.4) {
+				bigBird.endLevel(karmaBar.numKarma, p1);
+			}
+			if (bigBird.interacted == 'endLevel') {
+				if (karmaBar.numKarma < 5) {
+					game.state.start('level_2_bad');
+				} else {
+					game.state.start('level_2_good');
+				}
+			}
 
-		villager3.update(p1,karmaBar,this.balance);
-		if (villager3.interacted == 'yes' && villager3.timer == 59) {
-			villager3.task = new task();
-			villager3.task.spawn(game, 20, 200, 'gem', villager3);
-		}
-		if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
-			// if task is completed, update the villager instance and overall balance
-			this.balance = villager3.complete(this.balance, p1);
-			this.peopleHelped++;
-			//karmaBar.update(this.balance);
-			villager3.task.sprite.kill();
-		}
+			//Check if player if overlapping villager
+			// call update on villager to respond accordingly
+			villager6.update(p1,karmaBar,this.balance);
+			if (villager6.interacted == 'yes' && villager6.timer == 59) {
+				villager6.task = new task();
+				transition = 'HOUSE2';
+				fade();
+				villager6.task.spawn(game, 930, 550, 'gem', villager6);
+				
+			}
+			if (villager6.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager6.task.sprite, null, null, this)) {
+				// if task is completed, update the villager instance and overall balance
+				this.balance = villager6.complete(this.balance, p1);
+				this.peopleHelped++;
+				//karmaBar.update(this.balance);
+				villager6.task.sprite.kill();
+				transition = 'OVERWORLD2';
+				fade();
+			}
 
-		villager2.update(p1,karmaBar,this.balance);
-		if (villager2.interacted == 'yes' && villager2.timer == 59) {
-			villager2.task = new task();
-			villager2.task.spawn(game, 1500,355,'goat', villager2);
-		}
-		if (villager2.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager2.task.sprite, null, null, this)) {
-			// if task is completed, update the villager instance and overall balance
-			this.balance = villager2.complete(this.balance, p1);
-			this.peopleHelped++;
-			//karmaBar.update(this.balance);
-			goat.kill();
-			villager2.task.sprite.kill();
-		}
+			villager5.update(p1,karmaBar,this.balance);
+			if (villager5.interacted == 'yes' && villager5.timer == 59) {
+				villager5.task = new task();
+				villager5.task.spawn(game, 1530, 340, 'hat', villager5);
+			}
+			if (villager5.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager5.task.sprite, null, null, this)) {
+				// if task is completed, update the villager instance and overall balance
+				this.balance = villager5.complete(this.balance, p1);
+				this.peopleHelped++;
+				//karmaBar.update(this.balance);
+				villager5.task.sprite.kill();
+			}
 
-		villager1.update(p1,karmaBar,this.balance);
-		if (villager1.interacted == 'yes' && villager1.timer == 59) {
-			villager1.task = new task();
-			transition = 'HOUSE';
-			fade();
-			villager1.task.spawn(game, 480, 480, 'flag', villager1);
-		}
-		if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
-			// if task is completed, update the villager instance and overall balance
-			this.balance = villager1.complete(this.balance, p1);
-			this.peopleHelped++;
-			//karmaBar.update(this.balance);
-			villager1.task.sprite.kill();
-			transition = 'OVERWORLD1';
-			fade();
+			villager4.update(p1,karmaBar,this.balance);
+			if (villager4.interacted == 'yes' && villager4.timer == 59) {
+				villager4.task = new task();
+				villager4.task.spawn(game, 150,370,'totem', villager4);
+			}
+			if (villager4.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager4.task.sprite, null, null, this)) {
+				// if task is completed, update the villager instance and overall balance
+				this.balance = villager4.complete(this.balance, p1);
+				this.peopleHelped++;
+				//karmaBar.update(this.balance);
+				totem.kill();
+				villager4.task.sprite.kill();
+			}
+
+			villager3.update(p1,karmaBar,this.balance);
+			if (villager3.interacted == 'yes' && villager3.timer == 59) {
+				villager3.task = new task();
+				villager3.task.spawn(game, 20, 200, 'gem', villager3);
+			}
+			if (villager3.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager3.task.sprite, null, null, this)) {
+				// if task is completed, update the villager instance and overall balance
+				this.balance = villager3.complete(this.balance, p1);
+				this.peopleHelped++;
+				//karmaBar.update(this.balance);
+				villager3.task.sprite.kill();
+			}
+
+			villager2.update(p1,karmaBar,this.balance);
+			if (villager2.interacted == 'yes' && villager2.timer == 59) {
+				villager2.task = new task();
+				villager2.task.spawn(game, 1500,355,'goat', villager2);
+			}
+			if (villager2.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager2.task.sprite, null, null, this)) {
+				// if task is completed, update the villager instance and overall balance
+				this.balance = villager2.complete(this.balance, p1);
+				this.peopleHelped++;
+				//karmaBar.update(this.balance);
+				goat.kill();
+				villager2.task.sprite.kill();
+			}
+
+			villager1.update(p1,karmaBar,this.balance);
+			if (villager1.interacted == 'yes' && villager1.timer == 59) {
+				villager1.task = new task();
+				transition = 'HOUSE';
+				fade();
+				villager1.task.spawn(game, 480, 480, 'flag', villager1);
+			}
+			if (villager1.interacted == 'unfinished' && game.physics.arcade.overlap(p1.sprite, villager1.task.sprite, null, null, this)) {
+				// if task is completed, update the villager instance and overall balance
+				this.balance = villager1.complete(this.balance, p1);
+				this.peopleHelped++;
+				//karmaBar.update(this.balance);
+				villager1.task.sprite.kill();
+				transition = 'OVERWORLD1';
+				fade();
+			}
 		}
 
 		//console.log(this.peopleHelped);
@@ -362,7 +386,7 @@ level_1.prototype = {
 			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
 			game.camera.onFadeComplete.remove(resetFade, this);
-			game.state.start('level_2_bad')
+			game.state.start('level_2_bad');
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
 			game.camera.onFadeComplete.remove(resetFade, this);
