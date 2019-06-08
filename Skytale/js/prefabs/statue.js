@@ -15,6 +15,7 @@ function statue() {
 statue.prototype = {
 	spawn: function(game) {
 		this.sprite = game.add.sprite(10, 290, 'statue');
+		this.sprite.animations.add('sparkle',[0,1,2],4, true);
 		this.interacted = 'intro';
 		this.dialogue = ['Young hero...','text1','text2','text3','','stats'];
 		this.dialogue[4] = "Press\nto show you\nunderstand";
@@ -31,15 +32,18 @@ statue.prototype = {
 		//this.dialogue[4] = textWrap(text4);
 	},
 	startLevel: function() {
+		
 		this.timer++;
 		if (this.interacted == 'ready') {
 			if (this.timer == 120) {
+				this.sprite.animations.stop('sparkle', 0);
 				this.bubble.destroy();
 				this.textDisplay.destroy();
 				this.timer = 0;
 				this.interacted = 'playLevel';
 			}
 		} else {
+			this.sprite.animations.play('sparkle');
 			if (this.timer <= 25) {
 				this.bubble.width+=12;
 				this.bubble.height+=8.2;
@@ -73,6 +77,7 @@ statue.prototype = {
 		if (this.interacted == 'readyToLeave') {
 			//this.interacted == 'continueLevel' || 
 			if (this.timer == 60) {
+				this.sprite.animations.stop('sparkle', 0);
 				this.bubble.destroy();
 				this.textDisplay.destroy();
 				this.timer = 0;
@@ -81,6 +86,7 @@ statue.prototype = {
 				// if(this.interacted == 'continueLevel') {this.interacted = 'playLevel';}
 			}
 		} else if (this.interacted != 'endLevel') {
+			this.sprite.animations.play('sparkle');
 			if (this.timer < 5) {
 				this.bubble = game.add.sprite(100, 350, 'statuetextbub');
 				this.bubble.anchor.set(0,1);
@@ -135,6 +141,7 @@ statue.prototype = {
 				this.timer = 0;
 				//this.interacted = 'endLevel';
 				player.sprite.x = 101;
+				this.sprite.animations.stop('sparkle', 0);
 				if(this.interacted == 'readyToLeave') {this.interacted = 'endLevel';}
 				if(this.interacted == 'continueLevel') {
 					this.interacted = 'playLevel';
@@ -142,6 +149,7 @@ statue.prototype = {
 				}
 			}
 		} else if (this.interacted != 'endLevel') {
+			this.sprite.animations.play('sparkle');
 			player.interacting = 'statue';
 			if (this.timer < 5) {
 				this.bubble = game.add.sprite(100, 350, 'statuetextbub');

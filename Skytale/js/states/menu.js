@@ -20,7 +20,7 @@ Menu.prototype = {
 		game.load.image('textbubble', 'assets/img/textbubble.png');
 		game.load.image('platform', 'assets/img/rockplatform.png');
 		game.load.image('platform2', 'assets/img/sciplatform.png');
-		game.load.image('statue', 'assets/img/statue.png');
+		
 		game.load.image('statuetextbub', 'assets/img/statuetextbub.png');
 		game.load.image('goat', 'assets/img/goat.png');
 		game.load.image('totem', 'assets/img/totem.png');
@@ -28,6 +28,7 @@ Menu.prototype = {
 		game.load.image('hat', 'assets/img/hat.png');
 		game.load.image('gem', 'assets/img/gem.png');
 		game.load.spritesheet('dude', 'assets/img/player2.png',192/3, 192/3);
+		game.load.spritesheet('statue', 'assets/img/statue.png',192/2, 224/2);
 
 		//music cred
 		// "Dreamy Flashback" Kevin MacLeod (incompetech.com)
@@ -43,8 +44,8 @@ Menu.prototype = {
 
 		//menu testing
 		game.load.image('title', 'assets/img/title.png');
-		game.load.spritesheet('playButton', 'assets/img/playButton.png',178, 71);
-		game.load.spritesheet('tutorialButton', 'assets/img/tutorialButton.png',178, 71);
+		game.load.image('playButton', 'assets/img/playButton.png');
+		game.load.image('tutorialButton', 'assets/img/tutorialButton.png');
 		game.load.image('arrow', 'assets/img/arrow.png');
 		game.load.image('spacebar', 'assets/img/spacebar.png');
 		game.load.image('ykey', 'assets/img/ykey.png');
