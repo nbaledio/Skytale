@@ -464,11 +464,19 @@ function resetFade5() {
 		p1.sprite.y = 790;
 		villager1.sprite.x = 150;
 		villager1.sprite.y = 785;
+		bubble1 = game.add.sprite(50,590,'textbubble');
+		quote1 = textWrap("Now fly! Grab that flag in one jump!");
+		text1 = game.add.bitmapText(74,614,'myfont',quote1,48);
+		game.time.events.add(Phaser.Timer.SECOND * 4, killText, this)
 	}else if(transition == 'HOUSE2'){
 		p1.sprite.x = 850;
 		p1.sprite.y = 790;
 		villager2.sprite.x = 900;
 		villager2.sprite.y = 785;
+		bubble2 = game.add.sprite(850,590,'textbubble');
+		quote2 = textWrap("Ok, take his crystal and then we'll get out of here.");
+		text2 = game.add.bitmapText(874,614,'myfont',quote2,48);
+		game.time.events.add(Phaser.Timer.SECOND * 4, killText2, this);
 	}else if(transition == 'OVERWORLD1'){
 		p1.sprite.x = 760;
 		p1.sprite.y = 80;

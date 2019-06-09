@@ -372,7 +372,7 @@ level_1.prototype = {
 		//DEV TOOLS//
 
 		// the player will either quit or finish the game by helping everyone
-		if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
+		/*if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
@@ -395,7 +395,7 @@ level_1.prototype = {
 			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_3_bad')
 			bgm.stop();
-		}
+		}*/
 	}
 }
 // helper function for when task is done
