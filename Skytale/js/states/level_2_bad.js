@@ -157,7 +157,7 @@ level_2_bad.prototype = {
 
 		bigBird = new statue();
 		bigBird.spawn(game);
-		bigBird.setText("","","");
+		bigBird.setText("Misfortune has\nstruck my town! Reflect on your actions.","Remember your\npurpose... The key is balance.");
 		
 		//Spawn totem and goat
 		totem = game.add.sprite(150,370,'totem');

@@ -91,14 +91,14 @@ tutorial.prototype = {
 
 		bigBird = new statue();
 		bigBird.spawn(game);
+		bigBird.setText("You have been tasked with\nmaintaining the balance in my town.","Let's get you acquainted with\nsome controls, shall we?");
 
 
 		p1 = new player();
 		p1.spawn(game,110,330,'dude');
 		p1.sprite.scale.setTo(.9,.9);
-		p1.addAnimations('left', [0, 1, 2], 6, true);
-		p1.addAnimations('right', [4, 5, 6], 6, true);
-
+		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
+		p1.addAnimations('right', [3,7,4,8], 6, true);
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 

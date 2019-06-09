@@ -25,10 +25,10 @@ statue.prototype = {
 		this.bubble.width = 0;
 		this.bubble.height = 0;
 	},
-	setText: function(text1, text2, text3) {
+	setText: function(text1, text2) {
 		this.dialogue[1] = textWrap(text1);
 		this.dialogue[2] = textWrap(text2);
-		this.dialogue[3] = textWrap(text3);
+		//this.dialogue[3] = textWrap(text3);
 		//this.dialogue[4] = textWrap(text4);
 	},
 	startLevel: function() {
@@ -55,14 +55,14 @@ statue.prototype = {
 			} else if (this.timer == 340) {
 				this.textDisplay.destroy();
 				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[2], 48);
+			// } else if (this.timer == 580) {
+			// 	this.textDisplay.destroy();
+			// 	this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[3], 48);
 			} else if (this.timer == 580) {
-				this.textDisplay.destroy();
-				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[3], 48);
-			} else if (this.timer == 820) {
 				this.textDisplay.destroy();
 				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[4], 48);
 				space = game.add.sprite(230, 170, 'spacebar');
-			} else if (this.timer > 900 && game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+			} else if (this.timer > 600 && game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 				space.destroy();
 				this.textDisplay.destroy();
 				this.timer = 0;

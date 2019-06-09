@@ -161,7 +161,7 @@ level_1.prototype = {
 
 		bigBird = new statue();
 		bigBird.spawn(game);
-		bigBird.setText("","","");
+		bigBird.setText("You will meet a variety of people with a variety of tasks.","Keep in mind: You are\nresposible for the town, not the individual.");
 		
 		//Spawn totem and goat
 		totem = game.add.sprite(150,370,'totem');
@@ -372,7 +372,7 @@ level_1.prototype = {
 		//DEV TOOLS//
 
 		// the player will either quit or finish the game by helping everyone
-		/*if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
+		if (game.input.keyboard.isDown(Phaser.Keyboard.Q)) {
 			game.state.start('GameOver', true, false, this.peopleHelped, this.balance);
 		}
 		if(game.input.keyboard.justPressed(Phaser.Keyboard.ONE)){
@@ -395,7 +395,7 @@ level_1.prototype = {
 			game.camera.onFadeComplete.remove(resetFade, this);
 			game.state.start('level_3_bad')
 			bgm.stop();
-		}*/
+		}
 	}
 }
 // helper function for when task is done

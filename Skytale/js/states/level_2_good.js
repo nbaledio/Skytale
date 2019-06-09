@@ -166,7 +166,7 @@ level_2_good.prototype = {
 
 		bigBird = new statue();
 		bigBird.spawn(game);
-		bigBird.setText("","","");
+		bigBird.setText("The town is more lively\nbecause of your efforts...","But it is still your duty to maintain\nthis.");
 		
 		//Spawn totem and goat
 		totem = game.add.sprite(150,370,'totem');

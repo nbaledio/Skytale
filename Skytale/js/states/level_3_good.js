@@ -178,7 +178,7 @@ level_3_good.prototype = {
 
 		bigBird = new statue();
 		bigBird.spawn(game);
-		bigBird.setText("","","");
+		bigBird.setText("Good fortune\nfollows you closely. My\npeople are thriving!","But remember:\nFortune comes and goes. Work diligently.");
 		
 		//Spawn totem and goat
 		totem = game.add.sprite(150,370,'totem');
