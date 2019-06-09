@@ -173,8 +173,9 @@ level_2_good.prototype = {
 		goat = game.add.sprite(1500,355,'goat');
 			
 		//Add player
-		p1 = new player();
-		p1.spawn(game,110,330,'dude');
+		p1 = new player(3);
+		p1.spawn(game,110,330,'dude2');
+		p1.levelone = 'false';
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2], 6, true);
 		p1.addAnimations('right', [4, 5, 6], 6, true);
@@ -448,13 +449,13 @@ function resetFade3() {
 		p1.sprite.y = 130;
 		villager6.sprite.x = 1470;
 		villager6.sprite.y = 125;
-	}else if (transition == NULL){
+	}else if (transition == 'NULL'){
 		if (karmaBar.numKarma < 5) {
-			game.camera.onFadeComplete.remove(resetFade2, this);
+			game.camera.onFadeComplete.remove(resetFade3, this);
 			game.state.start('level_3_bad');
 			bgm.stop();
 		} else {
-			game.camera.onFadeComplete.remove(resetFade2, this);
+			game.camera.onFadeComplete.remove(resetFade3, this);
 			game.state.start('level_3_good');
 			bgm.stop();
 		}

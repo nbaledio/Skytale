@@ -168,11 +168,12 @@ level_1.prototype = {
 		goat = game.add.sprite(1500,355,'goat');
 
 		//Add player
-		p1 = new player();
+		p1 = new player(6);
 		p1.spawn(game,110,330,'dude');
+		p1.levelone = 'true';
 		p1.sprite.scale.setTo(.9,.9);
-		p1.addAnimations('left', [0, 1, 2], 6, true);
-		p1.addAnimations('right', [4, 5, 6], 6, true);
+		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
+		p1.addAnimations('right', [3,7,4,8], 6, true);
 		
 		//Focus camera on player/top half
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0.1, 0);

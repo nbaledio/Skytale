@@ -163,8 +163,9 @@ level_2_bad.prototype = {
 		totem = game.add.sprite(150,370,'totem');
 		goat = game.add.sprite(1200,355,'goat');
 		
-		p1 = new player();
-		p1.spawn(game,110,330,'dude');
+		p1 = new player(3);
+		p1.spawn(game,110,330,'dude2');
+		p1.levelone = 'false';
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2], 6, true);
 		p1.addAnimations('right', [4, 5, 6], 6, true);

@@ -29,7 +29,9 @@ Menu.prototype = {
 		game.load.image('flag', 'assets/img/flag.png');
 		game.load.image('hat', 'assets/img/hat.png');
 		game.load.image('gem', 'assets/img/gem.png');
-		game.load.spritesheet('dude', 'assets/img/player2.png',192/3, 192/3);
+		game.load.spritesheet('dude', 'assets/img/playerone.png',164/5, 129/2);
+		game.load.spritesheet('dude2', 'assets/img/player2.png',192/3, 192/3);
+		game.load.spritesheet('dude3', 'assets/img/player3.png',192/3, 192/3);
 		game.load.spritesheet('statue', 'assets/img/statue.png',192/2, 224/2);
 
 		//music cred

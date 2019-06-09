@@ -5,6 +5,7 @@
 function player(){
 	var sprite;
 	var interacting;
+	var levelone = 'false';
 }
 
 player.prototype = {
@@ -63,7 +64,11 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 3;
+			if(this.levelone == 'true'){
+				this.sprite.frame = 6;
+			}else{
+				this.sprite.frame = 3;
+			}
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -114,7 +119,11 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 3;
+			if(this.levelone == 'true'){
+				this.sprite.frame = 6;
+			}else{
+				this.sprite.frame = 3;
+			}
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
@@ -167,7 +176,7 @@ player.prototype = {
 		}else{
 			//  Stand still
 			this.sprite.animations.stop();
-			this.sprite.frame = 3;
+			this.sprite.frame = 6;
 		}
 		
 		//  Enable player to jump if they are standing on the ground/platform
