@@ -418,11 +418,19 @@ function resetFade() {
 		p1.sprite.y = 790;
 		villager1.sprite.x = 150;
 		villager1.sprite.y = 785;
+		bubble1 = game.add.sprite(50,590,'textbubble');
+		quote1 = textWrap('You look dizzy. Can you try to reach that flag?');
+		text1 = game.add.bitmapText(74,614,'myfont',quote1,48);
+		game.time.events.add(Phaser.Timer.SECOND * 4, killText, this);
 	}else if(transition == 'HOUSE2'){
 		p1.sprite.x = 850;
 		p1.sprite.y = 790;
 		villager6.sprite.x = 900;
 		villager6.sprite.y = 785;
+		bubble2 = game.add.sprite(850,590,'textbubble');
+		quote2 = textWrap("Ok, grab that gem, and let's get out of here.");
+		text2 = game.add.bitmapText(874,614,'myfont',quote2,48);
+		game.time.events.add(Phaser.Timer.SECOND * 4, killText2, this);
 	}else if(transition == 'OVERWORLD1'){
 		p1.sprite.x = 10;
 		p1.sprite.y = 80;
@@ -445,4 +453,12 @@ function resetFade() {
 		}
 	}
     game.camera.resetFX();
+}
+function killText(){
+	bubble1.kill();
+	text1.kill();
+}
+function killText2(){
+	bubble2.kill();
+	text2.kill();
 }
