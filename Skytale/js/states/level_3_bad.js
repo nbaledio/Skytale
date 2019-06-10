@@ -144,7 +144,7 @@ level_3_bad.prototype = {
 		villager4 = new villager();
 		villager4.spawn(game,1420,335,0,'Crystal_Stealer');
 		villagergroup.add(villager4.sprite);
-		villager4.setText("That dumb Alfred can't save us. You sell crystals not study them.","Come with me kid, we're gonna steal his last one.","Well, you coming or not?","Alright then, let's get to it.","You punk, don't you realize the village is done for.","He only had one? What a loser.");
+		villager4.setText("That dumb Alfred can't save us. You sell crystals not study them.","Come with me kid, we're gonna steal his last one.","Well, you coming or not?","Alright then, let's get to it.","You punk, don't you realize the village is done for.","Hah now he has none. What a loser.");
 		
 		villager5 = new villager();
 		villager5.spawn(game,1020,335,1,'Farmers');
@@ -417,11 +417,19 @@ function resetFade4() {
 		p1.sprite.y = 790;
 		villager1.sprite.x = 150;
 		villager1.sprite.y = 785;
+		bubble1 = game.add.sprite(50,590,'textbubble');
+		quote1 = textWrap("You look sick. Are you still able to grab that flag?");
+		text1 = game.add.bitmapText(74,614,'myfont',quote1,48);
+		game.time.events.add(Phaser.Timer.SECOND * 4, killText, this)
 	}else if(transition == 'HOUSE2'){
 		p1.sprite.x = 850;
 		p1.sprite.y = 790;
 		villager4.sprite.x = 900;
 		villager4.sprite.y = 785;
+		bubble2 = game.add.sprite(850,590,'textbubble');
+		quote2 = textWrap("There it is! Take it before Alfred returns!");
+		text2 = game.add.bitmapText(874,614,'myfont',quote2,48);
+		game.time.events.add(Phaser.Timer.SECOND * 4, killText2, this);
 	}else if(transition == 'OVERWORLD1'){
 		p1.sprite.x = 550;
 		p1.sprite.y = 340;
