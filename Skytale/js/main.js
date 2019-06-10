@@ -8,8 +8,7 @@
 //Variables
 var width = 800;
 var height = 450;
-// Have a consistent text style throughout (subject to change 5/13/2019)
-var style = { font: '24px Comic Sans MS', fill: '#FFF', align: "center", stroke: '#000000', strokeThickness: '6'};
+var style = null;
 
 //Game
 var game = new Phaser.Game(width, height, Phaser.AUTO, 'phaser');

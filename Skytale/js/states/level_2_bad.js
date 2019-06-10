@@ -12,7 +12,7 @@ level_2_bad.prototype = {
 	init: function(people, karmaAmt) {
 		this.peopleHelped = people;
 		this.balance = 0;
-		this.karmaAmt = karmaAmt;
+		this.karmaAmt = karmaAmt; //let the karma follow you
 		this.state = 'level_2_bad';
 	},
 	create: function(){
@@ -152,12 +152,12 @@ level_2_bad.prototype = {
 		villager6.spawn(game,1420,337,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
 		villager6.setText("I hate that Mendel... He has all the crystals for his 'science.'","You and I should teach him a lesson and steal one.","Well, what do you say?","Alright, let's go break into his place.","Good to know I can't count on you.","Good job kid. You're a natural thief.");
-		
+
+		//track the player's karma
 		karmaBar = new karma();
 		karmaBar.spawn(game,this.karmaAmt);
 		
-		//console.log(this.numKarma);
-
+		//spawn the omnicient statue for narrative
 		bigBird = new statue();
 		bigBird.spawn(game);
 		bigBird.setText("Misfortune has\nstruck my town! Reflect on your actions.","Remember your\npurpose... The key is balance.");
@@ -173,6 +173,7 @@ level_2_bad.prototype = {
 		p1.addAnimations('left', [0, 1, 2], 6, true);
 		p1.addAnimations('right', [4, 5, 6], 6, true);
 
+		//cover it all with the cutscene
 		cutbg = game.add.sprite(0,0,'badwelcome');
 		
 		//Focus camera on player
@@ -252,8 +253,10 @@ level_2_bad.prototype = {
 			platform10.sprite.body.velocity.y = 60;
 		}
 
+		//let the statue talk before level can be played
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
 			if (cutscene != 'done') {
+				//play cutscene before statue talks
 				playCutscene2(timer);
 				timer++;
 			} else {
@@ -434,11 +437,13 @@ function resetFade2() {
 		villager6.sprite.x = 1420;
 		villager6.sprite.y = 337;
 	} else if (transition == 'BEGIN') {
+		// creates a transition from cutscene to level
 		cutText.destroy();
 		cutBub.destroy();
 		cutbg.destroy();
 		cutscene = 'done';
 	}else if(transition == 'NULL'){
+		//chooses the next level based on karma
 		if (karmaBar.numKarma < 5) {
 			game.camera.onFadeComplete.remove(resetFade2, this);
 			timer = 0;
@@ -458,6 +463,7 @@ function resetFade2() {
 
 function playCutscene2(timer) {
 	if (cutscene != 'done') {
+		//moves the text in order based on a timer
 		if (timer == 1) {
 			cutBub = game.add.image(width/2, height/2, 'bigtextbub');
 			cutBub.anchor.set(0.5);

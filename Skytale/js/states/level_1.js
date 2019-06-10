@@ -3,10 +3,13 @@
 //First level of the game.
 
 var level_1 = function(game){};
-var theta = 1;
+var theta = 1;	//platform math
+
 var gamplay_state = 'OVERWORLD';
 var transition = 'OVERWORLD';
 var color = 'BLACK';
+
+//used to make the cutscenes run correctly
 var cutscene = 'begin';
 var timer = 0;
 
@@ -15,8 +18,6 @@ level_1.prototype = {
 		this.peopleHelped = 0;
 		this.balance = 0;
 		this.state = 'level_1';
-		// cutscene = 'begin';
-		// timer = 0;
 	},
 	create: function(){
 		
@@ -159,10 +160,13 @@ level_1.prototype = {
 		villager6.spawn(game,1470,105,0,'Crystal_Stealer');
 		villagergroup.add(villager6.sprite);
 		villager6.setText("Hey you! I hear Alvis has some crystals in his house.","Word is, they go for a pretty penny on the market.","Wanna help me steal one?","Follow me. We'll break in from the back.","No? Why not yes?!","Good stuff kid, now get out of here.");
-				
+		
+
+		//track the player's karma
 		karmaBar = new karma();
 		karmaBar.spawn(game,5);
 
+		//spawn the omnicient statue for narrative
 		bigBird = new statue();
 		bigBird.spawn(game);
 		bigBird.setText("You will meet a variety of people with a variety of tasks.","Keep in mind: You are\nresposible for the town, not the individual.");
@@ -179,6 +183,7 @@ level_1.prototype = {
 		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
 		p1.addAnimations('right', [3,7,4,8], 6, true);
 		
+		//cover it all with the cutscene
 		cutbg = game.add.sprite(0,0,'goodwelcome');
 
 		//Focus camera on player/top half
@@ -264,10 +269,9 @@ level_1.prototype = {
 			platform12.sprite.body.velocity.x = -80;
 		}
 
-		//console.log(p1.sprite.x);
-		//console.log(bigBird.interacted);
-
+		//let the statue talk before level can be played
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
+			//play cutscene before statue talks
 			if (cutscene != 'done') {
 				playCutscene(timer);
 				timer++;
@@ -461,11 +465,13 @@ function resetFade() {
 		villager6.sprite.x = 1470;
 		villager6.sprite.y = 105;
 	} else if (transition == 'BEGIN') {
+		// creates a transition from cutscene to level
 		cutText.destroy();
 		cutBub.destroy();
 		cutbg.destroy();
 		cutscene = 'done';
 	}else if (transition = 'NULL'){
+		//chooses the next level based on karma
 		if (karmaBar.numKarma < 5) {
 			game.camera.onFadeComplete.remove(resetFade, this);
 			timer = 0;
@@ -485,6 +491,7 @@ function resetFade() {
 
 function playCutscene(timer) {
 	if (cutscene != 'done') {
+		//moves the text in order based on a timer
 		if (timer == 1) {
 			cutBub = game.add.image(width/2, height/2, 'bigtextbub');
 			cutBub.anchor.set(0.5);
