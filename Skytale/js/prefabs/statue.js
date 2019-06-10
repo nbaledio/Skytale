@@ -97,10 +97,21 @@ statue.prototype = {
 				this.bubble.width+=12;
 				this.bubble.height+=8.2;
 			} else if (this.timer == 31) {
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "One last thing...", 48);
+			} else if (this.timer == 90) {
+				this.textDisplay.destroy();
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "This  indicates\nthe good forces\nyou bring into\nthe next life.", 48);
+				symbol = game.add.sprite(190, 160, 'karma');
+			} else if (this.timer == 360) {
+				symbol.destroy();
+				this.textDisplay.destroy();
+				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "Watch this\nclosely and\nremember:\nbalance is key.", 48);
+			} else if (this.timer == 560) {
+				this.textDisplay.destroy();
 				//this.textDisplay = game.add.bitmapText(124, 154,'myfont', "Have you learned\neverything you\nneeded?", 48);
 				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "The real work\nbegins when you\nare ready for it.\nPress", 48);
 				space = game.add.sprite(220, 280, 'spacebar');
-
+					
 
 			// } else if (this.timer > 50 && game.input.keyboard.justPressed(Phaser.Keyboard.N)) {
 			// 	this.textDisplay.destroy();
@@ -108,7 +119,7 @@ statue.prototype = {
 			// 	this.textDisplay = game.add.bitmapText(124, 154,'myfont', "Then by all means,\ncontinue learning.", 48);
 			// 	this.interacted = "continueLevel";
 			//	} else if (this.timer > 50 && game.input.keyboard.justPressed(Phaser.Keyboard.Y)) {
-			} else if (this.timer > 50 && game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+			} else if (this.timer > 560 && game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
 				space.destroy();
 				this.textDisplay.destroy();
 				this.timer = 0;

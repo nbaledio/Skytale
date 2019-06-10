@@ -33,7 +33,7 @@ level_2_bad.prototype = {
 		bgm.play();
 		
 		//Add background
-		background = game.add.sprite(0,0,'background');
+		background = game.add.sprite(0,0,'badbackground');
 		background2 = game.add.sprite(0,450,'homebackground');
 		background3 = game.add.sprite(800,450,'homebackground');
 		

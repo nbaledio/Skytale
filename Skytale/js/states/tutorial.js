@@ -40,11 +40,13 @@ tutorial.prototype = {
 		groundgroup.enableBody = true;
 
 
-
+		platform5 = new platform(game,400,265,'platform',platformgroup);
+		platform6 = new platform(game,490,230,'platform',platformgroup);
 		platform1 = new platform(game,1150,265,'platform',platformgroup);
 		platform2 = new platform(game,1240,230,'platform',platformgroup);
 		platform3 = new platform(game,1370,180,'platform',platformgroup);
 		platform4 = new platform(game,1515,148,'platform',platformgroup);
+
 
 
 		//Add ground to the bottom,enable their physics, and resize their hitboxes
@@ -75,17 +77,20 @@ tutorial.prototype = {
 		villager3.setText("Welcome to the tutorial, I've got a task for you.","Find me one of the chat bubbles.","Can you do it?","Wonderful!\nGood luck!","Alright then...", "Wow, thank you!");
 
 		bubble = game.add.sprite(65,185,'textbubble');
-		bubble.width = 280;
-		bubble.height = 75;
+		bubble.width = 315;
+		bubble.height = 95;
 		bubble.visible = false;
 
 
-		instructions = game.add.bitmapText(90, 200, 'myfont', 'Use    to jump', 48);
-		instructionsVisual = game.add.sprite(160,212,'arrow');
-		instructionsVisual2 = game.add.sprite(160,212,'arrow');
+		instructions = game.add.bitmapText(90, 210, 'myfont', 'Use      to move', 48);
+		instructionsVisual = game.add.sprite(155,205,'arrow');
+		//instructionsVisual2 = game.add.sprite(160,212,'arrow');
 		instructions.visible = false;
 		instructionsVisual.visible = false;
-		instructionsVisual2.visible = false;
+		//instructionsVisual2.visible = false;
+
+		karmaBar = new karma();
+		karmaBar.spawn(game,5);
 
 		timer = -5;
 
@@ -94,8 +99,10 @@ tutorial.prototype = {
 		bigBird.setText("You have been tasked with\nmaintaining the balance in my town.","Let's get you acquainted with\nsome controls, shall we?");
 
 
-		p1 = new player();
+		//Add player
+		p1 = new player(6);
 		p1.spawn(game,110,330,'dude');
+		p1.levelone = 'true';
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
 		p1.addAnimations('right', [3,7,4,8], 6, true);
@@ -125,6 +132,8 @@ tutorial.prototype = {
 
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
 			bigBird.startLevel();
+			//bigBird.endTutorial();
+
 		} else {
 
 		timer++;
@@ -139,7 +148,7 @@ tutorial.prototype = {
 		if (timer > 30 && timer%70 == 5) {
 			instructions.visible = !instructions.visible;
 			instructionsVisual.visible = !instructionsVisual.visible;
-			instructionsVisual2.visible = !instructionsVisual2.visible;
+			//instructionsVisual2.visible = !instructionsVisual2.visible;
 		}
 
 		villager3.update(p1,null,null);
@@ -178,6 +187,7 @@ tutorial.prototype = {
 		
 		//(bigBird.interacted == 'doneTutorial' || bigBird.interacted == 'readyToLeave')
 		if (bigBird.interacted == 'endLevel') {
+			timer = 0;
 			game.state.start('level_1', true, false);
 		} else if(p1.sprite.x < 120 && learned == 'done'){
 			bigBird.endTutorial();
@@ -185,21 +195,21 @@ tutorial.prototype = {
 		//console.log(bigBird.interacted);
 
 
-		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP)  && ( onGround) && learned == 0)
+		if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && (onGround) && learned == 0)
 		{
-			instructions.destroy();
-			instructionsVisual.destroy();
-			instructionsVisual2.destroy();
-			bubble.width = 425;
-			instructions = game.add.bitmapText(90, 200, 'myfont', 'Use    to move forward', 48);
-			instructionsVisual = game.add.sprite(175,222,'arrow');
-			instructionsVisual.anchor.set(0.5);
-			instructionsVisual.angle = 90;
+			// instructions.destroy();
+			// instructionsVisual.destroy();
+			//instructionsVisual2.destroy();
+			// bubble.width = 425;
+			// instructions = game.add.bitmapText(90, 200, 'myfont', 'Use    to move forward', 48);
+			// instructionsVisual = game.add.sprite(175,222,'arrow');
+			// instructionsVisual.anchor.set(0.5);
+			// instructionsVisual.angle = 90;
 			learned = 1;
 			timer = 0;
 		}
 	
-		if (cursors.right.isDown && learned == 1)
+		if (timer > 120 && learned == 1)
 		{
 			instructions.destroy();
 			instructionsVisual.destroy();
@@ -236,7 +246,7 @@ tutorial.prototype = {
 		if (villager3.interacted == 'no' && learned == 5) {
 			instructions.destroy();
 			instructionsVisual.destroy();
-			instructionsVisual2.destroy();
+			//instructionsVisual2.destroy();
 			bubble = game.add.sprite(680,185,'textbubble');
 			bubble.x = 590;
 			bubble.y = 130;
@@ -253,9 +263,9 @@ tutorial.prototype = {
 			bubble.height = 75;
 			instructions.destroy();
 			instructionsVisual.destroy();
-			instructionsVisual2.destroy();
+			//instructionsVisual2.destroy();
 			instructions = game.add.bitmapText(690, 200, 'myfont', "  Find the", 48);
-			instructionsVisual = instructionsVisual = game.add.sprite(860,208,'chat');
+			instructionsVisual = game.add.sprite(860,208,'chat');
 			learned = 7;
 			timer = 0;
 		}

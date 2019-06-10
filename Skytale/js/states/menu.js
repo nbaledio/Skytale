@@ -11,6 +11,7 @@ Menu.prototype = {
 	preload: function() {
 		//Preload Game assets
 		game.load.image('background', 'assets/img/sky.png');
+		game.load.image('badbackground', 'assets/img/badsky.png');
 		game.load.image('homebackground', 'assets/img/homebackground.png');
 		game.load.image('ground', 'assets/img/ground.png');
 		game.load.image('ground2', 'assets/img/ground2.png');

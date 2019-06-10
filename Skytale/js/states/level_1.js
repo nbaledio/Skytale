@@ -15,6 +15,8 @@ level_1.prototype = {
 		this.peopleHelped = 0;
 		this.balance = 0;
 		this.state = 'level_1';
+		// cutscene = 'begin';
+		// timer = 0;
 	},
 	create: function(){
 		
