@@ -7,6 +7,8 @@ var theta = 1;
 var gamplay_state = 'OVERWORLD';
 var transition = 'OVERWORLD';
 var color = 'BLACK';
+var cutscene = 'begin';
+var timer = 0;
 
 level_1.prototype = {
 	init: function() {
@@ -157,7 +159,7 @@ level_1.prototype = {
 		villager6.setText("Hey you! I hear Alvis has some crystals in his house.","Word is, they go for a pretty penny on the market.","Wanna help me steal one?","Follow me. We'll break in from the back.","No? Why not yes?!","Good stuff kid, now get out of here.");
 				
 		karmaBar = new karma();
-		karmaBar.spawn(game);
+		karmaBar.spawn(game,5);
 
 		bigBird = new statue();
 		bigBird.spawn(game);
@@ -175,6 +177,8 @@ level_1.prototype = {
 		p1.addAnimations('left', [0, 1, 2, 5], 6, true);
 		p1.addAnimations('right', [3,7,4,8], 6, true);
 		
+		cutbg = game.add.sprite(0,0,'goodwelcome');
+
 		//Focus camera on player/top half
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_PLATFORMER, 0.1, 0);
 		
@@ -262,7 +266,12 @@ level_1.prototype = {
 		//console.log(bigBird.interacted);
 
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
-			bigBird.startLevel();
+			if (cutscene != 'done') {
+				playCutscene(timer);
+				timer++;
+			} else {
+				bigBird.startLevel();
+			}
 			//bigBird.endLevel(4);
 		} else {
 			// check for ending
@@ -381,19 +390,27 @@ level_1.prototype = {
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.TWO)){
 			game.camera.onFadeComplete.remove(resetFade, this);
-			game.state.start('level_2_good');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_2_good',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		} else if(game.input.keyboard.justPressed(Phaser.Keyboard.THREE)){
 			game.camera.onFadeComplete.remove(resetFade, this);
-			game.state.start('level_2_bad');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_2_bad',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FOUR)){
 			game.camera.onFadeComplete.remove(resetFade, this);
-			game.state.start('level_3_good')
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_3_good',true,false,this.peopleHelped,karmaBar.numKarma)
 			bgm.stop();
 		}else if(game.input.keyboard.justPressed(Phaser.Keyboard.FIVE)){
 			game.camera.onFadeComplete.remove(resetFade, this);
-			game.state.start('level_3_bad')
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_3_bad',true,false,this.peopleHelped,karmaBar.numKarma)
 			bgm.stop();
 		}
 	}
@@ -433,16 +450,48 @@ function resetFade() {
 		p1.sprite.y = 110;;
 		villager6.sprite.x = 1470;
 		villager6.sprite.y = 105;
+	} else if (transition == 'BEGIN') {
+		cutText.destroy();
+		cutBub.destroy();
+		cutbg.destroy();
+		cutscene = 'done';
 	}else if (transition = 'NULL'){
 		if (karmaBar.numKarma < 5) {
 			game.camera.onFadeComplete.remove(resetFade, this);
-			game.state.start('level_2_bad');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_2_bad',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		} else {
 			game.camera.onFadeComplete.remove(resetFade, this);
-			game.state.start('level_2_good');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_2_good',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		}
 	}
     game.camera.resetFX();
+}
+
+function playCutscene(timer) {
+	if (cutscene != 'done') {
+		if (timer == 1) {
+			cutBub = game.add.image(width/2, height/2, 'bigtextbub');
+			cutBub.anchor.set(0.5);
+			cutBub.width = 0;
+			cutBub.height = 0;
+		}
+		if (timer < 175 && timer > 150) {
+			cutBub.width+=24;
+			cutBub.height+=8.2;
+		}
+		if (timer == 176) {
+			cutText = game.add.bitmapText(width/2, height/2,'myfont', "GENERATION 1", 96);
+			cutText.anchor.set(0.5);
+		}
+		if (timer == 240) {
+			transition = 'BEGIN';
+			fade();
+		}
+	}
 }

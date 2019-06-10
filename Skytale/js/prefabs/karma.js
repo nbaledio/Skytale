@@ -11,20 +11,18 @@ function karma() {
 }
 
 karma.prototype = {
-	spawn: function(game) {
+	spawn: function(game, karmaAmt) {
 		this.boxSprite = game.add.sprite(X_POS, Y_POS, 'container');
 		this.boxSprite.fixedToCamera = true;
 
 		karmaLevel = game.add.group();
 		karmaLevel.fixedToCamera = true;
 
-		karmaLevel.create(X_POS, Y_POS, 'karma');
-		karmaLevel.create(X_POS+KARMA_WIDTH, Y_POS, 'karma');
-		karmaLevel.create(X_POS+(KARMA_WIDTH*2), Y_POS, 'karma');
-		karmaLevel.create(X_POS+(KARMA_WIDTH*3), Y_POS, 'karma');
-		karmaLevel.create(X_POS+(KARMA_WIDTH*4), Y_POS, 'karma');
+		for(i = 0; i < karmaAmt; i++) {
+			karmaLevel.create(X_POS+(KARMA_WIDTH*i), Y_POS, 'karma');
+		}
 
-		this.numKarma = 5;
+		this.numKarma = karmaAmt;
 	},
 	update: function(balance) {
 		if (balance != 0) { this.numKarma--; }

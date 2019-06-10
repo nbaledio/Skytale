@@ -32,48 +32,48 @@ statue.prototype = {
 		//this.dialogue[4] = textWrap(text4);
 	},
 	startLevel: function() {
-		
 		this.timer++;
-		if (this.interacted == 'ready') {
-			if (this.timer == 120) {
-				this.sprite.animations.stop('sparkle', 0);
-				this.bubble.destroy();
-				this.textDisplay.destroy();
-				this.timer = 0;
-				this.interacted = 'playLevel';
+		//if (cutscene == 'done') {
+			if (this.interacted == 'ready') {
+				if (this.timer == 120) {
+					this.sprite.animations.stop('sparkle', 0);
+					this.bubble.destroy();
+					this.textDisplay.destroy();
+					this.timer = 0;
+					this.interacted = 'playLevel';
+				}
+			} else {
+				this.sprite.animations.play('sparkle');
+				if (this.timer <= 25) {
+					this.bubble.width+=12;
+					this.bubble.height+=8.2;
+				} else if (this.timer == 26) {
+					this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[0], 48);
+				} else if (this.timer == 100) {
+					this.textDisplay.destroy();
+					this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[1], 48);
+				} else if (this.timer == 340) {
+					this.textDisplay.destroy();
+					this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[2], 48);
+				// } else if (this.timer == 580) {
+				// 	this.textDisplay.destroy();
+				// 	this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[3], 48);
+				} else if (this.timer == 580) {
+					this.textDisplay.destroy();
+					this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[4], 48);
+					space = game.add.sprite(230, 170, 'spacebar');
+				} else if (this.timer > 600 && game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
+					space.destroy();
+					this.textDisplay.destroy();
+					this.timer = 0;
+					this.textDisplay = game.add.bitmapText(124, 154,'myfont', "I wish you luck\nin this lifetime.\nReturn to me\nonce finished.", 48);
+					this.interacted = 'ready';
+				}
 			}
-		} else {
-			this.sprite.animations.play('sparkle');
-			if (this.timer <= 25) {
-				this.bubble.width+=12;
-				this.bubble.height+=8.2;
-			} else if (this.timer == 26) {
-				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[0], 48);
-			} else if (this.timer == 100) {
-				this.textDisplay.destroy();
-				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[1], 48);
-			} else if (this.timer == 340) {
-				this.textDisplay.destroy();
-				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[2], 48);
-			// } else if (this.timer == 580) {
-			// 	this.textDisplay.destroy();
-			// 	this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[3], 48);
-			} else if (this.timer == 580) {
-				this.textDisplay.destroy();
-				this.textDisplay = game.add.bitmapText(124, 154,'myfont', this.dialogue[4], 48);
-				space = game.add.sprite(230, 170, 'spacebar');
-			} else if (this.timer > 600 && game.input.keyboard.justPressed(Phaser.Keyboard.SPACEBAR)) {
-				space.destroy();
-				this.textDisplay.destroy();
-				this.timer = 0;
-				this.textDisplay = game.add.bitmapText(124, 154,'myfont', "I wish you luck\nin this lifetime.\nReturn to me\nonce finished.", 48);
-				this.interacted = 'ready';
-			}
-		}
+	//	}
 	},
 	endTutorial: function() {
 		this.timer++;
-
 		if (this.interacted == 'readyToLeave') {
 			//this.interacted == 'continueLevel' || 
 			if (this.timer == 60) {

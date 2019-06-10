@@ -8,9 +8,10 @@ var transition = 'OVERWORLD';
 var color = 'BLACK';
 
 level_3_bad.prototype = {
-	init: function() {
-		this.peopleHelped = 0;
+	init: function(people, karmaAmt) {
+		this.peopleHelped = people;
 		this.balance = 0;
+		this.karmaAmt = karmaAmt;
 		this.state = 'level_3_bad';
 	},
 	create: function(){
@@ -156,8 +157,8 @@ level_3_bad.prototype = {
 		villager6.setText("This village is trash. Who cares about the rules? I want money.","I want you to steal a bird statue totem.","So, what do you say?","Well? Don't keep me waiting here.","You think you can still save this place? Get real.","You're slow. But whatever. I got what I wanted.");
 		
 		karmaBar = new karma();
-		karmaBar.spawn(game);
-
+		karmaBar.spawn(game,this.karmaAmt);
+		
 		bigBird = new statue();
 		bigBird.spawn(game);
 		bigBird.setText("My town is in turmoil and you are to blame.","Continue with\ncaution, and remember:\nbalance is key.");
@@ -174,6 +175,8 @@ level_3_bad.prototype = {
 		p1.addAnimations('left', [0, 1, 2], 6, true);
 		p1.addAnimations('right', [4, 5, 6], 6, true);
 		
+		cutbg = game.add.sprite(0,0,'badwelcome');
+
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 		
@@ -252,7 +255,12 @@ level_3_bad.prototype = {
 		
 
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
-			bigBird.startLevel();
+			if (cutscene != 'done') {
+				playCutscene4(timer);
+				timer++;
+			} else {
+				bigBird.startLevel();
+			}
 			//bigBird.endLevel(4);
 		} else {
 			// check for ending
@@ -265,7 +273,10 @@ level_3_bad.prototype = {
 				// } else {
 				// 	game.state.start('level_2_good');
 				// }
-				game.state.start('GameOver');
+				color = 'WHITE';
+				transition = 'NULL';
+				game.camera.fade('0xFFFFFF', 2000);
+				//game.state.start('GameOver');
 			}
 
 			//Check if player if overlapping villager
@@ -421,6 +432,40 @@ function resetFade4() {
 		p1.sprite.y = 340;
 		villager4.sprite.x = 1420;
 		villager4.sprite.y = 335;
+	} else if (transition == 'BEGIN') {
+		cutText.destroy();
+		cutBub.destroy();
+		cutbg.destroy();
+		cutscene = 'done';
+	}else if(transition == 'NULL'){
+		game.camera.onFadeComplete.remove(resetFade2, this);
+		timer = 0;
+		cutscene = 'begin';
+		game.state.start('GameOver',true,false,this.peopleHelped,karmaBar.numKarma);
+		bgm.stop();
 	}
     game.camera.resetFX();
+}
+
+function playCutscene4(timer) {
+	if (cutscene != 'done') {
+		if (timer == 1) {
+			cutBub = game.add.image(width/2, height/2, 'bigtextbub');
+			cutBub.anchor.set(0.5);
+			cutBub.width = 0;
+			cutBub.height = 0;
+		}
+		if (timer < 175 && timer > 150) {
+			cutBub.width+=24;
+			cutBub.height+=8.2;
+		}
+		if (timer == 176) {
+			cutText = game.add.bitmapText(width/2, height/2,'myfont', "GENERATION 3", 96);
+			cutText.anchor.set(0.5);
+		}
+		if (timer == 240) {
+			transition = 'BEGIN';
+			fade();
+		}
+	}
 }

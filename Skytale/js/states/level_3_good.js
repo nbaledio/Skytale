@@ -10,9 +10,10 @@ var transition = 'OVERWORLD';
 var color = 'BLACK';
 
 level_3_good.prototype = {
-	init: function() {
-		this.peopleHelped = 0;
+	init: function(people, karmaAmt) {
+		this.peopleHelped = people;
 		this.balance = 0;
+		this.karmaAmt = karmaAmt;
 		this.state = 'level_3_bad';
 	},
 	create: function(){
@@ -174,7 +175,7 @@ level_3_good.prototype = {
 		villager6.setText("I always wanted a pet. Winslow Jr. Jr. has too many goats.","I want one. I'll pay you well if you steal it.","Do you wanna take my offer?","Alright, I'll be waiting here.","Fine, guess I'll just have to steal it myself.","Cool. Now, what should I name it?");
 		
 		karmaBar = new karma();
-		karmaBar.spawn(game);
+		karmaBar.spawn(game,this.karmaAmt);
 
 		bigBird = new statue();
 		bigBird.spawn(game);
@@ -192,6 +193,7 @@ level_3_good.prototype = {
 		p1.addAnimations('left', [0, 1, 2], 6, true);
 		p1.addAnimations('right', [4, 5, 6], 6, true);
 		
+		cutbg = game.add.sprite(0,0,'goodwelcome');
 		
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -306,7 +308,12 @@ level_3_good.prototype = {
 		
 
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
-			bigBird.startLevel();
+			if (cutscene != 'done') {
+				playCutscene5(timer);
+				timer++;
+			} else {
+				bigBird.startLevel();
+			}
 			//bigBird.endLevel(4);
 		} else {
 			// check for ending
@@ -319,7 +326,10 @@ level_3_good.prototype = {
 				// } else {
 				// 	game.state.start('level_2_good');
 				// }
-				game.state.start('GameOver');
+				color = 'WHITE';
+				transition = 'NULL';
+				game.camera.fade('0xFFFFFF', 2000);
+				//game.state.start('GameOver');
 			}
 
 			//Check if player if overlapping villager
@@ -481,6 +491,40 @@ function resetFade5() {
 		villager2.sprite.y = 185;
 		game.camera.x = 30;
 		game.camera.y = 0;
+	} else if (transition == 'BEGIN') {
+		cutText.destroy();
+		cutBub.destroy();
+		cutbg.destroy();
+		cutscene = 'done';
+	}else if(transition == 'NULL'){
+		game.camera.onFadeComplete.remove(resetFade2, this);
+		timer = 0;
+		cutscene = 'begin';
+		game.state.start('GameOver',true,false,this.peopleHelped,karmaBar.numKarma);
+		bgm.stop();
 	}
     game.camera.resetFX();
+}
+
+function playCutscene5(timer) {
+	if (cutscene != 'done') {
+		if (timer == 1) {
+			cutBub = game.add.image(width/2, height/2, 'bigtextbub');
+			cutBub.anchor.set(0.5);
+			cutBub.width = 0;
+			cutBub.height = 0;
+		}
+		if (timer < 175 && timer > 150) {
+			cutBub.width+=24;
+			cutBub.height+=8.2;
+		}
+		if (timer == 176) {
+			cutText = game.add.bitmapText(width/2, height/2,'myfont', "GENERATION 3", 96);
+			cutText.anchor.set(0.5);
+		}
+		if (timer == 240) {
+			transition = 'BEGIN';
+			fade();
+		}
+	}
 }

@@ -59,6 +59,14 @@ Menu.prototype = {
 		game.load.image('container', 'assets/img/meterbg.png');
 		game.load.image('karma', 'assets/img/karmabox.png');
 
+		// cutscene stuff
+		game.load.image('goodwelcome', 'assets/img/goodwelcome.png');
+		game.load.image('badwelcome', 'assets/img/badwelcome.png');
+
+		//gameover stuff
+		game.load.image('ending', 'assets/img/ending.png');
+		game.load.image('bigtextbub', 'assets/img/bigstatuetextbub.png');
+
 	},
 	create: function() {
 		//add a background for continuity

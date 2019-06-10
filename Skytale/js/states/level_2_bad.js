@@ -9,9 +9,10 @@ var transition = 'OVERWORLD';
 var color = 'BLACK';
 
 level_2_bad.prototype = {
-	init: function() {
-		this.peopleHelped = 0;
+	init: function(people, karmaAmt) {
+		this.peopleHelped = people;
 		this.balance = 0;
+		this.karmaAmt = karmaAmt;
 		this.state = 'level_2_bad';
 	},
 	create: function(){
@@ -153,7 +154,9 @@ level_2_bad.prototype = {
 		villager6.setText("I hate that Mendel... He has all the crystals for his 'science.'","You and I should teach him a lesson and steal one.","Well, what do you say?","Alright, let's go break into his place.","Good to know I can't count on you.","Good job kid. You're a natural thief.");
 		
 		karmaBar = new karma();
-		karmaBar.spawn(game);
+		karmaBar.spawn(game,this.karmaAmt);
+		
+		//console.log(this.numKarma);
 
 		bigBird = new statue();
 		bigBird.spawn(game);
@@ -169,6 +172,8 @@ level_2_bad.prototype = {
 		p1.sprite.scale.setTo(.9,.9);
 		p1.addAnimations('left', [0, 1, 2], 6, true);
 		p1.addAnimations('right', [4, 5, 6], 6, true);
+
+		cutbg = game.add.sprite(0,0,'badwelcome');
 		
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
@@ -248,7 +253,12 @@ level_2_bad.prototype = {
 		}
 
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
-			bigBird.startLevel();
+			if (cutscene != 'done') {
+				playCutscene2(timer);
+				timer++;
+			} else {
+				bigBird.startLevel();
+			}
 			//bigBird.endLevel(4);
 		} else {
 			// check for ending
@@ -415,16 +425,48 @@ function resetFade2() {
 		p1.sprite.y = 342;
 		villager6.sprite.x = 1420;
 		villager6.sprite.y = 337;
+	} else if (transition == 'BEGIN') {
+		cutText.destroy();
+		cutBub.destroy();
+		cutbg.destroy();
+		cutscene = 'done';
 	}else if(transition == 'NULL'){
 		if (karmaBar.numKarma < 5) {
 			game.camera.onFadeComplete.remove(resetFade2, this);
-			game.state.start('level_3_bad');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_3_bad',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		} else {
 			game.camera.onFadeComplete.remove(resetFade2, this);
-			game.state.start('level_3_good');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_3_good',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		}
 	}
     game.camera.resetFX();
+}
+
+function playCutscene2(timer) {
+	if (cutscene != 'done') {
+		if (timer == 1) {
+			cutBub = game.add.image(width/2, height/2, 'bigtextbub');
+			cutBub.anchor.set(0.5);
+			cutBub.width = 0;
+			cutBub.height = 0;
+		}
+		if (timer < 175 && timer > 150) {
+			cutBub.width+=24;
+			cutBub.height+=8.2;
+		}
+		if (timer == 176) {
+			cutText = game.add.bitmapText(width/2, height/2,'myfont', "GENERATION 2", 96);
+			cutText.anchor.set(0.5);
+		}
+		if (timer == 240) {
+			transition = 'BEGIN';
+			fade();
+		}
+	}
 }

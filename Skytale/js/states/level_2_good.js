@@ -8,10 +8,14 @@ var gamplay_state = 'OVERWORLD';
 var transition = 'OVERWORLD';
 var color = 'BLACK';
 
+var cutscene = 'begin';
+var timer = 0;
+
 level_2_good.prototype = {
-	init: function() {
-		this.peopleHelped = 0;
+	init: function(people, karmaAmt) {
+		this.peopleHelped = people;
 		this.balance = 0;
+		this.karmaAmt = karmaAmt;
 		this.state = 'level_2_good';
 	},
 	create: function(){
@@ -162,7 +166,7 @@ level_2_good.prototype = {
 		villager6.setText("I'm bored. You know what we should do? Break into a house.","Mendel's place is perfect. He's got tons of stuff to steal.","Wanna come join me?","Follow me and be quiet. We're going in from the back.","Then beat it pipsqueak.","That was a clean job. You better keep quiet about this.");
 
 		karmaBar = new karma();
-		karmaBar.spawn(game);
+		karmaBar.spawn(game,this.karmaAmt);
 
 		bigBird = new statue();
 		bigBird.spawn(game);
@@ -180,6 +184,8 @@ level_2_good.prototype = {
 		p1.addAnimations('left', [0, 1, 2], 6, true);
 		p1.addAnimations('right', [4, 5, 6], 6, true);
 		
+
+		cutbg = game.add.sprite(0,0,'goodwelcome');
 		//Focus camera on player
 		game.camera.follow(p1.sprite,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 		
@@ -281,9 +287,14 @@ level_2_good.prototype = {
 			platform17.sprite.body.velocity.y = 60;
 		}
 		
-
+		//console.log(cutscene);
 		if ((bigBird.interacted == 'intro' || bigBird.interacted == 'ready')) {
-			bigBird.startLevel();
+			if (cutscene != 'done') {
+				playCutscene3(timer);
+				timer++;
+			} else {			
+				bigBird.startLevel();
+			}
 			//bigBird.endLevel(4);
 		} else {
 			// check for ending
@@ -449,16 +460,47 @@ function resetFade3() {
 		p1.sprite.y = 130;
 		villager6.sprite.x = 1470;
 		villager6.sprite.y = 125;
+	} else if (transition == 'BEGIN') {
+		cutText.destroy();
+		cutBub.destroy();
+		cutbg.destroy();
+		cutscene = 'done';
 	}else if (transition == 'NULL'){
 		if (karmaBar.numKarma < 5) {
 			game.camera.onFadeComplete.remove(resetFade3, this);
-			game.state.start('level_3_bad');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_3_bad',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		} else {
 			game.camera.onFadeComplete.remove(resetFade3, this);
-			game.state.start('level_3_good');
+			timer = 0;
+			cutscene = 'begin';
+			game.state.start('level_3_good',true,false,this.peopleHelped,karmaBar.numKarma);
 			bgm.stop();
 		}
 	}
     game.camera.resetFX();
+}
+function playCutscene3(timer) {
+	if (cutscene != 'done') {
+		if (timer == 1) {
+			cutBub = game.add.image(width/2, height/2, 'bigtextbub');
+			cutBub.anchor.set(0.5);
+			cutBub.width = 0;
+			cutBub.height = 0;
+		}
+		if (timer < 175 && timer > 150) {
+			cutBub.width+=24;
+			cutBub.height+=8.2;
+		}
+		if (timer == 176) {
+			cutText = game.add.bitmapText(width/2, height/2,'myfont', "GENERATION 2", 96);
+			cutText.anchor.set(0.5);
+		}
+		if (timer == 240) {
+			transition = 'BEGIN';
+			fade();
+		}
+	}
 }
