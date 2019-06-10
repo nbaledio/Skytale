@@ -66,6 +66,7 @@ Menu.prototype = {
 		//gameover stuff
 		game.load.image('ending', 'assets/img/ending.png');
 		game.load.image('bigtextbub', 'assets/img/bigstatuetextbub.png');
+		game.load.image('credits', 'assets/img/credits.png');
 
 	},
 	create: function() {
