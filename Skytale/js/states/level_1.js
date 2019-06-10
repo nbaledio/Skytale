@@ -511,5 +511,4 @@ function killText(){
 function killText2(){
 	bubble2.kill();
 	text2.kill();
-
 }
