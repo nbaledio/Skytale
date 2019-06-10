@@ -502,6 +502,7 @@ function playCutscene(timer) {
 			fade();
 		}
 	}
+}
 
 function killText(){
 	bubble1.kill();
@@ -510,5 +511,4 @@ function killText(){
 function killText2(){
 	bubble2.kill();
 	text2.kill();
-
 }
